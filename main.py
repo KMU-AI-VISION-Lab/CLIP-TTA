@@ -7,7 +7,7 @@ from datasets import get_all_dataloaders
 from utils import *
 from sampler import BatchSampler, OnlineSampler
 from tqdm import tqdm
-from solvers import TransCLIP_solver, StatA_solver, Dirichlet_solver, ZLaP_solver #, TDA_solver, DMN_solver
+from solvers import TransCLIP_solver, StatA_solver, Dirichlet_solver, ZLaP_solver #, TDA_solver, Tent_solver, DMN_solver : only imported when needed to avoid unecessary dependencies
 
 def get_arguments():
     
@@ -16,7 +16,7 @@ def get_arguments():
     # General arguments
     parser.add_argument('--dataset', default='dtd', help='dataset name', type=str)
     parser.add_argument('--root_path', default='./datasets', type=str)
-    parser.add_argument('--method', default='StatA', type=str, choices=['StatA', 'TransCLIP', 'Dirichlet', 'ZLaP', 'TDA'])
+    parser.add_argument('--method', default='StatA', type=str, choices=['StatA', 'TransCLIP', 'Dirichlet', 'ZLaP', 'TDA', 'tent'])
     parser.add_argument('--seed', default=1, type=int)
     parser.add_argument('--backbone', default='vit_b16', type=str, choices=['rn50', 'rn101', 'vit_b32', 'vit_b16', 'vit_l14'], help="CLIP architecture")
     parser.add_argument('--cache_dir', type = str, default = None, help='where to store visual and textual features if not None')
@@ -59,9 +59,11 @@ def get_hp(args, method_name):
         # For TDA, we need to know the number of classes to instantiate
         # so the solver is instantiated later in the function main()
         # We use default parameters from TDA's paper
-        return TDA_solver, {} 
+        return None, None
+    elif method_name == 'tent':
+        return None, None 
     else:
-        raise NotImplementedError(f"Method {method_name} is not implemented.")
+        raise NotImplementedError(f"Method {args.method} is not implemented.")
 
 
 
@@ -75,7 +77,8 @@ def set_random_seed(seed):
 def main():
 
     args = get_arguments()
-    
+    if args.method in ['TDA', 'DMN', 'tent'] and not(args.online):
+        raise ValueError(f'Got method {args.method} which is only supported for the online setting, but got args.online = {args.online}.')
     set_random_seed(args.seed) # for reproducibility
     
     if not args.cache_dir:
@@ -97,7 +100,9 @@ def main():
     # Load features
     test_features, test_labels, clip_prototypes = get_all_features(args, test_loader, dataset, clip_model)
         
-    clip_model = clip_model.to('cpu')  # unload CLIP model from VRAM
+    if not args.method == 'tent':
+        clip_model = clip_model.to('cpu')  # unload CLIP model from VRAM
+        # for tent we need it on cuda
 
     acc_tot = 0
     acc_zs_tot = 0
@@ -139,10 +144,15 @@ def main():
             K = torch.max(test_labels)+1
             d = test_features.shape[1]
             from solvers import TDA_solver#, run_test_tda, compute_tda_logits
+        elif args.method == 'tent':
+            K = torch.max(test_labels)+1
+            from solvers import Tent_solver, get_cfg
             
         for i in tqdm(range(args.n_tasks)):
             if args.method == 'TDA':
                 solver = TDA_solver(K, d) # reinstantiate solver with empty cache
+            elif args.method == 'tent':
+                solver = Tent_solver(get_cfg('tent'),  clip_model.visual, K) # reinstantiate from unchanged model for each task
             
             num_batch = test_features.shape[0]//args.batch_size
             num_slots = min(num_batch, len(torch.unique(test_labels)))
@@ -154,11 +164,19 @@ def main():
             
             while indices is not None:
                 
-                preds_zs, preds = solver(test_features[indices,:], test_labels[indices], clip_prototypes, # visual and textual features  
-                                                  **method_args)
+                if args.method == 'tent':
+                    batch_imgs = torch.stack([test_loader.dataset[u][0] for u in indices], dim = 0).cuda()
+
+                    preds = solver(batch_imgs, 
+                                            clip_prototypes = clip_prototypes.squeeze().T, # for tent we need to recompute the visual features so we pass the images 
+                                            )
+                    preds = preds.cpu()
+                    preds_zs = (test_features[indices,:].cuda() @ clip_prototypes.squeeze()).cpu() # it's a little dumb but preds_zs is actually the (log) probs
+                else:
+                    preds_zs, preds = solver(test_features[indices,:], test_labels[indices], clip_prototypes, # visual and textual features  
+                                            **method_args)
                 acc_zs = cls_acc(preds_zs, test_labels[indices])
                 acc = cls_acc(preds, test_labels[indices])
-                
                 all_accs.append(acc)
                 all_accs_zs.append(acc_zs)
                 indices = sampler.generate_indices()

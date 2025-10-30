@@ -358,6 +358,7 @@ def build_data_loader(
     shuffle=False,
     dataset_wrapper=None,
     sampler=None,
+    num_workers = 8
 ):
 
     if dataset_wrapper is None:
@@ -367,7 +368,7 @@ def build_data_loader(
     data_loader = torch.utils.data.DataLoader(
         dataset_wrapper(data_source, input_size=input_size, transform=tfm, is_train=is_train),
         batch_size=batch_size,
-        num_workers=8,
+        num_workers=num_workers,
         shuffle=shuffle,
         drop_last=False,
         pin_memory=(torch.cuda.is_available()),

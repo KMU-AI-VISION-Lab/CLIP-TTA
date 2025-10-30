@@ -37,7 +37,7 @@ dataset_list = {
                 }
 
 
-def get_all_dataloaders(args, preprocess):
+def get_all_dataloaders(args, preprocess, num_workers = 8):
     dataset_name = args.dataset
     train_loader = None
     val_loader = None
@@ -45,15 +45,15 @@ def get_all_dataloaders(args, preprocess):
 
     if dataset_name.startswith('imagenet'):
         dataset = dataset_list[dataset_name](args.root_path, 0, preprocess=preprocess, train_preprocess=None, test_preprocess=None, load_cache=cfg['load_cache'], load_pre_feat=cfg['load_pre_feat'])
-        test_loader = torch.utils.data.DataLoader(dataset.test, batch_size=64, num_workers=8, shuffle=False, sampler=sampler)
+        test_loader = torch.utils.data.DataLoader(dataset.test, batch_size=64, num_workers=num_workers, shuffle=False, sampler=sampler)
         
     else:
         dataset = dataset_list[dataset_name](args.root_path, 0)
         val_loader = build_data_loader(data_source=dataset.val, batch_size=64, is_train=False, tfm=preprocess,
-                                       shuffle=False)
+                                       shuffle=False, num_workers = num_workers)
         
         test_loader = build_data_loader(data_source=dataset.test, batch_size=64, is_train=False, tfm=preprocess,
-                                        shuffle=False, sampler=sampler)
+                                        shuffle=False, sampler=sampler, num_workers = num_workers)
         
     return train_loader, val_loader, test_loader, dataset
 
