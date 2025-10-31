@@ -10,13 +10,11 @@ from tqdm import tqdm
 from solvers import TransCLIP_solver, StatA_solver, Dirichlet_solver, ZLaP_solver #, TDA_solver, Tent_solver, DMN_solver : only imported when needed to avoid unecessary dependencies
 
 def get_arguments():
-    
     parser = argparse.ArgumentParser()
-    
     # General arguments
     parser.add_argument('--dataset', default='dtd', help='dataset name', type=str)
     parser.add_argument('--root_path', default='./datasets', type=str)
-    parser.add_argument('--method', default='StatA', type=str, choices=['StatA', 'TransCLIP', 'Dirichlet', 'ZLaP', 'TDA', 'tent'])
+    parser.add_argument('--method', default='StatA', type=str, choices=['StatA', 'TransCLIP', 'Dirichlet', 'ZLaP', 'TDA', 'tent', 'DMN'])
     parser.add_argument('--seed', default=1, type=int)
     parser.add_argument('--backbone', default='vit_b16', type=str, choices=['rn50', 'rn101', 'vit_b32', 'vit_b16', 'vit_l14'], help="CLIP architecture")
     parser.add_argument('--cache_dir', type = str, default = None, help='where to store visual and textual features if not None')
@@ -58,10 +56,15 @@ def get_hp(args, method_name):
         from solvers import TDA_solver
         # For TDA, we need to know the number of classes to instantiate
         # so the solver is instantiated later in the function main()
-        # We use default parameters from TDA's paper
+        # We use default parameters for ImageNet from TDA's paper
         return None, None
     elif method_name == 'tent':
         return None, None 
+    elif method_name == 'DMN':
+        # For DMN, we need to know the number of classes to instantiate
+        # so the solver is instantiated later in the function main()
+        # We use default parameters for ImageNet from DMN's paper
+        return None, None
     else:
         raise NotImplementedError(f"Method {args.method} is not implemented.")
 
@@ -147,13 +150,30 @@ def main():
         elif args.method == 'tent':
             K = torch.max(test_labels)+1
             from solvers import Tent_solver, get_cfg
+        elif args.method == 'DMN':
+            K = torch.max(test_labels)+1
+            d = test_features.shape[1]
+            from solvers import DMNClipWrapper, get_cfg_DMN, DMNDualMem, select_confident_samples
+            import torchvision.transforms as transform
+            dmn_args, beta = get_cfg_DMN()
+
             
         for i in tqdm(range(args.n_tasks)):
             if args.method == 'TDA':
                 solver = TDA_solver(K, d) # reinstantiate solver with empty cache
             elif args.method == 'tent':
                 solver = Tent_solver(get_cfg('tent'),  clip_model.visual, K) # reinstantiate from unchanged model for each task
-            
+            elif args.method == 'DMN':
+                DMN_clip = DMNClipWrapper(clip_model, preprocess, 'cuda', 
+                            dataset.classnames, args.batch_size, 
+                            arch = backbones[args.backbone],).cuda()
+                DMN_clip.reset_classnames(dataset)
+                DMN_clip.get_text_features()
+                dmn = DMNDualMem(args = dmn_args, feat_dim = test_features.shape[-1], class_num = K) # reinstantiate with empty cache
+                dmn = dmn.cuda()
+                DMN_clip.eval()
+                dmn.eval()
+
             num_batch = test_features.shape[0]//args.batch_size
             num_slots = min(num_batch, len(torch.unique(test_labels)))
             sampler = OnlineSampler(test_features, test_labels, args.gamma, num_slots, args.batch_size)
@@ -163,18 +183,35 @@ def main():
             all_accs_zs = []
             
             while indices is not None:
-                
                 if args.method == 'tent':
                     batch_imgs = torch.stack([test_loader.dataset[u][0] for u in indices], dim = 0).cuda()
-
                     preds = solver(batch_imgs, 
                                             clip_prototypes = clip_prototypes.squeeze().T, # for tent we need to recompute the visual features so we pass the images 
                                             )
                     preds = preds.cpu()
                     preds_zs = (test_features[indices,:].cuda() @ clip_prototypes.squeeze()).cpu() # it's a little dumb but preds_zs is actually the (log) probs
+                elif args.method == 'DMN':
+                    batch_imgs = torch.stack([test_loader.dataset[u][0] for u in indices], dim = 0).cuda()
+                    all_img_global_pred = torch.zeros((len(indices), K), dtype = torch.float16,  device = 'cuda')
+                    with torch.autocast("cuda"), torch.no_grad():
+                        image_features_global = test_features[indices,...].cuda()
+                        text_logits = DMN_clip.logit_scale.exp()*image_features_global @ clip_prototypes.squeeze()
+                        text_probs = text_logits.softmax(1)
+                        for ju,u in enumerate(indices):
+                            DMN_clip.image_features_global = image_features_global[ju:ju+1,...]
+                            dmn.init_pred = text_probs[ju:ju+1,:]
+                            dmn.update_memory_bank(DMN_clip)
+                         # predict on the batch with updated memory
+                        with torch.autocast("cuda"), torch.no_grad(): #
+                            for ju,u in enumerate(indices):
+                                # We also need to loop because get_image_pred is not designed to handle batches
+                                DMN_clip.image_features_global = image_features_global[ju:ju+1,...]
+                                all_img_global_pred[ju,...] = dmn.get_image_pred(DMN_clip, return_logit = True)  ## with updated local
+                        preds = (text_logits + beta * all_img_global_pred).squeeze().cpu()  
+                        preds_zs = (test_features[indices,:].cuda() @ clip_prototypes.squeeze()).cpu() # it's a little dumb but preds_zs is actually the (log) probs
                 else:
-                    preds_zs, preds = solver(test_features[indices,:], test_labels[indices], clip_prototypes, # visual and textual features  
-                                            **method_args)
+                    preds_zs, preds = solver(test_features[indices,:], test_labels[indices], clip_prototypes, **method_args)
+                    
                 acc_zs = cls_acc(preds_zs, test_labels[indices])
                 acc = cls_acc(preds, test_labels[indices])
                 all_accs.append(acc)
