@@ -181,6 +181,84 @@ For more detailed results, please refer to **Table 2** in the paper.
 
 ---
 
+## Geometry Analysis
+
+This fork also includes a lightweight analysis extension for comparing class-conditional CLIP embedding geometry across the ImageNet family. This analysis code is not part of the original StatA paper and does not modify the default adaptation pipeline in `main.py`.
+
+Expected dataset layout:
+```text
+/data2/TTA_datatset/
+|-- imagenet/
+|   |-- images/
+|   |   |-- train/
+|   |   `-- val/
+|-- imagenet-v2/
+|   |-- imagenetv2-matched-frequency-format-val/
+|   `-- images/                  # optional fallback layout
+|-- imagenet-sketch/
+|   `-- images/
+`-- imagenet-r/
+    `-- images/
+```
+
+Supported ImageNet-family datasets:
+- `imagenet`
+- `imagenet_v2`
+- `imagenet_sketch`
+- `imagenet_r`
+
+The ImageNet-family loaders align labels to ImageNet-1k indices whenever folder names permit it. For subset datasets such as ImageNet-R, the dumped feature files also expose `available_imagenet_indices` and `subset_classnames`.
+
+Dump CLIP features:
+```bash
+python tools/dump_features.py --dataset imagenet --root_path /data2/TTA_datatset --backbone vit_b16 --cache_dir ./caches/geometry/imagenet
+python tools/dump_features.py --dataset imagenet_v2 --root_path /data2/TTA_datatset --backbone vit_b16 --cache_dir ./caches/geometry/imagenet_v2
+python tools/dump_features.py --dataset imagenet_sketch --root_path /data2/TTA_datatset --backbone vit_b16 --cache_dir ./caches/geometry/imagenet_sketch
+```
+
+Each feature dump stores a `.pt` dictionary with:
+- `features`
+- `labels`
+- `classnames`
+- `dataset_name`
+- `backbone`
+- `image_paths` when available
+
+Run geometry evaluation:
+```bash
+python tools/geometry_eval.py \
+  --source_feature_file ./caches/geometry/imagenet/imagenet_vit_b16_features.pt \
+  --target_feature_file ./caches/geometry/imagenet_v2/imagenet_v2_vit_b16_features.pt \
+  --output ./outputs/imagenet_vs_imagenet_v2.json \
+  --num_classes 200 \
+  --samples_per_class 10 \
+  --seed 1 \
+  --metrics centroid_cosine,centroid_euclidean,cov_frobenius,pca_subspace,pairwise_spearman
+```
+
+Implemented geometry metrics:
+- centroid cosine similarity
+- centroid Euclidean distance
+- covariance Frobenius distance
+- top-k PCA subspace similarity via principal-angle cosines
+- pairwise distance correlation with Spearman or Pearson
+
+The evaluator also reports a control by comparing same-class source-target scores against averaged different-class source-target scores.
+
+To run the full ImageNet family example:
+```bash
+bash scripts/run_geometry_imagenet_family.sh /data2/TTA_datatset vit_b16
+```
+
+Optional adaptation comparison:
+```bash
+python tools/dump_adapted_features.py --dataset imagenet_sketch --root_path /data2/TTA_datatset --backbone vit_b16 --method StatA --batch_size 64
+```
+
+This script saves frozen CLIP image embeddings together with zero-shot and adapted prediction outputs for a sampled batch. It does not currently extract adapted image embeddings from the online adaptation methods.
+
+---
+
 ## Citation
 
 If you find this repository useful, please consider citing our paper:

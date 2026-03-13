@@ -6,6 +6,10 @@ import os
 import clip
 
 
+def get_model_device(model):
+    return next(model.parameters()).device
+
+
 def cls_acc(output, target, topk=1):
     pred = output.topk(topk, 1, True, True)[1].t()
     correct = pred.eq(target.view(1, -1).expand_as(pred))
@@ -15,6 +19,7 @@ def cls_acc(output, target, topk=1):
 
 
 def clip_classifier(classnames, template, clip_model, reduce='mean', gpt=False, wordnet_dict=None):
+    device = get_model_device(clip_model)
     with torch.no_grad():
         clip_weights = []
         if wordnet_dict is not None:
@@ -28,7 +33,7 @@ def clip_classifier(classnames, template, clip_model, reduce='mean', gpt=False, 
                     name = name.replace('_', ' ')
                     
                     texts = [t.format(name) for t in template]
-                    texts = clip.tokenize(texts).cuda()
+                    texts = clip.tokenize(texts).to(device)
         
                     class_embeddings = clip_model.encode_text(texts)
                     class_embeddings /= class_embeddings.norm(dim=-1, keepdim=True)
@@ -54,7 +59,7 @@ def clip_classifier(classnames, template, clip_model, reduce='mean', gpt=False, 
                     texts = template[classname]
                 else:
                     texts = [t.format(classname)  for t in template]
-                texts = clip.tokenize(texts).cuda()
+                texts = clip.tokenize(texts).to(device)
     
                 class_embeddings = clip_model.encode_text(texts)
                 class_embeddings /= class_embeddings.norm(dim=-1, keepdim=True)
@@ -66,7 +71,7 @@ def clip_classifier(classnames, template, clip_model, reduce='mean', gpt=False, 
                     class_embeddings /= class_embeddings.norm(dim=1, keepdim=True)
                     clip_weights.append(class_embeddings)
         
-            clip_weights = torch.stack(clip_weights, dim=-1).cuda()
+            clip_weights = torch.stack(clip_weights, dim=-1).to(device)
     return clip_weights
 
 
@@ -79,6 +84,7 @@ def get_all_features(args, test_loader, dataset, clip_model):
 
 def build_cache_model(cfg, clip_model, train_loader_cache, n_views=0, reduce=None):
     print('... for shot samples from train split:')
+    device = get_model_device(clip_model)
 
     if cfg['load_cache'] == False:    
         cache_keys = []
@@ -93,12 +99,12 @@ def build_cache_model(cfg, clip_model, train_loader_cache, n_views=0, reduce=Non
                 train_features = []
                 train_labels = []
                 for i, (images, target) in enumerate(tqdm(train_loader_cache)):
-                    images = images.cuda()
+                    images = images.to(device)
                     image_features = clip_model.encode_image(images)
                     train_features.append(image_features)
                     
                     if augment_idx == 0:
-                        target = target.cuda()
+                        target = target.to(device)
                         cache_values.append(target)
                         
                 cache_keys.append(torch.cat(train_features, dim=0).unsqueeze(0))
@@ -134,6 +140,7 @@ def build_cache_model(cfg, clip_model, train_loader_cache, n_views=0, reduce=Non
 
 
 def pre_load_features(args, split, clip_model, loader, n_views=1):
+    device = get_model_device(clip_model)
 
     if  not args.load:
         features, labels = [], []
@@ -145,7 +152,7 @@ def pre_load_features(args, split, clip_model, loader, n_views=1):
                 for i, (images, target) in enumerate(tqdm(loader)):
                     if n_views == 1:
                         
-                        images, target = images.cuda(), target.cuda()
+                        images, target = images.to(device), target.to(device)
                         
                         
                         image_features = clip_model.encode_image(images)
@@ -156,7 +163,7 @@ def pre_load_features(args, split, clip_model, loader, n_views=1):
                         features.append(image_features.cpu())
                         labels.append(target.cpu())
                     else:
-                        images, target = images.cuda(), target.cuda()
+                        images, target = images.to(device), target.to(device)
                         image_features = clip_model.encode_image(images)
                         image_features /= image_features.norm(dim=-1, keepdim=True)
                         if view == 0:
@@ -188,4 +195,3 @@ def pre_load_features(args, split, clip_model, loader, n_views=1):
             print("Cache not found...")
     
     return features, labels
-

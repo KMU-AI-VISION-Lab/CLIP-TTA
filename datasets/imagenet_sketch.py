@@ -8,6 +8,11 @@ import torchvision
 import torchvision.transforms as transforms
 
 import torchvision.datasets as datasets
+from .imagenet_family_utils import (
+    ImageFolderWithAlignedTargets,
+    build_imagenet_folder_to_index,
+    get_imagenet_sketch_dir,
+)
 
 imagenet_classes = ["tench", "goldfish", "great white shark", "tiger shark", "hammerhead shark", "electric ray",
                     "stingray", "rooster", "hen", "ostrich", "brambling", "goldfinch", "house finch", "junco",
@@ -499,7 +504,7 @@ class ImageNetSketch():
                  load_pre_feat=False):
 
         self.dataset_dir = os.path.join(root, self.dataset_dir)
-        self.image_dir = os.path.join(self.dataset_dir, 'images')
+        self.image_dir = get_imagenet_sketch_dir(root)
 
         if train_preprocess is None:
             train_preprocess = transforms.Compose([
@@ -515,9 +520,10 @@ class ImageNetSketch():
 
         self.train, self.val = None, None
         if not load_pre_feat:
-            self.test = datasets.ImageFolder(os.path.join(self.image_dir), transform=test_preprocess)
+            folder_to_imagenet_idx = build_imagenet_folder_to_index(root)
+            self.test = ImageFolderWithAlignedTargets(self.image_dir, transform=test_preprocess, folder_to_imagenet_idx=folder_to_imagenet_idx)
 
         self.template = imagenet_templates
         self.custom_templates = custom_templates
         self.classnames = imagenet_classes
-
+        self.available_imagenet_indices = getattr(self.test, 'available_imagenet_indices', list(range(len(self.classnames))))

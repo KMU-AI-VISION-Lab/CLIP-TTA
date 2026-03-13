@@ -13,7 +13,7 @@ def get_arguments():
     parser = argparse.ArgumentParser()
     # General arguments
     parser.add_argument('--dataset', default='dtd', help='dataset name', type=str)
-    parser.add_argument('--root_path', default='./datasets', type=str)
+    parser.add_argument('--root_path', default='/data2/TTA_datatset', type=str)
     parser.add_argument('--method', default='StatA', type=str, choices=['StatA', 'TransCLIP', 'Dirichlet', 'ZLaP', 'TDA', 'tent', 'DMN'])
     parser.add_argument('--seed', default=1, type=int)
     parser.add_argument('--backbone', default='vit_b16', type=str, choices=['rn50', 'rn101', 'vit_b32', 'vit_b16', 'vit_l14'], help="CLIP architecture")

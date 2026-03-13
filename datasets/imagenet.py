@@ -8,6 +8,7 @@ import torchvision
 import torchvision.transforms as transforms
 
 import torchvision.datasets as datasets
+from .imagenet_family_utils import get_imagenet_train_dir, get_imagenet_val_dir
 
 
 imagenet_classes = ["tench", "goldfish", "great white shark", "tiger shark", "hammerhead shark", "electric ray",
@@ -188,13 +189,14 @@ custom_templates = ["itap of a {}.",
 imagenet_templates = ["a photo of a {}."]
 
 class ImageNet():
-
     dataset_dir = 'imagenet'
 
     def __init__(self, root, num_shots, preprocess, train_preprocess=None, test_preprocess=None, load_cache=False, load_pre_feat=False):
 
         self.dataset_dir = os.path.join(root, self.dataset_dir)
         self.image_dir = os.path.join(self.dataset_dir, 'images')
+        self.train_dir = get_imagenet_train_dir(root)
+        self.val_dir = get_imagenet_val_dir(root)
         
         if train_preprocess is None:
             train_preprocess = transforms.Compose([
@@ -211,13 +213,13 @@ class ImageNet():
         self.train, self.val, self.test = None, None, None
 
         if not load_cache and num_shots > 0:
-            self.train = datasets.ImageFolder(os.path.join(os.path.join(self.dataset_dir, 'train')), transform=train_preprocess)
+            self.train = datasets.ImageFolder(self.train_dir, transform=train_preprocess)
 
         if not load_pre_feat and num_shots > 0:
-            self.val = datasets.ImageFolder(os.path.join(os.path.join(self.dataset_dir, 'train')), transform=preprocess)
+            self.val = datasets.ImageFolder(self.train_dir, transform=preprocess)
 
         if not load_pre_feat:
-            self.test = datasets.ImageFolder(os.path.join(os.path.join(self.dataset_dir, 'val')), transform=test_preprocess)
+            self.test = datasets.ImageFolder(self.val_dir, transform=test_preprocess)
         
         num_shots_val = min(4, num_shots)
         

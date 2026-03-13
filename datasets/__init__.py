@@ -42,19 +42,27 @@ def get_all_dataloaders(args, preprocess, num_workers = 8):
     train_loader = None
     val_loader = None
     sampler = None
+    batch_size = getattr(args, 'batch_size', 64)
+    num_workers = getattr(args, 'num_workers', num_workers)
 
     if dataset_name.startswith('imagenet'):
-        dataset = dataset_list[dataset_name](args.root_path, 0, preprocess=preprocess, train_preprocess=None, test_preprocess=None, load_cache=cfg['load_cache'], load_pre_feat=cfg['load_pre_feat'])
-        test_loader = torch.utils.data.DataLoader(dataset.test, batch_size=64, num_workers=num_workers, shuffle=False, sampler=sampler)
+        dataset = dataset_list[dataset_name](
+            args.root_path,
+            0,
+            preprocess=preprocess,
+            train_preprocess=None,
+            test_preprocess=None,
+            load_cache=False,
+            load_pre_feat=False,
+        )
+        test_loader = torch.utils.data.DataLoader(dataset.test, batch_size=batch_size, num_workers=num_workers, shuffle=False, sampler=sampler)
         
     else:
         dataset = dataset_list[dataset_name](args.root_path, 0)
-        val_loader = build_data_loader(data_source=dataset.val, batch_size=64, is_train=False, tfm=preprocess,
+        val_loader = build_data_loader(data_source=dataset.val, batch_size=batch_size, is_train=False, tfm=preprocess,
                                        shuffle=False, num_workers = num_workers)
         
-        test_loader = build_data_loader(data_source=dataset.test, batch_size=64, is_train=False, tfm=preprocess,
+        test_loader = build_data_loader(data_source=dataset.test, batch_size=batch_size, is_train=False, tfm=preprocess,
                                         shuffle=False, sampler=sampler, num_workers = num_workers)
         
     return train_loader, val_loader, test_loader, dataset
-
-

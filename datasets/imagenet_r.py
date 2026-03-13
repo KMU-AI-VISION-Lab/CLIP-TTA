@@ -8,6 +8,11 @@ import torchvision
 import torchvision.transforms as transforms
 
 import torchvision.datasets as datasets
+from .imagenet_family_utils import (
+    ImageFolderWithAlignedTargets,
+    build_imagenet_folder_to_index,
+    get_imagenet_r_dir,
+)
 
 imagenet_classes = ["tench", "goldfish", "great white shark", "tiger shark", "hammerhead shark", "electric ray",
                     "stingray", "rooster", "hen", "ostrich", "brambling", "goldfinch", "house finch", "junco",
@@ -493,13 +498,13 @@ imagenet_templates = ["a photo of a {}."]
 
 
 class ImageNetR():
-    dataset_dir = 'imagenet-rendition'
+    dataset_dir = 'imagenet-r'
 
     def __init__(self, root, num_shots, preprocess, train_preprocess=None, test_preprocess=None, load_cache=False,
                  load_pre_feat=False):
 
         self.dataset_dir = os.path.join(root, self.dataset_dir)
-        self.image_dir = os.path.join(self.dataset_dir, 'images')
+        self.image_dir = get_imagenet_r_dir(root)
 
         if train_preprocess is None:
             train_preprocess = transforms.Compose([
@@ -516,13 +521,28 @@ class ImageNetR():
         self.train, self.val = None, None
 
         if not load_pre_feat:
-            self.test = datasets.ImageFolder(os.path.join(self.image_dir), transform=test_preprocess)
+            folder_to_imagenet_idx = build_imagenet_folder_to_index(root)
+            self.test = ImageFolderWithAlignedTargets(self.image_dir, transform=test_preprocess, folder_to_imagenet_idx=folder_to_imagenet_idx)
 
         self.template = imagenet_templates
         self.custom_templates = custom_templates
-        classnames_all = imagenet_classes
-        self.classnames = []
-        label_mask = imagenet_r_mask
-        for i, m in enumerate(label_mask):
-            if m:
-                self.classnames.append(classnames_all[i])
+        self.available_imagenet_indices = getattr(self.test, 'available_imagenet_indices', [])
+        self.subset_to_imagenet_index = list(self.available_imagenet_indices)
+        self.imagenet_to_subset_index = {
+            imagenet_index: subset_index
+            for subset_index, imagenet_index in enumerate(self.subset_to_imagenet_index)
+        }
+        self.classnames = [imagenet_classes[index] for index in self.subset_to_imagenet_index]
+        self.subset_classnames = list(self.classnames)
+
+        if not load_pre_feat:
+            remapped_samples = []
+            remapped_targets = []
+            for image_path, imagenet_index in self.test.samples:
+                subset_index = self.imagenet_to_subset_index[imagenet_index]
+                remapped_samples.append((image_path, subset_index))
+                remapped_targets.append(subset_index)
+
+            self.test.samples = remapped_samples
+            self.test.imgs = remapped_samples
+            self.test.targets = remapped_targets
