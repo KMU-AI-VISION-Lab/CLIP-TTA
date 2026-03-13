@@ -21,6 +21,9 @@ def get_arguments():
     parser.add_argument("--class_indices", default=None, type=str, help="Comma-separated ImageNet class indices to evaluate.")
     parser.add_argument("--pca_dim", default=8, type=int)
     parser.add_argument("--self_test_pairwise_corr", action="store_true", default=False)
+    parser.add_argument("--same_dataset_upper_bound", action="store_true", default=False)
+    parser.add_argument("--min_samples_per_class_for_split", default=None, type=int)
+    parser.add_argument("--upper_bound_num_repeats", default=1, type=int)
     return parser.parse_args()
 
 
@@ -293,94 +296,54 @@ def mean_dict(metric_dicts, metrics):
     return summary
 
 
-def main():
-    args = get_arguments()
-    if args.self_test_pairwise_corr:
-        run_pairwise_corr_self_test(args.seed)
-        return
+def std_dict(metric_dicts, metrics):
+    summary = {}
+    for metric in metrics:
+        values = [entry[metric] for entry in metric_dicts if not math.isnan(entry[metric])]
+        summary[metric] = float(np.std(values)) if values else float("nan")
+    return summary
 
-    required_args = ["source_feature_file", "target_feature_file", "output", "num_classes", "samples_per_class"]
-    missing_args = [name for name in required_args if getattr(args, name) is None]
-    if missing_args:
-        raise ValueError(f"Missing required arguments: {missing_args}")
 
-    rng = np.random.default_rng(args.seed)
-    metrics = parse_metrics(args.metrics)
-    class_subset = parse_class_indices(args.class_indices)
+def compute_retrieval_summary_stats(retrieval_runs):
+    summary = {}
+    for mode in get_retrieval_modes():
+        accuracies = [run[mode]["accuracy"] for run in retrieval_runs if mode in run and not math.isnan(run[mode]["accuracy"])]
+        summary[mode] = {
+            "mean_accuracy": float(np.mean(accuracies)) if accuracies else float("nan"),
+            "std_accuracy": float(np.std(accuracies)) if accuracies else float("nan"),
+        }
+    return summary
 
-    source_payload = load_feature_file(args.source_feature_file)
-    target_payload = load_feature_file(args.target_feature_file)
 
-    source_features = source_payload["features"].float().cpu().numpy()
-    target_features = target_payload["features"].float().cpu().numpy()
-    source_labels = source_payload["labels"].long().cpu()
-    target_labels = target_payload["labels"].long().cpu()
-
-    if source_payload["backbone"] != target_payload["backbone"]:
-        raise ValueError("Source and target feature files must use the same backbone.")
-    if source_features.shape[1] != target_features.shape[1]:
-        raise ValueError("Feature dimensions do not match between source and target files.")
-
-    source_class_to_indices = build_class_index(source_labels)
-    target_class_to_indices = build_class_index(target_labels)
-    eligible_classes = sorted(
-        set(source_class_to_indices).intersection(target_class_to_indices)
-    )
-    eligible_classes = [
-        class_index for class_index in eligible_classes
-        if len(source_class_to_indices[class_index]) >= args.samples_per_class
-        and len(target_class_to_indices[class_index]) >= args.samples_per_class
-    ]
-
-    if class_subset is not None:
-        eligible_classes = [class_index for class_index in class_subset if class_index in eligible_classes]
-
-    if len(eligible_classes) < args.num_classes:
-        raise ValueError(
-            f"Requested {args.num_classes} classes, but only {len(eligible_classes)} classes have at least "
-            f"{args.samples_per_class} samples in both datasets."
-        )
-
-    selected_classes = sorted(rng.choice(eligible_classes, size=args.num_classes, replace=False).tolist())
+def build_result(
+    selected_classes,
+    source_payload,
+    target_payload,
+    metrics,
+    pca_dim,
+    source_class_samples,
+    target_class_samples,
+    class_names,
+    samples_per_class,
+    mode,
+):
     per_class_results = []
     same_class_metrics = []
     different_class_metrics = []
-    source_class_samples = {}
-    target_class_samples = {}
-    class_names = {}
-
-    # Sample each selected class once and reuse those same examples everywhere
-    # below. This keeps the metric comparisons and retrieval experiment consistent.
-    for class_index in selected_classes:
-        source_class_name = get_class_name(source_payload, class_index)
-        target_class_name = get_class_name(target_payload, class_index)
-        if source_class_name != target_class_name:
-            raise ValueError(
-                f"Class name mismatch at ImageNet index {class_index}: "
-                f"source='{source_class_name}', target='{target_class_name}'."
-            )
-        source_class_samples[class_index] = sample_class_features(
-            source_features, source_class_to_indices, class_index, args.samples_per_class, rng
-        )
-        target_class_samples[class_index] = sample_class_features(
-            target_features, target_class_to_indices, class_index, args.samples_per_class, rng
-        )
-        class_names[class_index] = source_class_name
 
     for class_index in selected_classes:
         source_class_name = class_names[class_index]
         source_samples = source_class_samples[class_index]
         target_samples = target_class_samples[class_index]
-        same_metrics = compute_metrics(source_samples, target_samples, metrics, args.pca_dim)
+        same_metrics = compute_metrics(source_samples, target_samples, metrics, pca_dim)
         same_class_metrics.append(same_metrics)
 
         control_metrics_list = []
         for target_class_index in selected_classes:
             if target_class_index == class_index:
                 continue
-            # Control: compare the source class against all *other* target classes.
             target_control_samples = target_class_samples[target_class_index]
-            control_metrics_list.append(compute_metrics(source_samples, target_control_samples, metrics, args.pca_dim))
+            control_metrics_list.append(compute_metrics(source_samples, target_control_samples, metrics, pca_dim))
 
         averaged_control_metrics = mean_dict(control_metrics_list, metrics)
         different_class_metrics.append(averaged_control_metrics)
@@ -397,17 +360,17 @@ def main():
         source_class_samples=source_class_samples,
         target_class_samples=target_class_samples,
         class_names=class_names,
-        pca_dim=args.pca_dim,
+        pca_dim=pca_dim,
     )
 
-    results = {
+    return {
+        "mode": mode,
         "source_dataset": source_payload["dataset_name"],
         "target_dataset": target_payload["dataset_name"],
         "backbone": source_payload["backbone"],
         "metrics": metrics,
-        "num_classes": args.num_classes,
-        "samples_per_class": args.samples_per_class,
-        "seed": args.seed,
+        "num_classes": len(selected_classes),
+        "samples_per_class": samples_per_class,
         "selected_classes": selected_classes,
         "averages": {
             "same_class": mean_dict(same_class_metrics, metrics),
@@ -417,20 +380,225 @@ def main():
         "per_class": per_class_results,
     }
 
+
+def run_same_dataset_upper_bound(args, payload, metrics):
+    features = payload["features"].float().cpu().numpy()
+    labels = payload["labels"].long().cpu()
+    class_subset = parse_class_indices(args.class_indices)
+    class_to_indices = build_class_index(labels)
+    min_samples = args.min_samples_per_class_for_split or (2 * args.samples_per_class)
+
+    eligible_classes = sorted(class_to_indices)
+    if class_subset is not None:
+        eligible_classes = [class_index for class_index in class_subset if class_index in class_to_indices]
+    eligible_classes = [class_index for class_index in eligible_classes if len(class_to_indices[class_index]) >= min_samples]
+
+    for class_index in sorted(class_to_indices):
+        if class_subset is not None and class_index not in class_subset:
+            continue
+        if len(class_to_indices[class_index]) < min_samples:
+            warnings.warn(
+                f"Skipping class {class_index} for same-dataset upper bound: "
+                f"needs at least {min_samples} samples, found {len(class_to_indices[class_index])}.",
+                RuntimeWarning,
+            )
+
+    if len(eligible_classes) < args.num_classes:
+        raise ValueError(
+            f"Requested {args.num_classes} classes, but only {len(eligible_classes)} classes have at least "
+            f"{min_samples} samples for same-dataset split-half evaluation."
+        )
+
+    selection_rng = np.random.default_rng(args.seed)
+    selected_classes = sorted(selection_rng.choice(eligible_classes, size=args.num_classes, replace=False).tolist())
+    repeat_results = []
+
+    for repeat_index in range(args.upper_bound_num_repeats):
+        repeat_rng = np.random.default_rng(args.seed + repeat_index)
+        source_class_samples = {}
+        target_class_samples = {}
+        class_names = {}
+
+        for class_index in selected_classes:
+            candidate_indices = np.array(class_to_indices[class_index])
+            shuffled_indices = repeat_rng.permutation(candidate_indices)
+            split_size = min(args.samples_per_class, shuffled_indices.shape[0] // 2)
+            if split_size < args.samples_per_class:
+                warnings.warn(
+                    f"Skipping class {class_index} in repeat {repeat_index}: "
+                    f"not enough disjoint samples for two halves of size {args.samples_per_class}.",
+                    RuntimeWarning,
+                )
+                continue
+
+            source_indices = np.sort(shuffled_indices[:split_size])
+            target_indices = np.sort(shuffled_indices[split_size:2 * split_size])
+            source_class_samples[class_index] = features[source_indices]
+            target_class_samples[class_index] = features[target_indices]
+            class_names[class_index] = get_class_name(payload, class_index)
+
+        repeat_selected_classes = sorted(source_class_samples)
+        if not repeat_selected_classes:
+            raise ValueError("No classes remained after same-dataset split-half sampling.")
+
+        repeat_result = build_result(
+            selected_classes=repeat_selected_classes,
+            source_payload={"dataset_name": f"{payload['dataset_name']}_split_A", "backbone": payload["backbone"]},
+            target_payload={"dataset_name": f"{payload['dataset_name']}_split_B", "backbone": payload["backbone"]},
+            metrics=metrics,
+            pca_dim=args.pca_dim,
+            source_class_samples=source_class_samples,
+            target_class_samples=target_class_samples,
+            class_names=class_names,
+            samples_per_class=args.samples_per_class,
+            mode="same_dataset_upper_bound",
+        )
+        repeat_result["repeat_index"] = repeat_index
+        repeat_results.append(repeat_result)
+
+    same_runs = [run["averages"]["same_class"] for run in repeat_results]
+    different_runs = [run["averages"]["different_class_control"] for run in repeat_results]
+    retrieval_runs = [run["retrieval"] for run in repeat_results]
+
+    return {
+        "mode": "same_dataset_upper_bound",
+        "source_dataset": f"{payload['dataset_name']}_split_A",
+        "target_dataset": f"{payload['dataset_name']}_split_B",
+        "backbone": payload["backbone"],
+        "metrics": metrics,
+        "num_classes": args.num_classes,
+        "samples_per_class": args.samples_per_class,
+        "seed": args.seed,
+        "selected_classes": selected_classes,
+        "min_samples_per_class_for_split": min_samples,
+        "upper_bound_num_repeats": args.upper_bound_num_repeats,
+        "summary": {
+            "same_class_mean": mean_dict(same_runs, metrics),
+            "same_class_std": std_dict(same_runs, metrics),
+            "different_class_control_mean": mean_dict(different_runs, metrics),
+            "different_class_control_std": std_dict(different_runs, metrics),
+            "retrieval": compute_retrieval_summary_stats(retrieval_runs),
+        },
+        "repeats": repeat_results,
+    }
+
+
+def main():
+    args = get_arguments()
+    if args.self_test_pairwise_corr:
+        run_pairwise_corr_self_test(args.seed)
+        return
+
+    if args.same_dataset_upper_bound:
+        required_args = ["source_feature_file", "output", "num_classes", "samples_per_class"]
+    else:
+        required_args = ["source_feature_file", "target_feature_file", "output", "num_classes", "samples_per_class"]
+    missing_args = [name for name in required_args if getattr(args, name) is None]
+    if missing_args:
+        raise ValueError(f"Missing required arguments: {missing_args}")
+
+    metrics = parse_metrics(args.metrics)
+    source_payload = load_feature_file(args.source_feature_file)
+    if args.same_dataset_upper_bound:
+        results = run_same_dataset_upper_bound(args, source_payload, metrics)
+    else:
+        rng = np.random.default_rng(args.seed)
+        class_subset = parse_class_indices(args.class_indices)
+        target_payload = load_feature_file(args.target_feature_file)
+
+        source_features = source_payload["features"].float().cpu().numpy()
+        target_features = target_payload["features"].float().cpu().numpy()
+        source_labels = source_payload["labels"].long().cpu()
+        target_labels = target_payload["labels"].long().cpu()
+
+        if source_payload["backbone"] != target_payload["backbone"]:
+            raise ValueError("Source and target feature files must use the same backbone.")
+        if source_features.shape[1] != target_features.shape[1]:
+            raise ValueError("Feature dimensions do not match between source and target files.")
+
+        source_class_to_indices = build_class_index(source_labels)
+        target_class_to_indices = build_class_index(target_labels)
+        eligible_classes = sorted(set(source_class_to_indices).intersection(target_class_to_indices))
+        eligible_classes = [
+            class_index for class_index in eligible_classes
+            if len(source_class_to_indices[class_index]) >= args.samples_per_class
+            and len(target_class_to_indices[class_index]) >= args.samples_per_class
+        ]
+
+        if class_subset is not None:
+            eligible_classes = [class_index for class_index in class_subset if class_index in eligible_classes]
+
+        if len(eligible_classes) < args.num_classes:
+            raise ValueError(
+                f"Requested {args.num_classes} classes, but only {len(eligible_classes)} classes have at least "
+                f"{args.samples_per_class} samples in both datasets."
+            )
+
+        selected_classes = sorted(rng.choice(eligible_classes, size=args.num_classes, replace=False).tolist())
+        source_class_samples = {}
+        target_class_samples = {}
+        class_names = {}
+
+        # Sample each selected class once and reuse those same examples everywhere
+        # below. This keeps the metric comparisons and retrieval experiment consistent.
+        for class_index in selected_classes:
+            source_class_name = get_class_name(source_payload, class_index)
+            target_class_name = get_class_name(target_payload, class_index)
+            if source_class_name != target_class_name:
+                raise ValueError(
+                    f"Class name mismatch at ImageNet index {class_index}: "
+                    f"source='{source_class_name}', target='{target_class_name}'."
+                )
+            source_class_samples[class_index] = sample_class_features(
+                source_features, source_class_to_indices, class_index, args.samples_per_class, rng
+            )
+            target_class_samples[class_index] = sample_class_features(
+                target_features, target_class_to_indices, class_index, args.samples_per_class, rng
+            )
+            class_names[class_index] = source_class_name
+
+        results = build_result(
+            selected_classes=selected_classes,
+            source_payload=source_payload,
+            target_payload=target_payload,
+            metrics=metrics,
+            pca_dim=args.pca_dim,
+            source_class_samples=source_class_samples,
+            target_class_samples=target_class_samples,
+            class_names=class_names,
+            samples_per_class=args.samples_per_class,
+            mode="cross_dataset",
+        )
+        results["seed"] = args.seed
+
     os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
     with open(args.output, "w", encoding="utf-8") as handle:
         json.dump(results, handle, indent=2)
 
+    if results["mode"] == "same_dataset_upper_bound":
+        print("Same-dataset upper bound / split-half reliability estimate")
+    else:
+        print("Cross-dataset geometry evaluation")
     print(f"Source dataset: {results['source_dataset']}")
     print(f"Target dataset: {results['target_dataset']}")
     print(f"Backbone: {results['backbone']}")
-    print(f"Selected classes: {len(selected_classes)}")
-    for metric in metrics:
-        same_value = results["averages"]["same_class"][metric]
-        diff_value = results["averages"]["different_class_control"][metric]
-        print(f"{metric}: same={same_value:.6f} different={diff_value:.6f}")
-    for mode, retrieval_result in results["retrieval"].items():
-        print(f"retrieval_acc_{mode}: {retrieval_result['accuracy']:.6f}")
+    print(f"Selected classes: {len(results['selected_classes'])}")
+    if results["mode"] == "same_dataset_upper_bound":
+        for metric in metrics:
+            same_mean = results["summary"]["same_class_mean"][metric]
+            same_std = results["summary"]["same_class_std"][metric]
+            diff_mean = results["summary"]["different_class_control_mean"][metric]
+            diff_std = results["summary"]["different_class_control_std"][metric]
+            print(f"{metric}: same={same_mean:.6f}+/-{same_std:.6f} different={diff_mean:.6f}+/-{diff_std:.6f}")
+        for mode, retrieval_result in results["summary"]["retrieval"].items():
+            print(f"retrieval_acc_{mode}: {retrieval_result['mean_accuracy']:.6f}+/-{retrieval_result['std_accuracy']:.6f}")
+    else:
+        for metric in metrics:
+            same_value = results["averages"]["same_class"][metric]
+            diff_value = results["averages"]["different_class_control"][metric]
+            print(f"{metric}: same={same_value:.6f} different={diff_value:.6f}")
+        for mode, retrieval_result in results["retrieval"].items():
+            print(f"retrieval_acc_{mode}: {retrieval_result['accuracy']:.6f}")
     print(f"Saved JSON to: {args.output}")
 
 
