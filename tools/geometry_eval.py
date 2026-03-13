@@ -241,6 +241,8 @@ def compute_knn_distribution_metrics(source, target, k_values):
 
 
 def compute_knn_distribution_metrics_from_cache(source_cache, target_cache, k_values):
+    # Compare local neighborhood geometry without requiring image-to-image
+    # correspondence between the two datasets.
     metrics = {
         "knn_wasserstein": {},
         "knn_mean_diff": {},
@@ -262,6 +264,8 @@ def compute_knn_distribution_metrics_from_cache(source_cache, target_cache, k_va
 
 
 def compute_distance_histogram_metrics(source, target, num_bins):
+    # Compare the full within-class distance distribution. This is a coarse
+    # "map similarity" score for the class cloud.
     source_distances = sanitize_distance_vector(compute_pairwise_distance_vector(source), "distance histogram source")
     target_distances = sanitize_distance_vector(compute_pairwise_distance_vector(target), "distance histogram target")
     if source_distances is None or target_distances is None:
@@ -363,14 +367,20 @@ def summarize_graph_stats(features, k_values):
         finite_distances = sanitize_distance_vector(finite_distances, f"graph stats k={k}")
         degrees = adjacency.sum(axis=1).astype(np.float64)
         summary[key] = {
+            # Average local spacing between points.
             "mean_knn_distance": float(np.mean(finite_distances)) if finite_distances is not None else float("nan"),
+            # Whether local density is uniform or very uneven.
             "std_knn_distance": float(np.std(finite_distances)) if finite_distances is not None else float("nan"),
+            # Symmetrized kNN graph degree; useful for spotting topology shifts.
             "average_node_degree": float(np.mean(degrees)),
         }
     return summary
 
 
 def prepare_class_geometry_cache(features, k_values, pca_dim, device):
+    # Precompute the geometry summary of one class cloud once, then reuse it
+    # for same-class comparison, different-class controls, retrieval, and
+    # upper-bound repeats. This avoids repeating expensive distance/PCA work.
     with torch.no_grad():
         feature_tensor = torch.as_tensor(features, dtype=torch.float32, device=device)
         centroid = feature_tensor.mean(dim=0)
@@ -750,6 +760,8 @@ def save_umap_outputs(viz_bundle, output_prefix, source_dataset_name, target_dat
 
 
 def compute_pairwise_correlation(source, target, method):
+    # Deprecated for cross-dataset comparison: the i-th pair in one dataset
+    # is not the same semantic image pair as the i-th pair in the other.
     if source.shape[0] != target.shape[0]:
         num_samples = min(source.shape[0], target.shape[0])
         warnings.warn(
@@ -935,7 +947,8 @@ def compute_retrieval_results(selected_classes, source_class_caches, target_clas
 
         for class_index in selected_classes:
             # Retrieval asks: "which target class geometry looks most like
-            # this source class geometry?"
+            # this source class geometry?" If the answer is the same class id,
+            # class identity is preserved well enough for nearest-class matching.
             scored_targets = []
             for target_class_index in selected_classes:
                 score = compute_retrieval_score_from_cache(
@@ -1041,6 +1054,7 @@ def build_result(
         source_class_name = class_names[class_index]
         source_cache = source_class_caches[class_index]
         target_cache = target_class_caches[class_index]
+        # Main question: does class y in source still look like class y in target?
         same_metrics = compute_metrics_from_cache(source_cache, target_cache, metrics)
         same_class_metrics.append(same_metrics)
 
@@ -1049,6 +1063,8 @@ def build_result(
             if target_class_index == class_index:
                 continue
             target_control_cache = target_class_caches[target_class_index]
+            # Control question: are we getting a genuinely class-specific match,
+            # or would many unrelated target classes score similarly?
             control_metrics_list.append(compute_metrics_from_cache(source_cache, target_control_cache, metrics))
 
         averaged_control_metrics = mean_dict(control_metrics_list, metrics)
@@ -1181,6 +1197,8 @@ def run_same_dataset_upper_bound(args, payload, metrics):
 
         for class_index in selected_classes:
             candidate_indices = np.array(class_to_indices[class_index])
+            # Split-half reliability: two disjoint subsets from the same dataset
+            # act as a noise ceiling for how high the metric can go in practice.
             shuffled_indices = repeat_rng.permutation(candidate_indices)
             split_size = min(args.samples_per_class, shuffled_indices.shape[0] // 2)
             if split_size < args.samples_per_class:

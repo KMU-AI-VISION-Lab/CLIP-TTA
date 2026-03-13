@@ -78,6 +78,8 @@ def select_from_eval_json(eval_payload, args):
         return select_manual_classes(selected_classes, class_names, args)
 
     if args.viz_select_mode == "retrieval_error":
+        # Focus on the classes that the quantitative retrieval metric found
+        # most confusing. These are usually the most informative to inspect.
         retrieval_entries = eval_payload["retrieval"][args.retrieval_mode]["per_class"]
         ranked = [entry["source_class_index"] for entry in retrieval_entries if not entry["correct"]]
         if len(ranked) < args.viz_topk:
@@ -85,6 +87,7 @@ def select_from_eval_json(eval_payload, args):
         return ranked[:args.viz_topk]
 
     if args.viz_select_mode == "centroid_shift":
+        # Large centroid movement means the class mean shifts a lot across domains.
         ranked_entries = sorted(per_class, key=lambda entry: entry["same_class"]["centroid_euclidean"], reverse=True)
         return [entry["class_index"] for entry in ranked_entries[:args.viz_topk]]
 
@@ -133,6 +136,8 @@ def build_visualization_bundle(source_payload, target_payload, class_ids, source
             warnings.warn(f"Skipping class {class_index}: not enough samples for visualization.", RuntimeWarning)
             continue
 
+        # Keep the number of plotted points per class bounded so one class
+        # does not visually dominate the whole UMAP.
         source_samples = sample_class_features(source_features, source_class_to_indices, class_index, args.samples_per_class, rng)
         target_samples = sample_class_features(target_features, target_class_to_indices, class_index, args.samples_per_class, rng)
         source_points = source_samples[:args.viz_max_points_per_class]
@@ -173,12 +178,16 @@ def save_umap_visualization(bundle, source_dataset_name, target_dataset_name, ou
         random_state=args.seed,
         transform_seed=args.seed,
     )
+    # Fit one shared reducer on pooled points so source and target are shown
+    # in the same low-dimensional coordinate system.
     embedding = reducer.fit_transform(bundle["features"])
     centroid_stack = np.stack(
         [item["source_centroid"] for item in bundle["centroids"]] +
         [item["target_centroid"] for item in bundle["centroids"]],
         axis=0,
     )
+    # Centroids are computed in the original CLIP space first, then projected
+    # with the fitted UMAP. The arrows show domain shift direction per class.
     centroid_embedding = reducer.transform(centroid_stack)
     centroid_split = len(bundle["centroids"])
 
@@ -256,6 +265,8 @@ def save_umap_visualization(bundle, source_dataset_name, target_dataset_name, ou
         "num_points": int(bundle["features"].shape[0]),
         "num_classes": len(bundle["class_ids"]),
         "selected_class_ids": bundle["class_ids"],
+        # These scores help judge whether the UMAP figure preserved local
+        # neighborhood structure well enough to trust qualitatively.
         "trustworthiness": float(trustworthiness(bundle["features"], embedding, n_neighbors=trust_k)),
         "continuity": compute_continuity_score(bundle["features"], embedding, n_neighbors=trust_k),
         "png_path": png_path,
