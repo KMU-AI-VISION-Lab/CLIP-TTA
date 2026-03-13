@@ -46,7 +46,6 @@ python tools/geometry_eval.py \
   --num_classes 200 \
   --samples_per_class 10 \
   --seed 1 \
-  --metrics centroid_cosine,centroid_euclidean,cov_frobenius,pca_subspace,pairwise_spearman
 
 python tools/geometry_eval.py \
   --source_feature_file "${CACHE_ROOT}/imagenet/imagenet_${BACKBONE}_features.pt" \
@@ -55,4 +54,3 @@ python tools/geometry_eval.py \
   --num_classes 200 \
   --samples_per_class 10 \
   --seed 1 \
-  --metrics centroid_cosine,centroid_euclidean,cov_frobenius,pca_subspace,pairwise_spearman

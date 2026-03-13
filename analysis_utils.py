@@ -18,6 +18,8 @@ BACKBONES = {
 
 
 def make_feature_args(dataset_name, root_path, cache_dir, load, batch_size=64, num_workers=8):
+    # Reuse the repository's existing dataloader/feature code by building
+    # a lightweight args namespace that matches what those helpers expect.
     return Namespace(
         dataset=dataset_name,
         root_path=root_path,
@@ -34,6 +36,8 @@ def ensure_cache_dir(cache_dir):
 
 
 def load_clip_model(backbone, device=None):
+    # Keep model loading centralized so the dump/adaptation scripts all use
+    # the same backbone naming and device selection logic.
     if device is None:
         device = "cuda" if torch.cuda.is_available() else "cpu"
     clip_model, preprocess = clip.load(BACKBONES[backbone], device=device)
@@ -45,12 +49,16 @@ def load_dataset_and_features(dataset_name, root_path, backbone, cache_dir, load
     cache_dir = ensure_cache_dir(cache_dir)
     clip_model, preprocess = load_clip_model(backbone, device=device)
     args = make_feature_args(dataset_name, root_path, cache_dir, load, batch_size=batch_size, num_workers=num_workers)
+    # This follows the same path as main.py: build the dataset, build the loader,
+    # then extract normalized CLIP features with the repo's caching utilities.
     _, _, test_loader, dataset = get_all_dataloaders(args, preprocess, num_workers=num_workers)
     features, labels, prototypes = get_all_features(args, test_loader, dataset, clip_model)
     return clip_model, preprocess, dataset, test_loader, features, labels, prototypes
 
 
 def get_image_paths(image_dataset):
+    # ImageFolder-style datasets keep original filenames in .samples/.imgs,
+    # which is useful when inspecting outliers after feature dumping.
     if image_dataset is None:
         return None
     if hasattr(image_dataset, "samples"):

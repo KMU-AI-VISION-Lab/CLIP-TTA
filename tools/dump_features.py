@@ -32,6 +32,8 @@ def main():
     cache_dir = args.cache_dir or os.path.join("./caches", f"{args.dataset}_{args.backbone}")
     output_path = args.output or os.path.join(cache_dir, f"{args.dataset}_{args.backbone}_features.pt")
 
+    # Load the dataset exactly once and extract frozen CLIP image embeddings.
+    # These saved tensors are the inputs to the later geometry analysis script.
     _, _, dataset, _, features, labels, _ = load_dataset_and_features(
         dataset_name=args.dataset,
         root_path=args.root_path,
@@ -46,13 +48,17 @@ def main():
     export_labels = labels.long().cpu()
     export_classnames = list(dataset.classnames)
     if hasattr(dataset, "subset_to_imagenet_index"):
+        # Some datasets only contain a subset of ImageNet classes (e.g. ImageNet-R).
+        # For cross-dataset analysis we export labels in the original ImageNet-1k index space.
         subset_mapping = torch.tensor(dataset.subset_to_imagenet_index, dtype=torch.long)
         export_labels = subset_mapping[export_labels]
         export_classnames = list(imagenet_classes)
 
     image_paths = get_image_paths(getattr(dataset, "test", None))
     payload = {
+        # features: [N, D] normalized CLIP image embeddings
         "features": features.float().cpu(),
+        # labels: ImageNet-aligned class ids used by geometry_eval.py
         "labels": export_labels,
         "classnames": export_classnames,
         "dataset_name": args.dataset,
