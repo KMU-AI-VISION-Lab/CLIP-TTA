@@ -1,0 +1,11 @@
+{
+  "source_dataset": "imagenet",
+  "target_dataset": "imagenet_sketch",
+  "viz_dim": 3,
+  "num_points": 4000,
+  "num_classes": 100,
+  "trustworthiness": 0.9786432802108169,
+  "continuity": 0.9786460409085205,
+  "png_path": "./outputs/geometry_vit_b16/imagenet_vs_imagenet_sketch_nc100_spc20_knn5_10_seed1_umap_3d.png",
+  "html_path": "./outputs/geometry_vit_b16/imagenet_vs_imagenet_sketch_nc100_spc20_knn5_10_seed1_umap_3d.html"
+}

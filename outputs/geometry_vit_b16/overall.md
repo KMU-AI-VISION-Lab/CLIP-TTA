@@ -1,5 +1,4 @@
-아래 step 2까지 하고 결과가 나왔어 이를 분석해줘.
-그리고 UMAP이 차원을 축소해서 보기 때문에, 원래 512차원에서의 toplogy를 못볼까봐 걱정돼. 괜한걱정인지, 아니면 보다 나은방법이 있는지 추천해줘.
+basic 결과가 나왔어. 결과를 선행 연구와 논문 및 이론 등 근거를 대며 철저하고 냉정하게 분석해. 그리고 이게 의미하는바를 쉽게 알려줘.
 
 # 결과
 Cross-dataset geometry evaluation
@@ -8,7 +7,7 @@ Source dataset: imagenet
 Target dataset: imagenet_v2
 Backbone: vit_b16
 Selected classes: 200
-centroid_cosine: same=0.943081 different=0.676568
+centroid_cosine: same=0.943081 different=0.676568   
 centroid_euclidean: same=0.280205 different=0.685358
 cov_frobenius: same=0.148735 different=0.160356
 pca_subspace: same=0.297882 different=0.182030

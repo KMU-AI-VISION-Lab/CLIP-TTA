@@ -9,6 +9,7 @@ import numpy as np
 import torch
 from scipy.spatial.distance import jensenshannon
 from scipy.stats import pearsonr, spearmanr, wasserstein_distance
+from sklearn.manifold import trustworthiness
 
 
 def get_arguments():
@@ -32,6 +33,12 @@ def get_arguments():
     parser.add_argument("--compute_graph_stats", action="store_true", default=False)
     parser.add_argument("--distance_hist_bins", default=20, type=int)
     parser.add_argument("--device", default=None, type=str, help="Device for geometry cache computation, e.g. cpu, cuda, cuda:0.")
+    parser.add_argument("--save_umap", action="store_true", default=False)
+    parser.add_argument("--viz_dim", default=2, type=int, choices=[2, 3])
+    parser.add_argument("--viz_classes", nargs="+", default=None, help="Class names to visualize, or 'all'.")
+    parser.add_argument("--viz_class_ids", nargs="+", type=int, default=None)
+    parser.add_argument("--viz_max_points_per_class", default=100, type=int)
+    parser.add_argument("--interactive", action="store_true", default=False)
     return parser.parse_args()
 
 
@@ -63,6 +70,23 @@ def parse_class_indices(class_indices_arg):
     if not class_indices_arg:
         return None
     return [int(value.strip()) for value in class_indices_arg.split(",") if value.strip()]
+
+
+def get_output_prefix(output_path):
+    directory = os.path.dirname(output_path) or "."
+    stem = os.path.splitext(os.path.basename(output_path))[0]
+    return os.path.join(directory, stem)
+
+
+def select_visualization_class_ids(selected_classes, class_names, args):
+    if args.viz_class_ids:
+        return [class_index for class_index in args.viz_class_ids if class_index in selected_classes]
+    if args.viz_classes:
+        if len(args.viz_classes) == 1 and args.viz_classes[0].lower() == "all":
+            return list(selected_classes)
+        requested_names = set(args.viz_classes)
+        return [class_index for class_index in selected_classes if class_names[class_index] in requested_names]
+    return list(selected_classes)
 
 
 def build_class_index(labels):
@@ -530,6 +554,201 @@ def aggregate_graph_stat_averages(graph_average_dicts):
     return aggregated
 
 
+def compute_continuity_score(original_features, embedded_features, n_neighbors=5):
+    num_samples = original_features.shape[0]
+    if num_samples <= n_neighbors + 1:
+        warnings.warn(
+            f"Continuity requires more than {n_neighbors + 1} samples, got {num_samples}. Returning NaN.",
+            RuntimeWarning,
+        )
+        return float("nan")
+
+    original_dist = compute_distance_matrix(original_features)
+    embedded_dist = compute_distance_matrix(embedded_features)
+    original_order = np.argsort(original_dist, axis=1)
+    embedded_order = np.argsort(embedded_dist, axis=1)
+    original_neighbor_sets = [set(order[1:n_neighbors + 1]) for order in original_order]
+
+    penalty = 0.0
+    for i in range(num_samples):
+        embedded_neighbors = embedded_order[i][1:n_neighbors + 1]
+        rank_positions = np.empty(num_samples, dtype=np.int64)
+        rank_positions[original_order[i]] = np.arange(num_samples)
+        for neighbor in embedded_neighbors:
+            if neighbor not in original_neighbor_sets[i]:
+                penalty += rank_positions[neighbor] - n_neighbors
+
+    normalizer = num_samples * n_neighbors * (2 * num_samples - 3 * n_neighbors - 1)
+    if normalizer <= 0:
+        return float("nan")
+    return float(1.0 - (2.0 / normalizer) * penalty)
+
+
+def build_visualization_arrays(selected_classes, source_class_samples, target_class_samples, class_names, args):
+    viz_class_ids = select_visualization_class_ids(selected_classes, class_names, args)
+    if not viz_class_ids:
+        warnings.warn("No classes selected for visualization. Skipping UMAP export.", RuntimeWarning)
+        return None
+
+    features = []
+    labels = []
+    dataset_tags = []
+    centroids = []
+
+    for class_index in viz_class_ids:
+        source_samples = source_class_samples[class_index][:args.viz_max_points_per_class]
+        target_samples = target_class_samples[class_index][:args.viz_max_points_per_class]
+
+        if source_samples.shape[0] == 0 or target_samples.shape[0] == 0:
+            warnings.warn(f"Class {class_index} has no samples for visualization. Skipping.", RuntimeWarning)
+            continue
+
+        features.append(source_samples)
+        features.append(target_samples)
+        labels.extend([class_names[class_index]] * source_samples.shape[0])
+        labels.extend([class_names[class_index]] * target_samples.shape[0])
+        dataset_tags.extend(["source"] * source_samples.shape[0])
+        dataset_tags.extend(["target"] * target_samples.shape[0])
+        centroids.append({
+            "class_index": class_index,
+            "class_name": class_names[class_index],
+            "source_centroid": source_samples.mean(axis=0),
+            "target_centroid": target_samples.mean(axis=0),
+        })
+
+    if not features:
+        return None
+
+    return {
+        "features": np.concatenate(features, axis=0),
+        "labels": labels,
+        "dataset_tags": dataset_tags,
+        "centroids": centroids,
+        "viz_class_ids": viz_class_ids,
+    }
+
+
+def save_umap_outputs(viz_bundle, output_prefix, source_dataset_name, target_dataset_name, args):
+    try:
+        import matplotlib.pyplot as plt
+        import umap
+    except ImportError as exc:
+        raise ImportError(
+            "UMAP visualization requires 'matplotlib' and 'umap-learn'. Please install requirements."
+        ) from exc
+
+    reducer = umap.UMAP(
+        n_components=args.viz_dim,
+        random_state=args.seed,
+        transform_seed=args.seed,
+    )
+    embedding = reducer.fit_transform(viz_bundle["features"])
+    centroid_stack = np.stack(
+        [item["source_centroid"] for item in viz_bundle["centroids"]] +
+        [item["target_centroid"] for item in viz_bundle["centroids"]],
+        axis=0,
+    )
+    centroid_embedding = reducer.transform(centroid_stack)
+    split_point = len(viz_bundle["centroids"])
+
+    dataset_to_marker = {"source": "o", "target": "^"}
+    class_to_color_id = {class_name: index for index, class_name in enumerate(sorted(set(viz_bundle["labels"])))}
+    color_values = np.array([class_to_color_id[label] for label in viz_bundle["labels"]], dtype=np.int64)
+
+    figure = plt.figure(figsize=(10, 8))
+    if args.viz_dim == 3:
+        axis = figure.add_subplot(111, projection="3d")
+    else:
+        axis = figure.add_subplot(111)
+
+    for dataset_tag in ["source", "target"]:
+        indices = [i for i, tag in enumerate(viz_bundle["dataset_tags"]) if tag == dataset_tag]
+        if not indices:
+            continue
+        points = embedding[indices]
+        scatter_kwargs = {
+            "c": color_values[indices],
+            "marker": dataset_to_marker[dataset_tag],
+            "alpha": 0.7,
+            "cmap": "tab20",
+            "label": dataset_tag,
+        }
+        if args.viz_dim == 3:
+            axis.scatter(points[:, 0], points[:, 1], points[:, 2], **scatter_kwargs)
+        else:
+            axis.scatter(points[:, 0], points[:, 1], **scatter_kwargs)
+
+    for centroid_index, centroid_info in enumerate(viz_bundle["centroids"]):
+        source_point = centroid_embedding[centroid_index]
+        target_point = centroid_embedding[split_point + centroid_index]
+        delta = target_point - source_point
+        if args.viz_dim == 3:
+            axis.quiver(source_point[0], source_point[1], source_point[2], delta[0], delta[1], delta[2], color="black", alpha=0.5)
+        else:
+            axis.annotate("", xy=target_point[:2], xytext=source_point[:2], arrowprops={"arrowstyle": "->", "alpha": 0.5, "color": "black"})
+
+    axis.set_title(f"UMAP: {source_dataset_name} vs {target_dataset_name}")
+    axis.legend()
+    png_path = f"{output_prefix}_umap_{args.viz_dim}d.png"
+    figure.tight_layout()
+    figure.savefig(png_path, dpi=200)
+    plt.close(figure)
+
+    html_path = None
+    if args.interactive:
+        try:
+            import plotly.express as px
+            import plotly.graph_objects as go
+        except ImportError as exc:
+            raise ImportError("Interactive visualization requires 'plotly'. Please install requirements.") from exc
+
+        data_frame = {
+            "x": embedding[:, 0],
+            "y": embedding[:, 1],
+            "class": viz_bundle["labels"],
+            "dataset": viz_bundle["dataset_tags"],
+        }
+        if args.viz_dim == 3:
+            data_frame["z"] = embedding[:, 2]
+            figure_html = px.scatter_3d(data_frame, x="x", y="y", z="z", color="class", symbol="dataset", title=f"UMAP: {source_dataset_name} vs {target_dataset_name}")
+            for centroid_index, centroid_info in enumerate(viz_bundle["centroids"]):
+                source_point = centroid_embedding[centroid_index]
+                target_point = centroid_embedding[split_point + centroid_index]
+                figure_html.add_trace(go.Scatter3d(x=[source_point[0], target_point[0]], y=[source_point[1], target_point[1]], z=[source_point[2], target_point[2]], mode="lines", line={"color": "black"}, showlegend=False))
+        else:
+            figure_html = px.scatter(data_frame, x="x", y="y", color="class", symbol="dataset", title=f"UMAP: {source_dataset_name} vs {target_dataset_name}")
+            for centroid_index, centroid_info in enumerate(viz_bundle["centroids"]):
+                source_point = centroid_embedding[centroid_index]
+                target_point = centroid_embedding[split_point + centroid_index]
+                figure_html.add_scatter(x=[source_point[0], target_point[0]], y=[source_point[1], target_point[1]], mode="lines", line={"color": "black"}, showlegend=False)
+
+        html_path = f"{output_prefix}_umap_{args.viz_dim}d.html"
+        figure_html.write_html(html_path)
+
+    trust_k = min(10, max(2, viz_bundle["features"].shape[0] - 1))
+    viz_metrics = {
+        "source_dataset": source_dataset_name,
+        "target_dataset": target_dataset_name,
+        "viz_dim": args.viz_dim,
+        "num_points": int(viz_bundle["features"].shape[0]),
+        "num_classes": len(viz_bundle["viz_class_ids"]),
+        "trustworthiness": float(trustworthiness(viz_bundle["features"], embedding, n_neighbors=trust_k)),
+        "continuity": compute_continuity_score(viz_bundle["features"], embedding, n_neighbors=trust_k),
+        "png_path": png_path,
+        "html_path": html_path,
+    }
+    viz_metrics_path = f"{output_prefix}_viz_metrics.json"
+    with open(viz_metrics_path, "w", encoding="utf-8") as handle:
+        json.dump(viz_metrics, handle, indent=2)
+
+    return {
+        "png_path": png_path,
+        "html_path": html_path,
+        "viz_metrics_path": viz_metrics_path,
+        "metrics": viz_metrics,
+    }
+
+
 def compute_pairwise_correlation(source, target, method):
     if source.shape[0] != target.shape[0]:
         num_samples = min(source.shape[0], target.shape[0])
@@ -790,6 +1009,8 @@ def build_result(
     samples_per_class,
     mode,
     args,
+    output_prefix=None,
+    save_visualization=False,
 ):
     device = resolve_device(args.device)
     per_class_results = []
@@ -899,6 +1120,24 @@ def build_result(
             "pairwise distance correlation is not reliable for cross-dataset comparison without sample correspondence"
         )
 
+    if save_visualization and args.save_umap:
+        viz_bundle = build_visualization_arrays(
+            selected_classes=selected_classes,
+            source_class_samples=source_class_samples,
+            target_class_samples=target_class_samples,
+            class_names=class_names,
+            args=args,
+        )
+        if viz_bundle is not None:
+            viz_outputs = save_umap_outputs(
+                viz_bundle=viz_bundle,
+                output_prefix=output_prefix,
+                source_dataset_name=source_payload["dataset_name"],
+                target_dataset_name=target_payload["dataset_name"],
+                args=args,
+            )
+            results["visualization"] = viz_outputs
+
     return results
 
 
@@ -974,6 +1213,8 @@ def run_same_dataset_upper_bound(args, payload, metrics):
             samples_per_class=args.samples_per_class,
             mode="same_dataset_upper_bound",
             args=args,
+            output_prefix=get_output_prefix(args.output),
+            save_visualization=(repeat_index == 0),
         )
         repeat_result["repeat_index"] = repeat_index
         repeat_results.append(repeat_result)
@@ -1121,6 +1362,8 @@ def main():
             samples_per_class=args.samples_per_class,
             mode="cross_dataset",
             args=args,
+            output_prefix=get_output_prefix(args.output),
+            save_visualization=True,
         )
         results["seed"] = args.seed
 
@@ -1175,6 +1418,14 @@ def main():
             graph_stats_summary = results["summary"]["neighbor_graph_stats"] if results["mode"] == "same_dataset_upper_bound" else results["averages"]["neighbor_graph_stats"]
             for k_key, stat_summary in graph_stats_summary.items():
                 print(f"neighbor graph mean kNN distance diff ({k_key}): {stat_summary['mean_knn_distance']['abs_diff_mean']:.6f}")
+
+    if "visualization" in results:
+        print(f"UMAP figure: {results['visualization']['png_path']}")
+        if results["visualization"]["html_path"] is not None:
+            print(f"UMAP html: {results['visualization']['html_path']}")
+        print(f"UMAP metrics: {results['visualization']['viz_metrics_path']}")
+        print(f"trustworthiness: {results['visualization']['metrics']['trustworthiness']:.6f}")
+        print(f"continuity: {results['visualization']['metrics']['continuity']:.6f}")
 
     print("small values -> class geometry preserved")
     print("large values -> geometry differs across datasets")
