@@ -45,6 +45,7 @@ def main():
     cache_dir = args.cache_dir or os.path.join("./caches", f"{args.dataset}_{args.backbone}")
     output_path = args.output or os.path.join(cache_dir, f"{args.dataset}_{args.backbone}_{args.method}_adapted.pt")
 
+    # First extract the frozen CLIP features exactly as in the other analysis scripts.
     _, _, dataset, _, features, labels, clip_prototypes = load_dataset_and_features(
         dataset_name=args.dataset,
         root_path=args.root_path,
@@ -65,6 +66,7 @@ def main():
         num_slots = min(num_batch, len(torch.unique(labels)))
         sampler = OnlineSampler(features, labels, args.gamma, num_slots, args.batch_size)
     else:
+        # Offline mode samples one batch/task from the saved test features.
         sampler = BatchSampler(features, labels, args.batch_size, args.num_class_eff, args.num_class_eff_min, args.num_class_eff_max)
 
     sampled_indices = sampler.generate_indices()
@@ -73,6 +75,8 @@ def main():
 
     batch_features = features[sampled_indices]
     batch_labels = labels[sampled_indices]
+    # The existing solvers operate on frozen CLIP features/logits here.
+    # We save those outputs for analysis rather than modifying the training code path.
     zs_scores, adapted_scores = solver(batch_features, batch_labels, clip_prototypes, **method_args)
     zs_logits = 100.0 * batch_features @ clip_prototypes.squeeze().cpu()
 

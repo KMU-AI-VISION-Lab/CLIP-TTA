@@ -59,12 +59,15 @@ def get_class_name(payload, class_index):
 
 def sample_class_features(features, class_to_indices, class_index, samples_per_class, rng):
     candidate_indices = class_to_indices[class_index]
+    # We compare class geometry using the same number of examples per class
+    # so the covariance/PCA/pairwise metrics are on equal footing.
     sampled_indices = rng.choice(candidate_indices, size=samples_per_class, replace=False)
     sampled_indices = np.sort(sampled_indices)
     return features[sampled_indices]
 
 
 def compute_covariance(matrix):
+    # Basic sample covariance of one class cloud in CLIP feature space.
     centered = matrix - matrix.mean(axis=0, keepdims=True)
     denom = max(matrix.shape[0] - 1, 1)
     return centered.T @ centered / denom
@@ -88,6 +91,8 @@ def compute_cov_frobenius(source, target):
 
 
 def compute_pca_subspace_similarity(source, target, pca_dim):
+    # Compare the top principal directions of two class clouds.
+    # Higher means the dominant geometric directions are more aligned.
     source_centered = source - source.mean(axis=0, keepdims=True)
     target_centered = target - target.mean(axis=0, keepdims=True)
     max_rank = min(source_centered.shape[0] - 1, target_centered.shape[0] - 1, source_centered.shape[1], pca_dim)
@@ -110,6 +115,8 @@ def compute_pairwise_distance_vector(features):
         )
         return None
 
+    # Build the within-class distance matrix, then keep only the unique
+    # pair distances (upper triangle without the diagonal).
     diffs = features[:, None, :] - features[None, :, :]
     distance_matrix = np.linalg.norm(diffs, axis=-1)
     upper_triangular = np.triu_indices(num_samples, k=1)
@@ -241,6 +248,8 @@ def compute_retrieval_results(selected_classes, source_class_samples, target_cla
         num_correct = 0
 
         for class_index in selected_classes:
+            # Retrieval asks: "which target class geometry looks most like
+            # this source class geometry?"
             scored_targets = []
             for target_class_index in selected_classes:
                 score = compute_retrieval_score(
@@ -340,6 +349,8 @@ def main():
     target_class_samples = {}
     class_names = {}
 
+    # Sample each selected class once and reuse those same examples everywhere
+    # below. This keeps the metric comparisons and retrieval experiment consistent.
     for class_index in selected_classes:
         source_class_name = get_class_name(source_payload, class_index)
         target_class_name = get_class_name(target_payload, class_index)
@@ -367,6 +378,7 @@ def main():
         for target_class_index in selected_classes:
             if target_class_index == class_index:
                 continue
+            # Control: compare the source class against all *other* target classes.
             target_control_samples = target_class_samples[target_class_index]
             control_metrics_list.append(compute_metrics(source_samples, target_control_samples, metrics, args.pca_dim))
 

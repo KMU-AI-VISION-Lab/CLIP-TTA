@@ -12,6 +12,8 @@ NUM_WORKERS="${NUM_WORKERS:-8}"
 
 mkdir -p "${CACHE_ROOT}" "${OUTPUT_ROOT}"
 
+# Step 1: dump frozen CLIP image features for each dataset once.
+# The later geometry step only reads these saved tensors; it does not touch the images.
 python tools/dump_features.py \
   --dataset imagenet \
   --root_path "${ROOT_PATH}" \
@@ -39,6 +41,7 @@ python tools/dump_features.py \
   --batch_size "${FEATURE_BATCH_SIZE}" \
   --num_workers "${NUM_WORKERS}"
 
+# Step 2: compare class geometry between ImageNet and each target dataset.
 python tools/geometry_eval.py \
   --source_feature_file "${CACHE_ROOT}/imagenet/imagenet_${BACKBONE}_features.pt" \
   --target_feature_file "${CACHE_ROOT}/imagenet_v2/imagenet_v2_${BACKBONE}_features.pt" \
