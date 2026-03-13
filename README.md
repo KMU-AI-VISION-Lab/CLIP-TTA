@@ -185,20 +185,32 @@ For more detailed results, please refer to **Table 2** in the paper.
 
 This fork also includes a lightweight analysis extension for comparing class-conditional CLIP embedding geometry across the ImageNet family. This analysis code is not part of the original StatA paper and does not modify the default adaptation pipeline in `main.py`.
 
-Expected dataset layout:
+### Goal
+
+For a semantic class `y`, the analysis compares the CLIP image-feature cloud from dataset `A` with the cloud from dataset `B`:
+
 ```text
-/data2/TTA_datatset/
-|-- imagenet/
-|   |-- images/
-|   |   |-- train/
-|   |   `-- val/
-|-- imagenet-v2/
-|   |-- imagenetv2-matched-frequency-format-val/
-|   `-- images/                  # optional fallback layout
-|-- imagenet-sketch/
-|   `-- images/
-`-- imagenet-r/
-    `-- images/
+Z_A^y = {f(x) | x in class y from dataset A}
+Z_B^y = {f(x) | x in class y from dataset B}
+```
+
+The main question is whether the same class keeps a similar geometry across domains such as ImageNet, ImageNet-V2, and ImageNet-Sketch.
+
+### Expected dataset layout
+
+The loaders in this fork support the `/data2/TTA_dataset` layout used in our experiments as well as compatible fallback layouts.
+
+```text
+/data2/TTA_dataset/
+|-- ImageNet/
+|   |-- train/ or images/train/
+|   `-- val/   or images/val/
+|-- ImageNetV2/
+|   `-- imagenetv2-matched-frequency-format-val/
+|-- ImageNet-Sketch/
+|   `-- images/ or class folders directly
+`-- ImageNet-R/
+    `-- images/ or class folders directly
 ```
 
 Supported ImageNet-family datasets:
@@ -209,12 +221,7 @@ Supported ImageNet-family datasets:
 
 The ImageNet-family loaders align labels to ImageNet-1k indices whenever folder names permit it. For subset datasets such as ImageNet-R, the dumped feature files also expose `available_imagenet_indices` and `subset_classnames`.
 
-Dump CLIP features:
-```bash
-python tools/dump_features.py --dataset imagenet --root_path /data2/TTA_datatset --backbone vit_b16 --cache_dir ./caches/geometry/imagenet
-python tools/dump_features.py --dataset imagenet_v2 --root_path /data2/TTA_datatset --backbone vit_b16 --cache_dir ./caches/geometry/imagenet_v2
-python tools/dump_features.py --dataset imagenet_sketch --root_path /data2/TTA_datatset --backbone vit_b16 --cache_dir ./caches/geometry/imagenet_sketch
-```
+### Step 1: dump CLIP features once
 
 Each feature dump stores a `.pt` dictionary with:
 - `features`
@@ -224,35 +231,136 @@ Each feature dump stores a `.pt` dictionary with:
 - `backbone`
 - `image_paths` when available
 
-Run geometry evaluation:
+Example:
+
+```bash
+python tools/dump_features.py --dataset imagenet --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/imagenet --device cuda:0
+python tools/dump_features.py --dataset imagenet_v2 --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/imagenet_v2 --device cuda:0
+python tools/dump_features.py --dataset imagenet_sketch --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/imagenet_sketch --device cuda:0
+```
+
+### Step 2: run geometry evaluation
+
+Example cross-dataset evaluation:
+
 ```bash
 python tools/geometry_eval.py \
-  --source_feature_file ./caches/geometry/imagenet/imagenet_vit_b16_features.pt \
-  --target_feature_file ./caches/geometry/imagenet_v2/imagenet_v2_vit_b16_features.pt \
-  --output ./outputs/imagenet_vs_imagenet_v2.json \
+  --source_feature_file ./caches/geometry_vit_b16/imagenet/imagenet_vit_b16_features.pt \
+  --target_feature_file ./caches/geometry_vit_b16/imagenet_v2/imagenet_v2_vit_b16_features.pt \
+  --output ./outputs/geometry_vit_b16/imagenet_vs_imagenet_v2_nc200_spc10_knn3_5_seed1.json \
   --num_classes 200 \
   --samples_per_class 10 \
   --seed 1 \
-  --metrics centroid_cosine,centroid_euclidean,cov_frobenius,pca_subspace,pairwise_spearman
+  --compute_knn_distribution \
+  --compute_distance_histogram \
+  --compute_graph_stats \
+  --knn_k 3 5 \
+  --device cuda:0
 ```
 
-Implemented geometry metrics:
-- centroid cosine similarity
-- centroid Euclidean distance
-- covariance Frobenius distance
-- top-k PCA subspace similarity via principal-angle cosines
-- pairwise distance correlation with Spearman or Pearson
+Example same-dataset split-half upper bound:
 
-The evaluator also reports a control by comparing same-class source-target scores against averaged different-class source-target scores.
-
-To run the full ImageNet family example:
 ```bash
-bash scripts/run_geometry_imagenet_family.sh /data2/TTA_datatset vit_b16
+python tools/geometry_eval.py \
+  --same_dataset_upper_bound \
+  --source_feature_file ./caches/geometry_vit_b16/imagenet/imagenet_vit_b16_features.pt \
+  --output ./outputs/geometry_vit_b16/imagenet_split_half_upper_bound_nc200_spc10_rep5_knn3_5_seed1.json \
+  --num_classes 200 \
+  --samples_per_class 10 \
+  --min_samples_per_class_for_split 20 \
+  --upper_bound_num_repeats 5 \
+  --seed 1 \
+  --compute_knn_distribution \
+  --compute_distance_histogram \
+  --compute_graph_stats \
+  --knn_k 3 5 \
+  --device cuda:0
 ```
 
-Optional adaptation comparison:
+The split-half mode is a reliability reference. It estimates how high a metric can be when comparing two disjoint subsets from the same dataset, so you can tell whether a low cross-dataset score reflects real domain shift or just finite-sample noise.
+
+### Step 3: optional UMAP visualization without rerunning the full evaluator
+
+If feature `.pt` files already exist, you do not need to rerun `tools/geometry_eval.py` just to create plots. Use `tools/geometry_viz.py` to reuse the feature dumps and, optionally, an existing evaluation JSON to auto-select interesting classes.
+
+Example: visualize classes with the largest centroid shifts.
+
 ```bash
-python tools/dump_adapted_features.py --dataset imagenet_sketch --root_path /data2/TTA_datatset --backbone vit_b16 --method StatA --batch_size 64
+python tools/geometry_viz.py \
+  --source_feature_file ./caches/geometry_vit_b16/imagenet/imagenet_vit_b16_features.pt \
+  --target_feature_file ./caches/geometry_vit_b16/imagenet_sketch/imagenet_sketch_vit_b16_features.pt \
+  --eval_json ./outputs/geometry_vit_b16/imagenet_vs_imagenet_sketch_nc200_spc10_knn3_5_seed1.json \
+  --output_prefix ./outputs/geometry_vit_b16/imagenet_vs_imagenet_sketch_shift_focus \
+  --viz_select_mode centroid_shift \
+  --viz_topk 12 \
+  --samples_per_class 10 \
+  --viz_max_points_per_class 50 \
+  --viz_dim 3 \
+  --interactive
+```
+
+Available class-selection modes:
+- `manual`
+- `retrieval_error`
+- `centroid_shift`
+- `topology`
+
+Outputs:
+- `*_umap_2d.png` or `*_umap_3d.png`
+- `*_umap_2d.html` or `*_umap_3d.html` when `--interactive` is used
+- `*_viz_metrics.json` with `trustworthiness` and `continuity`
+
+### Metric guide
+
+The geometry metrics can be read as three complementary views of a class cloud in feature space.
+
+Location and utility:
+- `centroid_cosine`, `centroid_euclidean`
+  - These compare the class mean in two datasets.
+  - Intuition: if you average many "dog" features, do the two average-dog vectors still point in the same direction and stay close together?
+- `retrieval_acc_*`
+  - For each source class representation, retrieve the most similar target class.
+  - High accuracy means class identity is still easy to match across datasets.
+
+Shape and orientation:
+- `cov_frobenius`
+  - Measures whether the class cloud keeps a similar spread and anisotropy.
+  - Intuition: do the two clouds have a similar volume and deformation?
+- `pca_subspace`
+  - Measures whether the dominant directions of variation still align.
+  - This is often the clearest sign that the feature space is relying on similar or different cues across domains.
+
+Topology and neighborhood structure:
+- `knn_wasserstein`, `knn_mean_diff`, `knn_std_diff`
+  - Compare local neighbor-distance distributions without requiring sample correspondence.
+  - Intuition: are points inside the class similarly dense and similarly arranged locally?
+- `distance_histogram_js`, `distance_histogram_wasserstein`
+  - Compare the whole within-class distance distribution.
+  - Intuition: does the class preserve its overall internal distance map?
+- `neighbor_graph_stats`
+  - Summarizes average local spacing from the k-nearest-neighbor graph.
+
+Deprecated metric kept for backward compatibility:
+- `pairwise_spearman`, `pairwise_pearson`
+  - These are not reliable for cross-dataset comparison without sample correspondence because entry-wise distances do not refer to the same object pairs.
+
+In the JSON output, `same` compares the same semantic class across datasets, while `different` is a control obtained by comparing a source class to other target classes. A useful metric should show a clear gap between `same` and `different`.
+
+### Full driver script
+
+```bash
+CUDA_VISIBLE_DEVICES=0 GEOMETRY_DEVICE=cuda:0 bash scripts/run_geometry_imagenet_family.sh /data2/TTA_dataset vit_b16
+```
+
+The script:
+- skips feature dumping if the expected feature file already exists
+- runs cross-dataset evaluation for ImageNet vs ImageNet-V2 and ImageNet vs ImageNet-Sketch
+- runs same-dataset split-half upper bounds for ImageNet, ImageNet-V2, and ImageNet-Sketch
+
+### Optional adaptation comparison
+
+```bash
+python tools/dump_adapted_features.py --dataset imagenet_sketch --root_path /data2/TTA_dataset --backbone vit_b16 --method StatA --batch_size 64
 ```
 
 This script saves frozen CLIP image embeddings together with zero-shot and adapted prediction outputs for a sampled batch. It does not currently extract adapted image embeddings from the online adaptation methods.
