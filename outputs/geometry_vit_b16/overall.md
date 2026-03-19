@@ -1,4 +1,4 @@
-basic 결과가 나왔어. 결과를 선행 연구와 논문 및 이론 등 근거를 대며 철저하고 냉정하게 분석해. 그리고 이게 의미하는바를 쉽게 알려줘.
+내가 ImageNet Family dataset 간의 geometry를 분석했고 아래가 결과인데, 내가 각 결과 값이 어떤건지, 뭘 의미하는지 잘몰라. 나는 석사 신입생이니 차근차근 알려줄 수 있어?
 
 # 결과
 Cross-dataset geometry evaluation

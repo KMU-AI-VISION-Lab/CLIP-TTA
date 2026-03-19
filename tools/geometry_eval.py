@@ -33,6 +33,9 @@ def get_arguments():
     parser.add_argument("--compute_graph_stats", action="store_true", default=False)
     parser.add_argument("--distance_hist_bins", default=20, type=int)
     parser.add_argument("--device", default=None, type=str, help="Device for geometry cache computation, e.g. cpu, cuda, cuda:0.")
+    parser.add_argument("--inter_class_geometry", action="store_true", default=False)
+    parser.add_argument("--sign_epsilon", default=0.05, type=float)
+    parser.add_argument("--save_inter_class_plots", action="store_true", default=False)
     parser.add_argument("--save_umap", action="store_true", default=False)
     parser.add_argument("--viz_dim", default=2, type=int, choices=[2, 3])
     parser.add_argument("--viz_classes", nargs="+", default=None, help="Class names to visualize, or 'all'.")
@@ -564,6 +567,317 @@ def aggregate_graph_stat_averages(graph_average_dicts):
     return aggregated
 
 
+def compute_cosine_similarity_matrix(centered_prototypes):
+    # `centered_prototypes`의 shape은 [클래스 수, feature 차원]입니다.
+    # 각 행은 "클래스 prototype - 전역 prototype" 입니다.
+    # 여기서는 모든 클래스 쌍에 대해 cosine similarity를 한 번에 계산합니다.
+    norms = np.linalg.norm(centered_prototypes, axis=1)
+    # `norms[:, None]`는 1차원 벡터를 열벡터처럼 바꿉니다.
+    # 열벡터 x 행벡터를 하면 cosine 분모에 필요한 모든 조합이 만들어집니다.
+    denom = norms[:, None] * norms[None, :]
+    similarity = np.full((centered_prototypes.shape[0], centered_prototypes.shape[0]), np.nan, dtype=np.float64)
+    valid = denom > 0
+    if np.any(valid):
+        # NumPy에서 `@`는 행렬곱입니다.
+        # 이 한 줄로 모든 클래스 쌍의 내적(dot product)을 동시에 계산합니다.
+        similarity[valid] = (centered_prototypes @ centered_prototypes.T)[valid] / denom[valid]
+    # 대각선은 자기 자신과의 비교이므로 정의상 항상 1입니다.
+    np.fill_diagonal(similarity, 1.0)
+    return np.clip(similarity, -1.0, 1.0), norms
+
+
+def build_inter_class_structure(class_samples, selected_classes):
+    class_ids = list(selected_classes)
+    # 각 클래스에서 뽑힌 이미지 feature들을 평균내서
+    # "클래스 대표 벡터(prototype)"를 만듭니다.
+    prototypes = np.stack([class_samples[class_index].mean(axis=0) for class_index in class_ids], axis=0)
+    # 선택된 모든 클래스/샘플을 합쳐 전체 평균을 구합니다.
+    # 이 벡터가 전체 클래스 구조의 중심점 역할을 합니다.
+    pooled_samples = np.concatenate([class_samples[class_index] for class_index in class_ids], axis=0)
+    global_prototype = pooled_samples.mean(axis=0)
+    # 각 클래스 prototype에서 전역 중심을 빼서 centered prototype을 만듭니다.
+    # 이렇게 하면 "절대 위치"보다 "전체 중심 대비 상대 관계"를 보기 쉬워집니다.
+    centered_prototypes = prototypes - global_prototype[None, :]
+    similarity_matrix, radii = compute_cosine_similarity_matrix(centered_prototypes)
+    return {
+        "class_ids": class_ids,
+        "prototypes": prototypes,
+        "global_prototype": global_prototype,
+        "centered_prototypes": centered_prototypes,
+        "similarity_matrix": similarity_matrix,
+        "radii": radii,
+    }
+
+
+def safe_stat_correlation(values_a, values_b, method, context):
+    # Pearson: 실제 값의 선형적 유사성
+    # Spearman: 값의 크기 순서(rank)가 얼마나 비슷한지
+    # 빈 벡터이거나 분산이 0이면 상관계수가 불안정하므로 NaN을 반환합니다.
+    if values_a.size == 0 or values_b.size == 0:
+        warnings.warn(f"{context}: empty vectors. Returning NaN.", RuntimeWarning)
+        return float("nan")
+    if np.var(values_a) == 0 or np.var(values_b) == 0:
+        warnings.warn(f"{context}: zero variance detected. Returning NaN.", RuntimeWarning)
+        return float("nan")
+    if method == "pearson":
+        return float(pearsonr(values_a, values_b)[0])
+    if method == "spearman":
+        return float(spearmanr(values_a, values_b).statistic)
+    raise ValueError(f"Unsupported correlation method: {method}")
+
+
+def sign_label(value):
+    # 부호를 JSON에 저장하기 쉽도록 -1 / 0 / +1로 바꿉니다.
+    if value > 0:
+        return 1
+    if value < 0:
+        return -1
+    return 0
+
+
+def build_inter_class_artifact_prefix(output_prefix, artifact_suffix):
+    return f"{output_prefix}{artifact_suffix}_inter_class"
+
+
+def maybe_save_inter_class_plots(source_matrix, target_matrix, upper_source, upper_target, abs_diff_vector, artifact_prefix, title_prefix):
+    try:
+        import matplotlib.pyplot as plt
+    except ImportError as exc:
+        raise ImportError("Inter-class plots require 'matplotlib'. Please install requirements.") from exc
+
+    diff_matrix = np.abs(source_matrix - target_matrix)
+    files = {}
+
+    for suffix, matrix, title in [
+        ("source_heatmap", source_matrix, f"{title_prefix} source centered prototype similarity"),
+        ("target_heatmap", target_matrix, f"{title_prefix} target centered prototype similarity"),
+        ("abs_diff_heatmap", diff_matrix, f"{title_prefix} absolute difference"),
+    ]:
+        figure, axis = plt.subplots(figsize=(7, 6))
+        image = axis.imshow(matrix, cmap="coolwarm" if suffix != "abs_diff_heatmap" else "magma", vmin=-1.0 if suffix != "abs_diff_heatmap" else None, vmax=1.0 if suffix != "abs_diff_heatmap" else None)
+        axis.set_title(title)
+        axis.set_xlabel("Class index")
+        axis.set_ylabel("Class index")
+        figure.colorbar(image, ax=axis, fraction=0.046, pad=0.04)
+        path = f"{artifact_prefix}_{suffix}.png"
+        figure.tight_layout()
+        figure.savefig(path, dpi=200)
+        plt.close(figure)
+        files[suffix] = path
+
+    # scatter plot은 source의 클래스쌍 관계와 target의 클래스쌍 관계가
+    # 얼마나 비슷한지 한눈에 보는 용도입니다.
+    # 점들이 대각선 주변에 모일수록 관계 구조가 잘 보존된 것입니다.
+    pearson_value = safe_stat_correlation(upper_source, upper_target, "pearson", "inter-class scatter pearson")
+    spearman_value = safe_stat_correlation(upper_source, upper_target, "spearman", "inter-class scatter spearman")
+    figure, axis = plt.subplots(figsize=(7, 6))
+    axis.scatter(upper_source, upper_target, alpha=0.6, s=18)
+    axis.set_xlabel("Source upper-triangular similarities")
+    axis.set_ylabel("Target upper-triangular similarities")
+    axis.set_title(f"{title_prefix} scatter\npearson={pearson_value:.4f}, spearman={spearman_value:.4f}")
+    scatter_path = f"{artifact_prefix}_scatter.png"
+    figure.tight_layout()
+    figure.savefig(scatter_path, dpi=200)
+    plt.close(figure)
+    files["scatter"] = scatter_path
+
+    figure, axis = plt.subplots(figsize=(7, 5))
+    axis.hist(abs_diff_vector, bins=min(40, max(10, abs_diff_vector.shape[0] // 5)))
+    axis.set_xlabel("|source - target|")
+    axis.set_ylabel("Count")
+    axis.set_title(f"{title_prefix} absolute-difference histogram")
+    histogram_path = f"{artifact_prefix}_abs_diff_hist.png"
+    figure.tight_layout()
+    figure.savefig(histogram_path, dpi=200)
+    plt.close(figure)
+    files["abs_diff_histogram"] = histogram_path
+
+    return files
+
+
+def compute_inter_class_geometry_results(
+    selected_classes,
+    class_names,
+    source_class_samples,
+    target_class_samples,
+    output_prefix,
+    artifact_suffix,
+    source_dataset_name,
+    target_dataset_name,
+    sign_epsilon,
+    save_plots,
+):
+    if len(selected_classes) < 2:
+        raise ValueError("Inter-class relational geometry requires at least 2 classes.")
+
+    # source / target 각각에 대해
+    # "클래스 prototype -> 전역 중심 제거 -> 클래스 간 유사도 행렬"
+    # 구조를 만듭니다.
+    source_structure = build_inter_class_structure(source_class_samples, selected_classes)
+    target_structure = build_inter_class_structure(target_class_samples, selected_classes)
+
+    # 두 데이터셋에서 만든 클래스-클래스 유사도 행렬 S를 꺼냅니다.
+    # shape은 [클래스 수, 클래스 수] 입니다.
+    source_matrix = source_structure["similarity_matrix"]
+    target_matrix = target_structure["similarity_matrix"]
+    # 대각선은 자기 자신과의 비교라 항상 1이고,
+    # 아래 삼각형은 위 삼각형과 중복이므로 upper triangle만 사용합니다.
+    upper_indices = np.triu_indices(len(selected_classes), k=1)
+    upper_source = source_matrix[upper_indices]
+    upper_target = target_matrix[upper_indices]
+
+    # NaN / Inf 같은 비정상 값은 비교에서 제외합니다.
+    # 예를 들어 centered prototype의 길이가 0이면 cosine이 정의되지 않을 수 있습니다.
+    if not np.all(np.isfinite(upper_source)) or not np.all(np.isfinite(upper_target)):
+        warnings.warn("Inter-class relational geometry contains non-finite similarity values.", RuntimeWarning)
+    valid_mask = np.isfinite(upper_source) & np.isfinite(upper_target)
+    valid_source = upper_source[valid_mask]
+    valid_target = upper_target[valid_mask]
+    # 각 클래스쌍 관계가 source와 target에서 얼마나 달라졌는지 절댓값 차이로 봅니다.
+    abs_diff_vector = np.abs(valid_source - valid_target)
+
+    # pair_records에는 클래스쌍별 상세 정보를 저장합니다.
+    # 나중에 어떤 클래스쌍에서 관계 변화가 컸는지 추적할 때 사용합니다.
+    pair_records = []
+    num_pairs_near_zero = 0
+    num_sign_comparisons = 0
+    num_sign_matches = 0
+    top_abs_diff_pairs = []
+    for pair_offset, (a_pos, b_pos) in enumerate(zip(*upper_indices)):
+        # upper triangle에서 꺼낸 1차원 값 하나가
+        # 실제로는 (class a, class b) 쌍 하나에 해당합니다.
+        source_value = float(upper_source[pair_offset])
+        target_value = float(upper_target[pair_offset])
+        # 두 값이 모두 0 근처면 부호 비교가 매우 불안정하므로
+        # normal sign 비교에서 제외하고 near_zero로만 표시합니다.
+        near_zero = abs(source_value) < sign_epsilon and abs(target_value) < sign_epsilon
+        source_sign = sign_label(source_value)
+        target_sign = sign_label(target_value)
+        sign_match = source_sign == target_sign
+        if near_zero:
+            num_pairs_near_zero += 1
+        else:
+            num_sign_comparisons += 1
+            num_sign_matches += int(sign_match)
+        pair_records.append({
+            "class_a_id": selected_classes[a_pos],
+            "class_b_id": selected_classes[b_pos],
+            "class_a_name": class_names[selected_classes[a_pos]],
+            "class_b_name": class_names[selected_classes[b_pos]],
+            "source_similarity": source_value,
+            "target_similarity": target_value,
+            "source_sign": source_sign,
+            "target_sign": target_sign,
+            "sign_match": bool(sign_match),
+            "near_zero": bool(near_zero),
+            "abs_diff": float(abs(source_value - target_value)),
+        })
+
+    # 관계 차이가 큰 클래스쌍 상위 10개를 따로 저장합니다.
+    # 해석 단계에서 "어떤 클래스쌍이 가장 많이 변했는가?"를 보기 쉽습니다.
+    top_abs_diff_pairs = sorted(pair_records, key=lambda item: item["abs_diff"], reverse=True)[:10]
+
+    # radius는 각 클래스 centered prototype의 길이입니다.
+    # 즉, "전체 중심에서 이 클래스가 얼마나 멀리 떨어져 있는가?"를 뜻합니다.
+    radius_records = []
+    for class_index, source_radius, target_radius in zip(selected_classes, source_structure["radii"], target_structure["radii"]):
+        radius_records.append({
+            "class_id": class_index,
+            "class_name": class_names[class_index],
+            "source_radius": float(source_radius),
+            "target_radius": float(target_radius),
+            "abs_diff": float(abs(source_radius - target_radius)),
+        })
+
+    # 상관계수 계산을 위해 radius를 다시 숫자 벡터로 모읍니다.
+    source_radius_values = np.asarray([record["source_radius"] for record in radius_records], dtype=np.float64)
+    target_radius_values = np.asarray([record["target_radius"] for record in radius_records], dtype=np.float64)
+
+    artifact_prefix = build_inter_class_artifact_prefix(output_prefix, artifact_suffix)
+    os.makedirs(os.path.dirname(output_prefix) or ".", exist_ok=True)
+
+    # 행렬이 커질 수 있으므로 main JSON에 직접 다 넣지 않고
+    # 별도 .npy / .json 파일로 저장합니다.
+    source_matrix_path = f"{artifact_prefix}_source.npy"
+    target_matrix_path = f"{artifact_prefix}_target.npy"
+    np.save(source_matrix_path, source_matrix)
+    np.save(target_matrix_path, target_matrix)
+
+    # 클래스쌍별 sign 정보와 클래스별 radius 정보는 사람이 읽기 쉽도록 JSON으로 저장합니다.
+    per_pair_path = f"{artifact_prefix}_per_pair_sign_info.json"
+    with open(per_pair_path, "w", encoding="utf-8") as handle:
+        json.dump(pair_records, handle, indent=2)
+
+    per_radius_path = f"{artifact_prefix}_per_class_radius.json"
+    with open(per_radius_path, "w", encoding="utf-8") as handle:
+        json.dump(radius_records, handle, indent=2)
+
+    plot_files = None
+    if save_plots:
+        # heatmap / scatter / histogram은 정량 지표를 보조하는 시각적 해석 도구입니다.
+        plot_files = maybe_save_inter_class_plots(
+            source_matrix=source_matrix,
+            target_matrix=target_matrix,
+            upper_source=valid_source,
+            upper_target=valid_target,
+            abs_diff_vector=abs_diff_vector,
+            artifact_prefix=artifact_prefix,
+            title_prefix=f"{source_dataset_name} vs {target_dataset_name}",
+        )
+
+    return {
+        "class_ids": selected_classes,
+        "class_names": [class_names[class_index] for class_index in selected_classes],
+        "matrix_shape": list(source_matrix.shape),
+        "matrix_file_source": source_matrix_path,
+        "matrix_file_target": target_matrix_path,
+        # upper triangle만 펼친 벡터끼리 비교한 상관계수입니다.
+        # 높을수록 "클래스-클래스 관계 지도"가 비슷하다는 뜻입니다.
+        "pearson_corr": safe_stat_correlation(valid_source, valid_target, "pearson", "inter-class matrix pearson"),
+        "spearman_corr": safe_stat_correlation(valid_source, valid_target, "spearman", "inter-class matrix spearman"),
+        # 클래스쌍 관계값이 평균적으로 얼마나 달라졌는지 봅니다.
+        "mean_abs_diff": float(np.mean(abs_diff_vector)) if abs_diff_vector.size > 0 else float("nan"),
+        # near_zero가 아닌 클래스쌍들 중에서 부호가 얼마나 일치하는지 봅니다.
+        "sign_consistency_rate": float(num_sign_matches / num_sign_comparisons) if num_sign_comparisons > 0 else float("nan"),
+        "sign_epsilon": float(sign_epsilon),
+        "num_pairs_total": int(upper_source.shape[0]),
+        "num_pairs_near_zero": int(num_pairs_near_zero),
+        # radius는 "각 클래스 prototype이 전체 중심에서 얼마나 멀리 있는가"입니다.
+        # 이 값이 비슷하면 전체 클래스 배치의 바깥/안쪽 구조가 유지된 것으로 볼 수 있습니다.
+        "radius_corr": safe_stat_correlation(source_radius_values, target_radius_values, "pearson", "inter-class radius correlation"),
+        "radius_mean_abs_diff": float(np.mean(np.abs(source_radius_values - target_radius_values))),
+        # centered prototype norm 자체도 저장해 두면 나중에 클래스별 해석이 쉬워집니다.
+        "source_centered_prototype_norms": [float(value) for value in source_structure["radii"]],
+        "target_centered_prototype_norms": [float(value) for value in target_structure["radii"]],
+        "per_pair_sign_info_file": per_pair_path,
+        "per_class_radius_file": per_radius_path,
+        "plot_files": plot_files,
+        "top_abs_diff_pairs": top_abs_diff_pairs,
+    }
+
+
+def summarize_inter_class_geometry(inter_class_runs):
+    # split-half upper bound에서는 랜덤하게 나눈 결과가 여러 번 생기므로
+    # 반복 실험들의 평균과 표준편차를 함께 요약합니다.
+    keys = ["pearson_corr", "spearman_corr", "mean_abs_diff", "sign_consistency_rate", "radius_corr", "radius_mean_abs_diff"]
+    summary = {}
+    for key in keys:
+        values = [run[key] for run in inter_class_runs if key in run and not math.isnan(run[key])]
+        summary[key] = {
+            "mean": float(np.mean(values)) if values else float("nan"),
+            "std": float(np.std(values)) if values else float("nan"),
+        }
+    near_zero_values = [run["num_pairs_near_zero"] for run in inter_class_runs]
+    total_values = [run["num_pairs_total"] for run in inter_class_runs]
+    summary["num_pairs_near_zero"] = {
+        "mean": float(np.mean(near_zero_values)) if near_zero_values else float("nan"),
+        "std": float(np.std(near_zero_values)) if near_zero_values else float("nan"),
+    }
+    summary["num_pairs_total"] = int(total_values[0]) if total_values else 0
+    summary["sign_epsilon"] = inter_class_runs[0]["sign_epsilon"] if inter_class_runs else float("nan")
+    return summary
+
+
 def compute_continuity_score(original_features, embedded_features, n_neighbors=5):
     num_samples = original_features.shape[0]
     if num_samples <= n_neighbors + 1:
@@ -1024,6 +1338,7 @@ def build_result(
     args,
     output_prefix=None,
     save_visualization=False,
+    artifact_suffix="",
 ):
     device = resolve_device(args.device)
     per_class_results = []
@@ -1136,6 +1451,22 @@ def build_result(
             "pairwise distance correlation is not reliable for cross-dataset comparison without sample correspondence"
         )
 
+    if args.inter_class_geometry:
+        inter_class_start = time.perf_counter()
+        results["inter_class_geometry"] = compute_inter_class_geometry_results(
+            selected_classes=selected_classes,
+            class_names=class_names,
+            source_class_samples=source_class_samples,
+            target_class_samples=target_class_samples,
+            output_prefix=output_prefix,
+            artifact_suffix=artifact_suffix,
+            source_dataset_name=source_payload["dataset_name"],
+            target_dataset_name=target_payload["dataset_name"],
+            sign_epsilon=args.sign_epsilon,
+            save_plots=save_visualization and args.save_inter_class_plots,
+        )
+        log_timing("inter-class relational geometry", inter_class_start)
+
     if save_visualization and args.save_umap:
         viz_bundle = build_visualization_arrays(
             selected_classes=selected_classes,
@@ -1233,6 +1564,7 @@ def run_same_dataset_upper_bound(args, payload, metrics):
             args=args,
             output_prefix=get_output_prefix(args.output),
             save_visualization=(repeat_index == 0),
+            artifact_suffix=f"_repeat_{repeat_index}",
         )
         repeat_result["repeat_index"] = repeat_index
         repeat_results.append(repeat_result)
@@ -1269,6 +1601,10 @@ def run_same_dataset_upper_bound(args, payload, metrics):
     if args.compute_graph_stats:
         graph_runs = [{"neighbor_graph_stats": run["averages"]["neighbor_graph_stats"]} for run in repeat_results]
         summary.update(aggregate_graph_stat_averages(graph_runs))
+    if args.inter_class_geometry:
+        summary["inter_class_geometry"] = summarize_inter_class_geometry(
+            [run["inter_class_geometry"] for run in repeat_results if "inter_class_geometry" in run]
+        )
 
     return {
         "mode": "same_dataset_upper_bound",
@@ -1382,6 +1718,7 @@ def main():
             args=args,
             output_prefix=get_output_prefix(args.output),
             save_visualization=True,
+            artifact_suffix="",
         )
         results["seed"] = args.seed
 
@@ -1436,6 +1773,33 @@ def main():
             graph_stats_summary = results["summary"]["neighbor_graph_stats"] if results["mode"] == "same_dataset_upper_bound" else results["averages"]["neighbor_graph_stats"]
             for k_key, stat_summary in graph_stats_summary.items():
                 print(f"neighbor graph mean kNN distance diff ({k_key}): {stat_summary['mean_knn_distance']['abs_diff_mean']:.6f}")
+
+    if args.inter_class_geometry:
+        print("Inter-class relational geometry")
+        if results["mode"] == "same_dataset_upper_bound":
+            inter_class_summary = results["summary"]["inter_class_geometry"]
+            print(f"- matrix Pearson corr: {inter_class_summary['pearson_corr']['mean']:.6f}+/-{inter_class_summary['pearson_corr']['std']:.6f}")
+            print(f"- matrix Spearman corr: {inter_class_summary['spearman_corr']['mean']:.6f}+/-{inter_class_summary['spearman_corr']['std']:.6f}")
+            print(f"- mean abs diff: {inter_class_summary['mean_abs_diff']['mean']:.6f}+/-{inter_class_summary['mean_abs_diff']['std']:.6f}")
+            print(f"- sign consistency rate: {inter_class_summary['sign_consistency_rate']['mean']:.6f}+/-{inter_class_summary['sign_consistency_rate']['std']:.6f}")
+            print(f"- near-zero pairs: {inter_class_summary['num_pairs_near_zero']['mean']:.2f}+/-{inter_class_summary['num_pairs_near_zero']['std']:.2f}")
+            print(f"- radius corr: {inter_class_summary['radius_corr']['mean']:.6f}+/-{inter_class_summary['radius_corr']['std']:.6f}")
+            print(f"- radius mean abs diff: {inter_class_summary['radius_mean_abs_diff']['mean']:.6f}+/-{inter_class_summary['radius_mean_abs_diff']['std']:.6f}")
+        else:
+            inter_class = results["inter_class_geometry"]
+            print(f"- matrix Pearson corr: {inter_class['pearson_corr']:.6f}")
+            print(f"- matrix Spearman corr: {inter_class['spearman_corr']:.6f}")
+            print(f"- mean abs diff: {inter_class['mean_abs_diff']:.6f}")
+            print(f"- sign consistency rate: {inter_class['sign_consistency_rate']:.6f}")
+            print(f"- near-zero pairs: {inter_class['num_pairs_near_zero']}/{inter_class['num_pairs_total']}")
+            print(f"- radius corr: {inter_class['radius_corr']:.6f}")
+            print(f"- radius mean abs diff: {inter_class['radius_mean_abs_diff']:.6f}")
+            print(f"- source matrix: {inter_class['matrix_file_source']}")
+            print(f"- target matrix: {inter_class['matrix_file_target']}")
+            print(f"- per-pair signs: {inter_class['per_pair_sign_info_file']}")
+            print(f"- per-class radii: {inter_class['per_class_radius_file']}")
+            if inter_class["plot_files"] is not None:
+                print(f"- inter-class plots: {inter_class['plot_files']}")
 
     if "visualization" in results:
         print(f"UMAP figure: {results['visualization']['png_path']}")
