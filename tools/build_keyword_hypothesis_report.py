@@ -23,7 +23,7 @@ def find_summary_files(output_root, keywords, match_mode):
     pattern = os.path.join(
         output_root,
         "**",
-        f"ImageNet_v1_vs_*_inter_class_inter_class_per_pair_sign_info_{keyword_suffix}_{match_mode}_summary.json",
+        f"*per_pair_sign_info_{keyword_suffix}_{match_mode}_summary.json",
     )
     return sorted(glob.glob(pattern, recursive=True))
 
@@ -40,7 +40,7 @@ def format_pair(entry):
 
 def parse_dataset_pair_name(path):
     base = os.path.basename(path)
-    return base.split("_inter_class_inter_class_per_pair_sign_info_")[0]
+    return base.split("_inter_class_per_pair_sign_info_")[0]
 
 
 def build_section(summary_path):
