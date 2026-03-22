@@ -23,6 +23,14 @@ LOG_ROOT="${LOG_ROOT:-${OUTPUT_ROOT}/logs}"
 FEATURE_BATCH_SIZE="${FEATURE_BATCH_SIZE:-64}"
 NUM_WORKERS="${NUM_WORKERS:-8}"
 NUM_CLASSES="${NUM_CLASSES:-100}"
+IMAGENET_NUM_CLASSES="${IMAGENET_NUM_CLASSES:-${NUM_CLASSES}}"
+IMAGENET_V2_NUM_CLASSES="${IMAGENET_V2_NUM_CLASSES:-${NUM_CLASSES}}"
+IMAGENET_SKETCH_NUM_CLASSES="${IMAGENET_SKETCH_NUM_CLASSES:-${NUM_CLASSES}}"
+IMAGENET_A_NUM_CLASSES="${IMAGENET_A_NUM_CLASSES:-${NUM_CLASSES}}"
+IMAGENET_R_NUM_CLASSES="${IMAGENET_R_NUM_CLASSES:-${NUM_CLASSES}}"
+IMAGENET_UPPER_BOUND_NUM_CLASSES="${IMAGENET_UPPER_BOUND_NUM_CLASSES:-${NUM_CLASSES}}"
+IMAGENET_V2_UPPER_BOUND_NUM_CLASSES="${IMAGENET_V2_UPPER_BOUND_NUM_CLASSES:-${NUM_CLASSES}}"
+IMAGENET_SKETCH_UPPER_BOUND_NUM_CLASSES="${IMAGENET_SKETCH_UPPER_BOUND_NUM_CLASSES:-${NUM_CLASSES}}"
 IMAGENET_SAMPLES_PER_CLASS="${IMAGENET_SAMPLES_PER_CLASS:-30}"
 IMAGENET_V2_SAMPLES_PER_CLASS="${IMAGENET_V2_SAMPLES_PER_CLASS:-10}"
 IMAGENET_SKETCH_SAMPLES_PER_CLASS="${IMAGENET_SKETCH_SAMPLES_PER_CLASS:-30}"
@@ -65,13 +73,13 @@ IMAGENET_V2_FEATURE_FILE="${IMAGENET_V2_FEATURE_DIR}/ImageNet_v2_${BACKBONE}_fea
 IMAGENET_SKETCH_FEATURE_FILE="${IMAGENET_SKETCH_FEATURE_DIR}/ImageNet_Sketch_${BACKBONE}_features.pt"
 IMAGENET_A_FEATURE_FILE="${IMAGENET_A_FEATURE_DIR}/ImageNet_A_${BACKBONE}_features.pt"
 IMAGENET_R_FEATURE_FILE="${IMAGENET_R_FEATURE_DIR}/ImageNet_R_${BACKBONE}_features.pt"
-IMAGENET_V2_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_v2_nc${NUM_CLASSES}_sc${IMAGENET_V2_SAMPLES_PER_CLASS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
-IMAGENET_SKETCH_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_Sketch_nc${NUM_CLASSES}_sc${IMAGENET_SKETCH_SAMPLES_PER_CLASS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
-IMAGENET_A_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_A_nc${NUM_CLASSES}_sc${IMAGENET_A_SAMPLES_PER_CLASS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
-IMAGENET_R_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_R_nc${NUM_CLASSES}_sc${IMAGENET_R_SAMPLES_PER_CLASS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
-IMAGENET_UPPER_BOUND_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_split_half_upper_bound_nc${NUM_CLASSES}_sc${IMAGENET_UPPER_BOUND_SAMPLES_PER_CLASS}_rep${UPPER_BOUND_REPEATS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
-IMAGENET_V2_UPPER_BOUND_OUTPUT="${OUTPUT_ROOT}/ImageNet_v2_split_half_upper_bound_nc${NUM_CLASSES}_sc${IMAGENET_V2_UPPER_BOUND_SAMPLES_PER_CLASS}_rep${UPPER_BOUND_REPEATS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
-IMAGENET_SKETCH_UPPER_BOUND_OUTPUT="${OUTPUT_ROOT}/ImageNet_Sketch_split_half_upper_bound_nc${NUM_CLASSES}_sc${IMAGENET_SKETCH_UPPER_BOUND_SAMPLES_PER_CLASS}_rep${UPPER_BOUND_REPEATS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
+IMAGENET_V2_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_v2_nc${IMAGENET_V2_NUM_CLASSES}_sc${IMAGENET_V2_SAMPLES_PER_CLASS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
+IMAGENET_SKETCH_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_Sketch_nc${IMAGENET_SKETCH_NUM_CLASSES}_sc${IMAGENET_SKETCH_SAMPLES_PER_CLASS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
+IMAGENET_A_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_A_nc${IMAGENET_A_NUM_CLASSES}_sc${IMAGENET_A_SAMPLES_PER_CLASS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
+IMAGENET_R_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_R_nc${IMAGENET_R_NUM_CLASSES}_sc${IMAGENET_R_SAMPLES_PER_CLASS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
+IMAGENET_UPPER_BOUND_OUTPUT="${OUTPUT_ROOT}/ImageNet_v1_split_half_upper_bound_nc${IMAGENET_UPPER_BOUND_NUM_CLASSES}_sc${IMAGENET_UPPER_BOUND_SAMPLES_PER_CLASS}_rep${UPPER_BOUND_REPEATS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
+IMAGENET_V2_UPPER_BOUND_OUTPUT="${OUTPUT_ROOT}/ImageNet_v2_split_half_upper_bound_nc${IMAGENET_V2_UPPER_BOUND_NUM_CLASSES}_sc${IMAGENET_V2_UPPER_BOUND_SAMPLES_PER_CLASS}_rep${UPPER_BOUND_REPEATS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
+IMAGENET_SKETCH_UPPER_BOUND_OUTPUT="${OUTPUT_ROOT}/ImageNet_Sketch_split_half_upper_bound_nc${IMAGENET_SKETCH_UPPER_BOUND_NUM_CLASSES}_sc${IMAGENET_SKETCH_UPPER_BOUND_SAMPLES_PER_CLASS}_rep${UPPER_BOUND_REPEATS}_knn${KNN_K_1}_${KNN_K_2}_seed1.json"
 
 INTER_CLASS_ARGS=()
 if [[ "${RUN_INTER_CLASS_GEOMETRY}" == "1" ]]; then
@@ -169,7 +177,8 @@ cross_eval_job() {
   local target_feature_file="$2"
   local output_file="$3"
   local samples_per_class="$4"
-  local label="$5"
+  local num_classes="$5"
+  local label="$6"
   if [[ "${SKIP_EXISTING_EVALS}" == "1" && -f "${output_file}" ]]; then
     echo "Skipping ${label} eval; found ${output_file}"
     return
@@ -181,7 +190,7 @@ cross_eval_job() {
       --source_feature_file "${IMAGENET_FEATURE_FILE}" \
       --target_feature_file "${target_feature_file}" \
       --output "${output_file}" \
-      --num_classes "${NUM_CLASSES}" \
+      --num_classes "${num_classes}" \
       --samples_per_class "${samples_per_class}" \
       --seed 1 \
       --compute_knn_distribution \
@@ -198,7 +207,8 @@ upper_bound_job() {
   local source_feature_file="$2"
   local output_file="$3"
   local samples_per_class="$4"
-  local label="$5"
+  local num_classes="$5"
+  local label="$6"
   if [[ "${SKIP_EXISTING_EVALS}" == "1" && -f "${output_file}" ]]; then
     echo "Skipping ${label} upper bound; found ${output_file}"
     return
@@ -210,7 +220,7 @@ upper_bound_job() {
       --same_dataset_upper_bound \
       --source_feature_file "${source_feature_file}" \
       --output "${output_file}" \
-      --num_classes "${NUM_CLASSES}" \
+      --num_classes "${num_classes}" \
       --samples_per_class "${samples_per_class}" \
       --min_samples_per_class_for_split "$(( samples_per_class * 2 ))" \
       --upper_bound_num_repeats "${UPPER_BOUND_REPEATS}" \
@@ -239,6 +249,8 @@ echo "[config] output root: ${OUTPUT_ROOT}"
 echo "[config] parallel execution: ${PARALLEL_EXECUTION}"
 echo "[config] parallel jobs: ${PARALLEL_JOBS}"
 echo "[config] gpu ids: ${GPU_IDS_RAW}"
+echo "[config] num_classes: v1=${IMAGENET_NUM_CLASSES}, v2=${IMAGENET_V2_NUM_CLASSES}, sketch=${IMAGENET_SKETCH_NUM_CLASSES}, A=${IMAGENET_A_NUM_CLASSES}, R=${IMAGENET_R_NUM_CLASSES}"
+echo "[config] upper_bound_num_classes: v1=${IMAGENET_UPPER_BOUND_NUM_CLASSES}, v2=${IMAGENET_V2_UPPER_BOUND_NUM_CLASSES}, sketch=${IMAGENET_SKETCH_UPPER_BOUND_NUM_CLASSES}"
 
 # Step 1: dump frozen CLIP image features for each dataset once.
 # The internal dataset keys stay lowercase (`imagenet`, `imagenet_v2`, ...),
@@ -259,21 +271,21 @@ fi
 wait_for_active_jobs
 
 # Step 2: compare class geometry between ImageNet_v1 and each target dataset.
-cross_eval_job "$(gpu_for_job_index 0)" "${IMAGENET_V2_FEATURE_FILE}" "${IMAGENET_V2_OUTPUT}" "${IMAGENET_V2_SAMPLES_PER_CLASS}" "ImageNet_v1_vs_ImageNet_v2"
-cross_eval_job "$(gpu_for_job_index 1)" "${IMAGENET_SKETCH_FEATURE_FILE}" "${IMAGENET_SKETCH_OUTPUT}" "${IMAGENET_SKETCH_SAMPLES_PER_CLASS}" "ImageNet_v1_vs_ImageNet_Sketch"
+cross_eval_job "$(gpu_for_job_index 0)" "${IMAGENET_V2_FEATURE_FILE}" "${IMAGENET_V2_OUTPUT}" "${IMAGENET_V2_SAMPLES_PER_CLASS}" "${IMAGENET_V2_NUM_CLASSES}" "ImageNet_v1_vs_ImageNet_v2"
+cross_eval_job "$(gpu_for_job_index 1)" "${IMAGENET_SKETCH_FEATURE_FILE}" "${IMAGENET_SKETCH_OUTPUT}" "${IMAGENET_SKETCH_SAMPLES_PER_CLASS}" "${IMAGENET_SKETCH_NUM_CLASSES}" "ImageNet_v1_vs_ImageNet_Sketch"
 
 if [[ "${RUN_IMAGENET_A}" == "1" ]]; then
-  cross_eval_job "$(gpu_for_job_index 2)" "${IMAGENET_A_FEATURE_FILE}" "${IMAGENET_A_OUTPUT}" "${IMAGENET_A_SAMPLES_PER_CLASS}" "ImageNet_v1_vs_ImageNet_A"
+  cross_eval_job "$(gpu_for_job_index 2)" "${IMAGENET_A_FEATURE_FILE}" "${IMAGENET_A_OUTPUT}" "${IMAGENET_A_SAMPLES_PER_CLASS}" "${IMAGENET_A_NUM_CLASSES}" "ImageNet_v1_vs_ImageNet_A"
 fi
 
 if [[ "${RUN_IMAGENET_R}" == "1" ]]; then
-  cross_eval_job "$(gpu_for_job_index 3)" "${IMAGENET_R_FEATURE_FILE}" "${IMAGENET_R_OUTPUT}" "${IMAGENET_R_SAMPLES_PER_CLASS}" "ImageNet_v1_vs_ImageNet_R"
+  cross_eval_job "$(gpu_for_job_index 3)" "${IMAGENET_R_FEATURE_FILE}" "${IMAGENET_R_OUTPUT}" "${IMAGENET_R_SAMPLES_PER_CLASS}" "${IMAGENET_R_NUM_CLASSES}" "ImageNet_v1_vs_ImageNet_R"
 fi
 
 wait_for_active_jobs
 
-upper_bound_job "$(gpu_for_job_index 0)" "${IMAGENET_FEATURE_FILE}" "${IMAGENET_UPPER_BOUND_OUTPUT}" "${IMAGENET_UPPER_BOUND_SAMPLES_PER_CLASS}" "ImageNet_v1_split_half_upper_bound"
-upper_bound_job "$(gpu_for_job_index 1)" "${IMAGENET_V2_FEATURE_FILE}" "${IMAGENET_V2_UPPER_BOUND_OUTPUT}" "${IMAGENET_V2_UPPER_BOUND_SAMPLES_PER_CLASS}" "ImageNet_v2_split_half_upper_bound"
-upper_bound_job "$(gpu_for_job_index 2)" "${IMAGENET_SKETCH_FEATURE_FILE}" "${IMAGENET_SKETCH_UPPER_BOUND_OUTPUT}" "${IMAGENET_SKETCH_UPPER_BOUND_SAMPLES_PER_CLASS}" "ImageNet_Sketch_split_half_upper_bound"
+upper_bound_job "$(gpu_for_job_index 0)" "${IMAGENET_FEATURE_FILE}" "${IMAGENET_UPPER_BOUND_OUTPUT}" "${IMAGENET_UPPER_BOUND_SAMPLES_PER_CLASS}" "${IMAGENET_UPPER_BOUND_NUM_CLASSES}" "ImageNet_v1_split_half_upper_bound"
+upper_bound_job "$(gpu_for_job_index 1)" "${IMAGENET_V2_FEATURE_FILE}" "${IMAGENET_V2_UPPER_BOUND_OUTPUT}" "${IMAGENET_V2_UPPER_BOUND_SAMPLES_PER_CLASS}" "${IMAGENET_V2_UPPER_BOUND_NUM_CLASSES}" "ImageNet_v2_split_half_upper_bound"
+upper_bound_job "$(gpu_for_job_index 2)" "${IMAGENET_SKETCH_FEATURE_FILE}" "${IMAGENET_SKETCH_UPPER_BOUND_OUTPUT}" "${IMAGENET_SKETCH_UPPER_BOUND_SAMPLES_PER_CLASS}" "${IMAGENET_SKETCH_UPPER_BOUND_NUM_CLASSES}" "ImageNet_Sketch_split_half_upper_bound"
 
 wait_for_active_jobs
