@@ -766,6 +766,7 @@ def compute_inter_class_geometry_results(
             "class_b_name": class_names[selected_classes[b_pos]],
             "source_similarity": source_value,
             "target_similarity": target_value,
+            "delta_similarity": float(target_value - source_value),
             "source_sign": source_sign,
             "target_sign": target_sign,
             "sign_match": bool(sign_match),
@@ -776,6 +777,10 @@ def compute_inter_class_geometry_results(
     # 관계 차이가 큰 클래스쌍 상위 10개를 따로 저장합니다.
     # 해석 단계에서 "어떤 클래스쌍이 가장 많이 변했는가?"를 보기 쉽습니다.
     top_abs_diff_pairs = sorted(pair_records, key=lambda item: item["abs_diff"], reverse=True)[:10]
+    top_source_similar_pairs = sorted(pair_records, key=lambda item: item["source_similarity"], reverse=True)[:10]
+    top_target_similar_pairs = sorted(pair_records, key=lambda item: item["target_similarity"], reverse=True)[:10]
+    largest_similarity_increase_pairs = sorted(pair_records, key=lambda item: item["delta_similarity"], reverse=True)[:10]
+    largest_similarity_decrease_pairs = sorted(pair_records, key=lambda item: item["delta_similarity"])[:10]
 
     # radius는 각 클래스 centered prototype의 길이입니다.
     # 즉, "전체 중심에서 이 클래스가 얼마나 멀리 떨어져 있는가?"를 뜻합니다.
@@ -853,6 +858,10 @@ def compute_inter_class_geometry_results(
         "per_class_radius_file": per_radius_path,
         "plot_files": plot_files,
         "top_abs_diff_pairs": top_abs_diff_pairs,
+        "top_source_similar_pairs": top_source_similar_pairs,
+        "top_target_similar_pairs": top_target_similar_pairs,
+        "largest_similarity_increase_pairs": largest_similarity_increase_pairs,
+        "largest_similarity_decrease_pairs": largest_similarity_decrease_pairs,
     }
 
 
@@ -1798,6 +1807,18 @@ def main():
             print(f"- target matrix: {inter_class['matrix_file_target']}")
             print(f"- per-pair signs: {inter_class['per_pair_sign_info_file']}")
             print(f"- per-class radii: {inter_class['per_class_radius_file']}")
+            if inter_class["top_source_similar_pairs"]:
+                pair = inter_class["top_source_similar_pairs"][0]
+                print(f"- most similar pair in source: {pair['class_a_name']} / {pair['class_b_name']} ({pair['source_similarity']:.6f})")
+            if inter_class["top_target_similar_pairs"]:
+                pair = inter_class["top_target_similar_pairs"][0]
+                print(f"- most similar pair in target: {pair['class_a_name']} / {pair['class_b_name']} ({pair['target_similarity']:.6f})")
+            if inter_class["largest_similarity_increase_pairs"]:
+                pair = inter_class["largest_similarity_increase_pairs"][0]
+                print(f"- largest similarity increase: {pair['class_a_name']} / {pair['class_b_name']} (delta={pair['delta_similarity']:.6f})")
+            if inter_class["largest_similarity_decrease_pairs"]:
+                pair = inter_class["largest_similarity_decrease_pairs"][0]
+                print(f"- largest similarity decrease: {pair['class_a_name']} / {pair['class_b_name']} (delta={pair['delta_similarity']:.6f})")
             if inter_class["plot_files"] is not None:
                 print(f"- inter-class plots: {inter_class['plot_files']}")
 
