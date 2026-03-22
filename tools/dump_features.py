@@ -12,6 +12,15 @@ from analysis_utils import get_image_paths, load_dataset_and_features
 from datasets.imagenet import imagenet_classes
 
 
+CANONICAL_DATASET_NAMES = {
+    "imagenet": "ImageNet_v1",
+    "imagenet_v2": "ImageNet_v2",
+    "imagenet_sketch": "ImageNet_Sketch",
+    "imagenet_a": "ImageNet_A",
+    "imagenet_r": "ImageNet_R",
+}
+
+
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", required=True, type=str)
@@ -61,7 +70,7 @@ def main():
         # labels: ImageNet-aligned class ids used by geometry_eval.py
         "labels": export_labels,
         "classnames": export_classnames,
-        "dataset_name": args.dataset,
+        "dataset_name": CANONICAL_DATASET_NAMES.get(args.dataset, args.dataset),
         "backbone": args.backbone,
         "image_paths": image_paths,
     }

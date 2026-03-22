@@ -13,10 +13,10 @@ if [[ ${#KEYWORDS[@]} -eq 0 ]]; then
 fi
 
 PAIR_FILES=(
-  "${OUTPUT_ROOT}/imagenet_vs_imagenet_v2_inter_class_inter_class_per_pair_sign_info.json"
-  "${OUTPUT_ROOT}/imagenet_vs_imagenet_sketch_inter_class_inter_class_per_pair_sign_info.json"
-  "${OUTPUT_ROOT}/imagenet_vs_imagenet_a_inter_class_inter_class_per_pair_sign_info.json"
-  "${OUTPUT_ROOT}/imagenet_vs_imagenet_r_inter_class_inter_class_per_pair_sign_info.json"
+  "${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_v2_inter_class_inter_class_per_pair_sign_info.json"
+  "${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_Sketch_inter_class_inter_class_per_pair_sign_info.json"
+  "${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_A_inter_class_inter_class_per_pair_sign_info.json"
+  "${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_R_inter_class_inter_class_per_pair_sign_info.json"
 )
 
 for pair_file in "${PAIR_FILES[@]}"; do

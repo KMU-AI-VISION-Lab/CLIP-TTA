@@ -12,6 +12,9 @@ def _first_existing_dir(paths):
 
 def get_imagenet_train_dir(root):
     return _first_existing_dir([
+        os.path.join(root, "ImageNet_v1", "images", "train"),
+        os.path.join(root, "ImageNet_v1", "train"),
+        os.path.join(root, "ImageNet_v1"),
         os.path.join(root, "imagenet", "images", "train"),
         os.path.join(root, "imagenet", "train"),
         os.path.join(root, "ImageNet", "train"),
@@ -21,6 +24,9 @@ def get_imagenet_train_dir(root):
 
 def get_imagenet_val_dir(root):
     return _first_existing_dir([
+        os.path.join(root, "ImageNet_v1", "images", "val"),
+        os.path.join(root, "ImageNet_v1", "val"),
+        os.path.join(root, "ImageNet_v1"),
         os.path.join(root, "imagenet", "images", "val"),
         os.path.join(root, "imagenet", "val"),
         os.path.join(root, "ImageNet", "val"),
@@ -30,6 +36,9 @@ def get_imagenet_val_dir(root):
 
 def get_imagenet_v2_dir(root):
     return _first_existing_dir([
+        os.path.join(root, "ImageNet_v2", "imagenetv2-matched-frequency-format-val"),
+        os.path.join(root, "ImageNet_v2", "images"),
+        os.path.join(root, "ImageNet_v2"),
         os.path.join(root, "imagenet-v2", "imagenetv2-matched-frequency-format-val"),
         os.path.join(root, "imagenet-v2", "images"),
         os.path.join(root, "imagenetv2", "images"),
@@ -40,6 +49,8 @@ def get_imagenet_v2_dir(root):
 
 def get_imagenet_sketch_dir(root):
     return _first_existing_dir([
+        os.path.join(root, "ImageNet_Sketch", "images"),
+        os.path.join(root, "ImageNet_Sketch"),
         os.path.join(root, "imagenet-sketch", "images"),
         os.path.join(root, "imagenet-sketch"),
         os.path.join(root, "ImageNet-Sketch"),
@@ -48,6 +59,8 @@ def get_imagenet_sketch_dir(root):
 
 def get_imagenet_r_dir(root):
     return _first_existing_dir([
+        os.path.join(root, "ImageNet_R", "images"),
+        os.path.join(root, "ImageNet_R"),
         os.path.join(root, "imagenet-r", "images"),
         os.path.join(root, "imagenet-r"),
         os.path.join(root, "imagenet-rendition", "images"),
@@ -58,6 +71,8 @@ def get_imagenet_r_dir(root):
 
 def get_imagenet_a_dir(root):
     return _first_existing_dir([
+        os.path.join(root, "ImageNet_A", "images"),
+        os.path.join(root, "ImageNet_A"),
         os.path.join(root, "imagenet-adversarial", "images"),
         os.path.join(root, "imagenet-adversarial"),
         os.path.join(root, "ImageNet-A"),

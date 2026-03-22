@@ -194,22 +194,24 @@ Z_A^y = {f(x) | x in class y from dataset A}
 Z_B^y = {f(x) | x in class y from dataset B}
 ```
 
-The main question is whether the same class keeps a similar geometry across domains such as ImageNet, ImageNet-V2, and ImageNet-Sketch.
+The main question is whether the same class keeps a similar geometry across domains such as ImageNet_v1, ImageNet_v2, and ImageNet_Sketch.
 
 ### Expected dataset layout
 
-The loaders in this fork support the `/data2/TTA_dataset` layout used in our experiments as well as compatible fallback layouts.
+The loaders in this fork support the canonical ImageNet-family naming below, while still keeping backward-compatible fallbacks for the older directory names.
 
 ```text
 /data2/TTA_dataset/
-|-- ImageNet/
+|-- ImageNet_v1/
 |   |-- train/ or images/train/
 |   `-- val/   or images/val/
-|-- ImageNetV2/
+|-- ImageNet_v2/
 |   `-- imagenetv2-matched-frequency-format-val/
-|-- ImageNet-Sketch/
+|-- ImageNet_Sketch/
 |   `-- images/ or class folders directly
-`-- ImageNet-R/
+|-- ImageNet_A/
+|   `-- images/ or class folders directly
+`-- ImageNet_R/
     `-- images/ or class folders directly
 ```
 
@@ -217,9 +219,17 @@ Supported ImageNet-family datasets:
 - `imagenet`
 - `imagenet_v2`
 - `imagenet_sketch`
+- `imagenet_a`
 - `imagenet_r`
 
-The ImageNet-family loaders align labels to ImageNet-1k indices whenever folder names permit it. For subset datasets such as ImageNet-R, the dumped feature files also expose `available_imagenet_indices` and `subset_classnames`.
+The internal CLI keys remain lowercase for compatibility, but saved feature files, JSON outputs, and displayed dataset names use the canonical naming:
+- `ImageNet_v1`
+- `ImageNet_v2`
+- `ImageNet_Sketch`
+- `ImageNet_A`
+- `ImageNet_R`
+
+The ImageNet-family loaders align labels to ImageNet-1k indices whenever folder names permit it. For subset datasets such as ImageNet_R, the dumped feature files also expose `available_imagenet_indices` and `subset_classnames`.
 
 ### Step 1: dump CLIP features once
 
@@ -234,9 +244,11 @@ Each feature dump stores a `.pt` dictionary with:
 Example:
 
 ```bash
-python tools/dump_features.py --dataset imagenet --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/imagenet --device cuda:0
-python tools/dump_features.py --dataset imagenet_v2 --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/imagenet_v2 --device cuda:0
-python tools/dump_features.py --dataset imagenet_sketch --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/imagenet_sketch --device cuda:0
+python tools/dump_features.py --dataset imagenet --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/ImageNet_v1 --output ./caches/geometry_vit_b16/ImageNet_v1/ImageNet_v1_vit_b16_features.pt --device cuda:0
+python tools/dump_features.py --dataset imagenet_v2 --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/ImageNet_v2 --output ./caches/geometry_vit_b16/ImageNet_v2/ImageNet_v2_vit_b16_features.pt --device cuda:0
+python tools/dump_features.py --dataset imagenet_sketch --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/ImageNet_Sketch --output ./caches/geometry_vit_b16/ImageNet_Sketch/ImageNet_Sketch_vit_b16_features.pt --device cuda:0
+python tools/dump_features.py --dataset imagenet_a --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/ImageNet_A --output ./caches/geometry_vit_b16/ImageNet_A/ImageNet_A_vit_b16_features.pt --device cuda:0
+python tools/dump_features.py --dataset imagenet_r --root_path /data2/TTA_dataset --backbone vit_b16 --cache_dir ./caches/geometry_vit_b16/ImageNet_R --output ./caches/geometry_vit_b16/ImageNet_R/ImageNet_R_vit_b16_features.pt --device cuda:0
 ```
 
 ### Step 2: run geometry evaluation
@@ -245,9 +257,9 @@ Example cross-dataset evaluation:
 
 ```bash
 python tools/geometry_eval.py \
-  --source_feature_file ./caches/geometry_vit_b16/imagenet/imagenet_vit_b16_features.pt \
-  --target_feature_file ./caches/geometry_vit_b16/imagenet_v2/imagenet_v2_vit_b16_features.pt \
-  --output ./outputs/geometry_vit_b16/imagenet_vs_imagenet_v2_nc200_spc10_knn3_5_seed1.json \
+  --source_feature_file ./caches/geometry_vit_b16/ImageNet_v1/ImageNet_v1_vit_b16_features.pt \
+  --target_feature_file ./caches/geometry_vit_b16/ImageNet_v2/ImageNet_v2_vit_b16_features.pt \
+  --output ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_v2_nc200_spc10_knn3_5_seed1.json \
   --num_classes 200 \
   --samples_per_class 10 \
   --seed 1 \
@@ -263,8 +275,8 @@ Example same-dataset split-half upper bound:
 ```bash
 python tools/geometry_eval.py \
   --same_dataset_upper_bound \
-  --source_feature_file ./caches/geometry_vit_b16/imagenet/imagenet_vit_b16_features.pt \
-  --output ./outputs/geometry_vit_b16/imagenet_split_half_upper_bound_nc200_spc10_rep5_knn3_5_seed1.json \
+  --source_feature_file ./caches/geometry_vit_b16/ImageNet_v1/ImageNet_v1_vit_b16_features.pt \
+  --output ./outputs/geometry_vit_b16/ImageNet_v1_split_half_upper_bound_nc200_spc10_rep5_knn3_5_seed1.json \
   --num_classes 200 \
   --samples_per_class 10 \
   --min_samples_per_class_for_split 20 \
@@ -287,10 +299,10 @@ Example: visualize classes with the largest centroid shifts.
 
 ```bash
 python tools/geometry_viz.py \
-  --source_feature_file ./caches/geometry_vit_b16/imagenet/imagenet_vit_b16_features.pt \
-  --target_feature_file ./caches/geometry_vit_b16/imagenet_sketch/imagenet_sketch_vit_b16_features.pt \
-  --eval_json ./outputs/geometry_vit_b16/imagenet_vs_imagenet_sketch_nc200_spc10_knn3_5_seed1.json \
-  --output_prefix ./outputs/geometry_vit_b16/imagenet_vs_imagenet_sketch_shift_focus \
+  --source_feature_file ./caches/geometry_vit_b16/ImageNet_v1/ImageNet_v1_vit_b16_features.pt \
+  --target_feature_file ./caches/geometry_vit_b16/ImageNet_Sketch/ImageNet_Sketch_vit_b16_features.pt \
+  --eval_json ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_Sketch_nc200_spc10_knn3_5_seed1.json \
+  --output_prefix ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_Sketch_shift_focus \
   --viz_select_mode centroid_shift \
   --viz_topk 12 \
   --samples_per_class 10 \
@@ -349,13 +361,19 @@ In the JSON output, `same` compares the same semantic class across datasets, whi
 ### Full driver script
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 GEOMETRY_DEVICE=cuda:0 bash scripts/run_geometry_imagenet_family.sh /data2/TTA_dataset vit_b16
+CUDA_VISIBLE_DEVICES=0 GEOMETRY_DEVICE=cuda:0 bash scripts/run_geometry_imagenet_family.sh lab_server vit_b16
 ```
 
 The script:
 - skips feature dumping if the expected feature file already exists
-- runs cross-dataset evaluation for ImageNet vs ImageNet-V2 and ImageNet vs ImageNet-Sketch
-- runs same-dataset split-half upper bounds for ImageNet, ImageNet-V2, and ImageNet-Sketch
+- runs cross-dataset evaluation for ImageNet_v1 vs ImageNet_v2 and ImageNet_v1 vs ImageNet_Sketch
+- optionally runs ImageNet_v1 vs ImageNet_A and ImageNet_v1 vs ImageNet_R
+- runs same-dataset split-half upper bounds for ImageNet_v1, ImageNet_v2, and ImageNet_Sketch
+
+`run_geometry_imagenet_family.sh` dataset-location shortcuts:
+- `lab_server` -> `/data2/TTA_dataset`
+- `naver` -> `/data/tta/ImageNet_Family`
+- any other first argument is treated as an explicit dataset root path
 
 ### Optional adaptation comparison
 
