@@ -13,13 +13,16 @@ if [[ ${#KEYWORDS[@]} -eq 0 ]]; then
 fi
 
 mapfile -t PAIR_FILES < <(
-  find "${OUTPUT_ROOT}" -type f \
-    \( \
-      -name "ImageNet_v1_vs_ImageNet_v2_inter_class_inter_class_per_pair_sign_info.json" -o \
-      -name "ImageNet_v1_vs_ImageNet_Sketch_inter_class_inter_class_per_pair_sign_info.json" -o \
-      -name "ImageNet_v1_vs_ImageNet_A_inter_class_inter_class_per_pair_sign_info.json" -o \
-      -name "ImageNet_v1_vs_ImageNet_R_inter_class_inter_class_per_pair_sign_info.json" \
-    \) | sort
+  find "${OUTPUT_ROOT}" -type f -name "*per_pair_sign_info.json" | sort | while read -r path; do
+    base="$(basename "${path}")"
+    lower_base="$(printf '%s' "${base}" | tr '[:upper:]' '[:lower:]')"
+    if [[ "${lower_base}" == *"repeat_"* ]]; then
+      continue
+    fi
+    if [[ "${lower_base}" == *"vs"* && "${lower_base}" == *"inter_class"* ]]; then
+      printf '%s\n' "${path}"
+    fi
+  done
 )
 
 if [[ ${#PAIR_FILES[@]} -eq 0 ]]; then
