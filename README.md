@@ -364,8 +364,32 @@ In the JSON output, `same` compares the same semantic class across datasets, whi
 CUDA_VISIBLE_DEVICES=0 GEOMETRY_DEVICE=cuda:0 bash scripts/run_geometry_imagenet_family.sh lab_server vit_b16
 ```
 
+Example: parallel feature dumping and evaluation on the `naver` server with 4 GPUs. Each dataset-level job is independent, so the script can run ImageNet-family feature dumps and geometry evaluations in parallel waves across GPUs.
+
+```bash
+PARALLEL_EXECUTION=1 \
+GPU_IDS=0,1,2,3 \
+RUN_IMAGENET_A=0 \
+RUN_IMAGENET_R=1 \
+RUN_INTER_CLASS_GEOMETRY=1 \
+SIGN_EPSILON=0.05 \
+NUM_CLASSES=100 \
+IMAGENET_SAMPLES_PER_CLASS=30 \
+IMAGENET_V2_SAMPLES_PER_CLASS=10 \
+IMAGENET_SKETCH_SAMPLES_PER_CLASS=10 \
+IMAGENET_R_SAMPLES_PER_CLASS=10 \
+IMAGENET_UPPER_BOUND_SAMPLES_PER_CLASS=25 \
+IMAGENET_V2_UPPER_BOUND_SAMPLES_PER_CLASS=5 \
+IMAGENET_SKETCH_UPPER_BOUND_SAMPLES_PER_CLASS=10 \
+UPPER_BOUND_REPEATS=5 \
+FEATURE_BATCH_SIZE=64 \
+NUM_WORKERS=8 \
+bash scripts/run_geometry_imagenet_family.sh naver vit_b16
+```
+
 The script:
 - skips feature dumping if the expected feature file already exists
+- can run independent dataset jobs in parallel when `PARALLEL_EXECUTION=1`
 - runs cross-dataset evaluation for ImageNet_v1 vs ImageNet_v2 and ImageNet_v1 vs ImageNet_Sketch
 - optionally runs ImageNet_v1 vs ImageNet_A and ImageNet_v1 vs ImageNet_R
 - runs same-dataset split-half upper bounds for ImageNet_v1, ImageNet_v2, and ImageNet_Sketch
