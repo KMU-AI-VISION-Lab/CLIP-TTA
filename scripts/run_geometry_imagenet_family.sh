@@ -39,6 +39,7 @@ RUN_IMAGENET_R="${RUN_IMAGENET_R:-1}"
 RUN_INTER_CLASS_GEOMETRY="${RUN_INTER_CLASS_GEOMETRY:-1}"
 SIGN_EPSILON="${SIGN_EPSILON:-0.05}"
 SAVE_INTER_CLASS_PLOTS="${SAVE_INTER_CLASS_PLOTS:-0}"
+SKIP_EXISTING_EVALS="${SKIP_EXISTING_EVALS:-0}"
 
 GPU_IDS=()
 IFS=', ' read -r -a GPU_IDS <<< "${GPU_IDS_RAW}"
@@ -169,6 +170,10 @@ cross_eval_job() {
   local output_file="$3"
   local samples_per_class="$4"
   local label="$5"
+  if [[ "${SKIP_EXISTING_EVALS}" == "1" && -f "${output_file}" ]]; then
+    echo "Skipping ${label} eval; found ${output_file}"
+    return
+  fi
   local device_arg
   device_arg="$(job_device_arg "${gpu_id}")"
   launch_job "eval_${label}" "${gpu_id}" \
@@ -194,6 +199,10 @@ upper_bound_job() {
   local output_file="$3"
   local samples_per_class="$4"
   local label="$5"
+  if [[ "${SKIP_EXISTING_EVALS}" == "1" && -f "${output_file}" ]]; then
+    echo "Skipping ${label} upper bound; found ${output_file}"
+    return
+  fi
   local device_arg
   device_arg="$(job_device_arg "${gpu_id}")"
   launch_job "upper_${label}" "${gpu_id}" \
