@@ -24,6 +24,9 @@ bash scripts/run_geometry_imagenet_family.sh "${DATASET_LOCATION}" "${BACKBONE}"
 echo "[step 2/4] Build keyword summaries"
 bash scripts/run_inter_class_keyword_summary.sh "${OUTPUT_ROOT}" "${MAPPING_FILE}" "${KEYWORDS[@]}"
 
+echo "[step 2.5/4] Organize outputs"
+bash scripts/organize_geometry_outputs.sh "${OUTPUT_ROOT}"
+
 echo "[step 3/4] Build markdown hypothesis report"
 python tools/build_keyword_hypothesis_report.py \
   --output_root "${OUTPUT_ROOT}" \
@@ -32,3 +35,6 @@ python tools/build_keyword_hypothesis_report.py \
 
 echo "[step 4/4] Generate keyword-focused visualizations"
 BACKBONE="${BACKBONE}" bash scripts/run_keyword_visualizations.sh "${OUTPUT_ROOT}" "${CACHE_ROOT}" "${MAPPING_FILE}" "${KEYWORDS[@]}"
+
+echo "[step 4.5/4] Re-organize outputs after report and visualization"
+bash scripts/organize_geometry_outputs.sh "${OUTPUT_ROOT}"

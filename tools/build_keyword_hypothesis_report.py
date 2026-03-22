@@ -20,8 +20,12 @@ def load_json(path):
 
 def find_summary_files(output_root, keywords, match_mode):
     keyword_suffix = "_".join(keyword.lower() for keyword in keywords)
-    pattern = os.path.join(output_root, f"ImageNet_v1_vs_*_inter_class_inter_class_per_pair_sign_info_{keyword_suffix}_{match_mode}_summary.json")
-    return sorted(glob.glob(pattern))
+    pattern = os.path.join(
+        output_root,
+        "**",
+        f"ImageNet_v1_vs_*_inter_class_inter_class_per_pair_sign_info_{keyword_suffix}_{match_mode}_summary.json",
+    )
+    return sorted(glob.glob(pattern, recursive=True))
 
 
 def format_pair(entry):

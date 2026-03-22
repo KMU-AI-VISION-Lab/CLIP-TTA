@@ -12,12 +12,20 @@ if [[ ${#KEYWORDS[@]} -eq 0 ]]; then
   KEYWORDS=("dog" "wolf" "frog")
 fi
 
-PAIR_FILES=(
-  "${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_v2_inter_class_inter_class_per_pair_sign_info.json"
-  "${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_Sketch_inter_class_inter_class_per_pair_sign_info.json"
-  "${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_A_inter_class_inter_class_per_pair_sign_info.json"
-  "${OUTPUT_ROOT}/ImageNet_v1_vs_ImageNet_R_inter_class_inter_class_per_pair_sign_info.json"
+mapfile -t PAIR_FILES < <(
+  find "${OUTPUT_ROOT}" -type f \
+    \( \
+      -name "ImageNet_v1_vs_ImageNet_v2_inter_class_inter_class_per_pair_sign_info.json" -o \
+      -name "ImageNet_v1_vs_ImageNet_Sketch_inter_class_inter_class_per_pair_sign_info.json" -o \
+      -name "ImageNet_v1_vs_ImageNet_A_inter_class_inter_class_per_pair_sign_info.json" -o \
+      -name "ImageNet_v1_vs_ImageNet_R_inter_class_inter_class_per_pair_sign_info.json" \
+    \) | sort
 )
+
+if [[ ${#PAIR_FILES[@]} -eq 0 ]]; then
+  echo "[error] No inter-class per-pair files found under ${OUTPUT_ROOT}"
+  exit 1
+fi
 
 for pair_file in "${PAIR_FILES[@]}"; do
   if [[ ! -f "${pair_file}" ]]; then

@@ -44,7 +44,7 @@ fi
 
 latest_eval_json() {
   local target_name="$1"
-  local matches=("${OUTPUT_ROOT}/ImageNet_v1_vs_${target_name}"*.json)
+  mapfile -t matches < <(find "${OUTPUT_ROOT}" -type f -name "ImageNet_v1_vs_${target_name}*.json" | sort)
   local filtered=()
   local path
   for path in "${matches[@]}"; do
