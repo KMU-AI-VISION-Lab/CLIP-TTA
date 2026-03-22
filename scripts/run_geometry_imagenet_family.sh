@@ -2,7 +2,16 @@
 
 set -euo pipefail
 
-ROOT_PATH="${1:-/data2/TTA_dataset}"
+DATASET_LOCATION="${1:-lab_server}"
+
+if [[ "${DATASET_LOCATION}" == "naver" ]]; then
+  ROOT_PATH="${HOME}/data"
+elif [[ "${DATASET_LOCATION}" == "lab_server" ]]; then
+  ROOT_PATH="/data2/TTA_dataset"
+else
+  ROOT_PATH="${DATASET_LOCATION}"
+fi
+
 BACKBONE="${2:-vit_b16}"
 CACHE_ROOT="${3:-./caches/geometry_${BACKBONE}}"
 OUTPUT_ROOT="${4:-./outputs/geometry_${BACKBONE}}"
