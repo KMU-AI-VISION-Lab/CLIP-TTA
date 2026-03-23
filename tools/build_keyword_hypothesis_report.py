@@ -20,6 +20,8 @@ def load_json(path):
 
 def find_summary_files(output_root, keywords, match_mode):
     keyword_suffix = "_".join(keyword.lower() for keyword in keywords)
+    # summary 파일이 organize 이후 하위 폴더로 들어갈 수 있으므로
+    # `**` + recursive=True로 전체 하위 디렉터리를 다 뒤집니다.
     pattern = os.path.join(
         output_root,
         "**",
@@ -58,6 +60,8 @@ def build_section(summary_path):
     overall_within = group_summary.get("overall_within_group", {})
     overall_cross = group_summary.get("overall_cross_group", {})
     if overall_within.get("num_pairs", 0) > 0:
+        # within-group은 같은 semantic group 내부의 재배치 정도입니다.
+        # 예: dog 품종끼리 서로 더 가까워졌는지 / 멀어졌는지
         lines.append(
             "- overall within-group: "
             f"pairs={overall_within['num_pairs']}, "
@@ -65,6 +69,8 @@ def build_section(summary_path):
             f"mean_abs_diff={overall_within['mean_abs_diff']:.4f}"
         )
     if overall_cross.get("num_pairs", 0) > 0:
+        # cross-group은 서로 다른 group 사이의 관계 변화입니다.
+        # 예: dog와 wolf가 더 가까워졌는지
         lines.append(
             "- overall cross-group: "
             f"pairs={overall_cross['num_pairs']}, "
@@ -120,6 +126,7 @@ def main():
     lines = [
         "# Keyword Hypothesis Report",
         "",
+        # 이 문서는 원본 JSON을 사람이 빠르게 읽을 수 있게 압축한 markdown 요약입니다.
         "This report focuses on within-group and cross-group relational changes for selected keywords.",
         "",
     ]

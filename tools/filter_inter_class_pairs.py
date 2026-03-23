@@ -6,6 +6,9 @@ from collections import defaultdict
 
 def get_arguments():
     parser = argparse.ArgumentParser()
+    # `pair_info_file`은 geometry_eval.py가 저장한
+    # `..._inter_class_per_pair_sign_info.json` 파일입니다.
+    # 이 파일 안에는 클래스쌍마다 source/target similarity가 모두 들어 있습니다.
     parser.add_argument("--pair_info_file", required=True, type=str)
     parser.add_argument("--mapping_file", default="./imagenet-class-ids.txt", type=str)
     parser.add_argument("--keywords", nargs="+", default=None, help="Examples: dog wolf frog")
@@ -56,6 +59,9 @@ def build_keyword_to_class_ids(mapping, keywords):
     normalized_mapping = {class_id: normalize_text(class_name) for class_id, class_name in mapping.items()}
     for keyword in keywords:
         keyword_norm = normalize_text(keyword)
+        # keyword mode는 class name 안에 문자열이 포함되면 매칭합니다.
+        # 예: keyword='dog'면 'golden retriever'는 안 잡히고, 'hot dog'는 잡히는 문제가 있어서
+        # 나중에 curated group mode를 추가하게 되었습니다.
         for class_id, class_name in normalized_mapping.items():
             if keyword_norm in class_name:
                 keyword_to_ids[keyword_norm].append(class_id)
@@ -64,6 +70,8 @@ def build_keyword_to_class_ids(mapping, keywords):
 
 def build_group_to_class_ids(mapping, args):
     if args.group_file is not None:
+        # curated group file이 있으면 문자열 매칭 대신,
+        # 미리 정한 class id 목록을 그대로 사용합니다.
         group_to_ids = load_group_file(args.group_file)
         requested_groups = [normalize_text(group) for group in (args.groups or args.keywords or sorted(group_to_ids.keys()))]
         filtered = {}
@@ -88,8 +96,12 @@ def pair_matches(entry, keyword_to_ids, match_mode):
             matched_keywords.add(keyword)
 
     if match_mode == "any":
+        # any: 두 클래스 중 하나라도 관심 group에 들어가면 포함
         return len(matched_keywords) > 0, sorted(matched_keywords)
     if match_mode == "both":
+        # both: 양쪽 클래스가 모두 관심 group 안에 있어야 포함
+        # - 서로 다른 group에 하나씩 들어가도 포함됩니다. (cross-group)
+        # - 같은 group에 둘 다 속해도 포함됩니다. (within-group)
         return len(matched_keywords) >= 2 or (
             len(matched_keywords) == 1 and class_a_id in keyword_to_ids[next(iter(matched_keywords))] and class_b_id in keyword_to_ids[next(iter(matched_keywords))]
         ), sorted(matched_keywords)
@@ -105,6 +117,8 @@ def get_entry_keywords(entry, keyword_to_ids):
 
 
 def summarize_pairs(filtered_pairs, topk):
+    # 여러 summary는 모두 "어떤 pair가 대표적인가?"를 빠르게 보기 위한 용도입니다.
+    # 수치 평균만 보면 놓치기 쉬운 대표 사례를 같이 저장해 둡니다.
     top_source = sorted(filtered_pairs, key=lambda item: item["source_similarity"], reverse=True)[:topk]
     top_target = sorted(filtered_pairs, key=lambda item: item["target_similarity"], reverse=True)[:topk]
     top_increase = sorted(filtered_pairs, key=lambda item: item["delta_similarity"], reverse=True)[:topk]
@@ -124,6 +138,8 @@ def mean_or_nan(values):
 
 
 def build_group_bucket_summary(pairs, topk):
+    # 한 group bucket(예: dog__wolf)에 대해 평균 source/target similarity와
+    # 평균 변화량(delta), 절대 차이(abs diff)를 요약합니다.
     return {
         "num_pairs": len(pairs),
         "mean_source_similarity": mean_or_nan([entry["source_similarity"] for entry in pairs]),
@@ -140,7 +156,6 @@ def build_group_bucket_summary(pairs, topk):
 def summarize_group_relations(filtered_pairs, keywords, topk):
     within_group = {keyword: [] for keyword in keywords}
     cross_group = {}
-    group_pairwise = {}
 
     for keyword_a in keywords:
         for keyword_b in keywords:
@@ -205,6 +220,7 @@ def main():
 
     filtered_pairs = []
     for entry in pair_info:
+        # 각 클래스쌍(entry)이 우리가 보고 싶은 group 조건을 만족하는지 먼저 검사합니다.
         matches, matched_keywords = pair_matches(entry, keyword_to_ids, args.match_mode)
         if not matches:
             continue
@@ -213,7 +229,8 @@ def main():
         class_a_keywords, class_b_keywords = get_entry_keywords(entry, keyword_to_ids)
         entry["class_a_keywords"] = class_a_keywords
         entry["class_b_keywords"] = class_b_keywords
-        # Older pair files may not have delta_similarity yet.
+        # 예전 실험 파일은 `delta_similarity`를 저장하지 않았을 수 있습니다.
+        # 그 경우 target - source를 여기서 즉석 계산해 backward compatibility를 유지합니다.
         entry.setdefault("delta_similarity", float(entry["target_similarity"] - entry["source_similarity"]))
         filtered_pairs.append(entry)
 

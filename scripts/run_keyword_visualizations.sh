@@ -18,6 +18,8 @@ if [[ ${#KEYWORDS[@]} -eq 0 ]]; then
 fi
 
 if [[ -n "${GROUP_FILE}" ]]; then
+  # visualization에서도 report와 같은 class set을 써야 해석이 맞습니다.
+  # 그래서 curated group file이 있으면 거기서 class id를 직접 읽습니다.
   mapfile -t CLASS_IDS < <(
     python - "${GROUP_FILE}" "${KEYWORDS[@]}" <<'PY'
 import json
@@ -36,6 +38,7 @@ for class_id in sorted({int(class_id) for class_id in ids}):
 PY
   )
 else
+  # fallback: mapping file에서 keyword substring으로 class id를 찾습니다.
   keywords_csv="$(printf '%s,' "${KEYWORDS[@]}")"
   keywords_csv="${keywords_csv%,}"
 
@@ -65,6 +68,8 @@ fi
 
 latest_eval_json() {
   local target_name="$1"
+  # 같은 target에 대한 JSON이 여러 개 있을 수 있으므로,
+  # 가장 최근 파일 하나를 골라 visualization 입력으로 씁니다.
   mapfile -t matches < <(find "${OUTPUT_ROOT}" -type f -name "ImageNet_v1_vs_${target_name}*.json" | sort)
   local filtered=()
   local path
@@ -98,6 +103,8 @@ run_viz() {
   fi
 
   local output_prefix="${OUTPUT_ROOT}/keyword_viz_ImageNet_v1_vs_${target_name}_$(echo "${KEYWORDS[*]}" | tr ' ' '_')"
+  # `cmd=(...)`는 bash 배열입니다.
+  # 공백이 들어가는 경로도 안전하게 처리하려고 문자열 하나가 아니라 배열로 명령을 만듭니다.
   local cmd=(
     python tools/geometry_viz.py
     --source_feature_file "${CACHE_ROOT}/ImageNet_v1/ImageNet_v1_${BACKBONE}_features.pt"

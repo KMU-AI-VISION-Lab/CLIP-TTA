@@ -710,6 +710,13 @@ def compute_inter_class_geometry_results(
     if len(selected_classes) < 2:
         raise ValueError("Inter-class relational geometry requires at least 2 classes.")
 
+    # 이 함수가 inter-class 분석의 핵심입니다.
+    # 흐름은 아래와 같습니다.
+    # 1) source/target 각각에서 class prototype을 만듭니다.
+    # 2) 전체 평균(global prototype)을 빼서 centered prototype을 만듭니다.
+    # 3) centered prototype 사이 cosine similarity matrix S를 만듭니다.
+    # 4) source S와 target S를 비교해서 관계 구조가 얼마나 유지됐는지 수치화합니다.
+
     # source / target 각각에 대해
     # "클래스 prototype -> 전역 중심 제거 -> 클래스 간 유사도 행렬"
     # 구조를 만듭니다.
@@ -725,6 +732,8 @@ def compute_inter_class_geometry_results(
     upper_indices = np.triu_indices(len(selected_classes), k=1)
     upper_source = source_matrix[upper_indices]
     upper_target = target_matrix[upper_indices]
+    # `np.triu_indices(..., k=1)`는 대각선을 제외한 위쪽 삼각형 인덱스만 뽑습니다.
+    # 이렇게 하면 (a,b)와 (b,a) 중복 없이 클래스쌍을 한 번만 비교할 수 있습니다.
 
     # NaN / Inf 같은 비정상 값은 비교에서 제외합니다.
     # 예를 들어 centered prototype의 길이가 0이면 cosine이 정의되지 않을 수 있습니다.
@@ -735,6 +744,8 @@ def compute_inter_class_geometry_results(
     valid_target = upper_target[valid_mask]
     # 각 클래스쌍 관계가 source와 target에서 얼마나 달라졌는지 절댓값 차이로 봅니다.
     abs_diff_vector = np.abs(valid_source - valid_target)
+    # 여기서 `valid_source`, `valid_target`의 shape은 [유효한 클래스쌍 수]인 1차원 벡터입니다.
+    # 즉 행렬 비교를 위해 결국 상삼각 행렬을 "펼친 벡터" 형태로 다루고 있습니다.
 
     # pair_records에는 클래스쌍별 상세 정보를 저장합니다.
     # 나중에 어떤 클래스쌍에서 관계 변화가 컸는지 추적할 때 사용합니다.
@@ -793,6 +804,8 @@ def compute_inter_class_geometry_results(
             "target_radius": float(target_radius),
             "abs_diff": float(abs(source_radius - target_radius)),
         })
+    # `zip(selected_classes, source_radii, target_radii)`는 같은 위치의 값들을 묶어 줍니다.
+    # 그래서 class id 하나와 source/target radius 하나를 같이 처리하기 좋습니다.
 
     # 상관계수 계산을 위해 radius를 다시 숫자 벡터로 모읍니다.
     source_radius_values = np.asarray([record["source_radius"] for record in radius_records], dtype=np.float64)
@@ -805,6 +818,8 @@ def compute_inter_class_geometry_results(
     # 별도 .npy / .json 파일로 저장합니다.
     source_matrix_path = f"{artifact_prefix}_source.npy"
     target_matrix_path = f"{artifact_prefix}_target.npy"
+    # `.npy`는 NumPy 배열을 그대로 저장하는 포맷입니다.
+    # JSON보다 빠르고, 2차원 행렬을 손실 없이 보관하기 좋습니다.
     np.save(source_matrix_path, source_matrix)
     np.save(target_matrix_path, target_matrix)
 
