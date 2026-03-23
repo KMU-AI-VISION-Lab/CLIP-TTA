@@ -1,0 +1,87 @@
+{
+  "config_name": "balanced_ImageNet_v1_ImageNet_A",
+  "dataset_names": [
+    "ImageNet_v1",
+    "ImageNet_A"
+  ],
+  "feature_files": [
+    "./caches/geometry_vit_b16/ImageNet_v1/ImageNet_v1_vit_b16_features.pt",
+    "./caches/geometry_vit_b16/ImageNet_A/ImageNet_A_vit_b16_features.pt"
+  ],
+  "groups": [
+    "dog",
+    "bird",
+    "vehicle"
+  ],
+  "group_candidates_file": "./configs/imagenet_supergroup_candidates.json",
+  "common_available_indices_count": 200,
+  "group_sizes_before_balancing": {
+    "dog": 5,
+    "bird": 16,
+    "vehicle": 11
+  },
+  "balanced_group_size": 5,
+  "selected_class_ids_by_group": {
+    "dog": [
+      151,
+      207,
+      234,
+      235,
+      254
+    ],
+    "bird": [
+      11,
+      13,
+      15,
+      17,
+      22
+    ],
+    "vehicle": [
+      404,
+      407,
+      472,
+      609,
+      627
+    ]
+  },
+  "selected_class_names_by_group": {
+    "dog": [
+      "Chihuahua",
+      "Golden Retriever",
+      "Rottweiler",
+      "German Shepherd Dog",
+      "pug"
+    ],
+    "bird": [
+      "goldfinch",
+      "junco",
+      "American robin",
+      "jay",
+      "bald eagle"
+    ],
+    "vehicle": [
+      "airliner",
+      "ambulance",
+      "canoe",
+      "jeep",
+      "limousine"
+    ]
+  },
+  "balanced_class_ids_union": [
+    11,
+    13,
+    15,
+    17,
+    22,
+    151,
+    207,
+    234,
+    235,
+    254,
+    404,
+    407,
+    472,
+    609,
+    627
+  ]
+}

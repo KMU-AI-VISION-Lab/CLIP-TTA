@@ -33,7 +33,7 @@ Class ID	Class Name
 31	tree frog, tree-frog
 32	tailed frog, bell toad, ribbed toad, tailed toad, Ascaphus trui
 33	loggerhead, loggerhead turtle, Caretta caretta
-34	leatherback turtle, leatherback, leathery turtle, Dermochelys coriacea
+34	leatherback turtle, leatherbfack, leathery turtle, Dermochelys coriacea
 35	mud turtle
 36	terrapin
 37	box turtle, box tortoise
