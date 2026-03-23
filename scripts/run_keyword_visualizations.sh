@@ -6,6 +6,7 @@ OUTPUT_ROOT="${1:-./outputs/geometry_vit_b16}"
 CACHE_ROOT="${2:-./caches/geometry_vit_b16}"
 MAPPING_FILE="${3:-./imagenet-class-ids.txt}"
 BACKBONE="${BACKBONE:-vit_b16}"
+GROUP_FILE="${GROUP_FILE:-}"
 VIZ_DIM="${VIZ_DIM:-3}"
 VIZ_MAX_POINTS_PER_CLASS="${VIZ_MAX_POINTS_PER_CLASS:-30}"
 VIZ_SAMPLES_PER_CLASS="${VIZ_SAMPLES_PER_CLASS:-10}"
@@ -16,26 +17,46 @@ if [[ ${#KEYWORDS[@]} -eq 0 ]]; then
   KEYWORDS=("dog" "wolf" "frog")
 fi
 
-keywords_csv="$(printf '%s,' "${KEYWORDS[@]}")"
-keywords_csv="${keywords_csv%,}"
+if [[ -n "${GROUP_FILE}" ]]; then
+  mapfile -t CLASS_IDS < <(
+    python - "${GROUP_FILE}" "${KEYWORDS[@]}" <<'PY'
+import json
+import sys
 
-mapfile -t CLASS_IDS < <(
-  awk -F '\t' -v keywords="${keywords_csv}" '
-    BEGIN {
-      split(tolower(keywords), kws, ",")
-    }
-    NR == 1 { next }
-    {
-      name = tolower($2)
-      for (i in kws) {
-        if (index(name, kws[i]) > 0) {
-          print $1
-          break
+group_file = sys.argv[1]
+requested = [item.lower() for item in sys.argv[2:]]
+with open(group_file, "r", encoding="utf-8") as handle:
+    payload = json.load(handle)
+
+ids = []
+for group_name in requested:
+    ids.extend(payload.get(group_name, []))
+for class_id in sorted({int(class_id) for class_id in ids}):
+    print(class_id)
+PY
+  )
+else
+  keywords_csv="$(printf '%s,' "${KEYWORDS[@]}")"
+  keywords_csv="${keywords_csv%,}"
+
+  mapfile -t CLASS_IDS < <(
+    awk -F '\t' -v keywords="${keywords_csv}" '
+      BEGIN {
+        split(tolower(keywords), kws, ",")
+      }
+      NR == 1 { next }
+      {
+        name = tolower($2)
+        for (i in kws) {
+          if (index(name, kws[i]) > 0) {
+            print $1
+            break
+          }
         }
       }
-    }
-  ' "${MAPPING_FILE}"
-)
+    ' "${MAPPING_FILE}"
+  )
+fi
 
 if [[ ${#CLASS_IDS[@]} -eq 0 ]]; then
   echo "[error] No class ids matched keywords: ${KEYWORDS[*]}"

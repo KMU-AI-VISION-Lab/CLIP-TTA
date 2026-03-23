@@ -7,6 +7,7 @@ BACKBONE="${2:-vit_b16}"
 CACHE_ROOT="${3:-./caches/geometry_${BACKBONE}}"
 OUTPUT_ROOT="${4:-./outputs/geometry_${BACKBONE}}"
 MAPPING_FILE="${5:-./imagenet-class-ids.txt}"
+GROUP_FILE="${GROUP_FILE:-./configs/imagenet_curated_groups.json}"
 KEYWORDS=("${@:6}")
 
 if [[ ${#KEYWORDS[@]} -eq 0 ]]; then
@@ -22,7 +23,7 @@ GPU_IDS="${GPU_IDS:-0,1,2,3}" \
 bash scripts/run_geometry_imagenet_family.sh "${DATASET_LOCATION}" "${BACKBONE}" "${CACHE_ROOT}" "${OUTPUT_ROOT}"
 
 echo "[step 2/4] Build keyword summaries"
-bash scripts/run_inter_class_keyword_summary.sh "${OUTPUT_ROOT}" "${MAPPING_FILE}" "${KEYWORDS[@]}"
+GROUP_FILE="${GROUP_FILE}" bash scripts/run_inter_class_keyword_summary.sh "${OUTPUT_ROOT}" "${MAPPING_FILE}" "${KEYWORDS[@]}"
 
 echo "[step 2.5/4] Organize outputs"
 bash scripts/organize_geometry_outputs.sh "${OUTPUT_ROOT}"
@@ -34,7 +35,7 @@ python tools/build_keyword_hypothesis_report.py \
   --match_mode "${MATCH_MODE:-any}"
 
 echo "[step 4/4] Generate keyword-focused visualizations"
-BACKBONE="${BACKBONE}" bash scripts/run_keyword_visualizations.sh "${OUTPUT_ROOT}" "${CACHE_ROOT}" "${MAPPING_FILE}" "${KEYWORDS[@]}"
+BACKBONE="${BACKBONE}" GROUP_FILE="${GROUP_FILE}" bash scripts/run_keyword_visualizations.sh "${OUTPUT_ROOT}" "${CACHE_ROOT}" "${MAPPING_FILE}" "${KEYWORDS[@]}"
 
 echo "[step 4.5/4] Re-organize outputs after report and visualization"
 bash scripts/organize_geometry_outputs.sh "${OUTPUT_ROOT}"

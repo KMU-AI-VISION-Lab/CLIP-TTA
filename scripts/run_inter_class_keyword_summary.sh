@@ -6,6 +6,7 @@ OUTPUT_ROOT="${1:-./outputs/geometry_vit_b16}"
 MAPPING_FILE="${2:-./imagenet-class-ids.txt}"
 TOPK="${TOPK:-20}"
 MATCH_MODE="${MATCH_MODE:-any}"
+GROUP_FILE="${GROUP_FILE:-}"
 KEYWORDS=("${@:3}")
 
 if [[ ${#KEYWORDS[@]} -eq 0 ]]; then
@@ -37,10 +38,20 @@ for pair_file in "${PAIR_FILES[@]}"; do
   fi
 
   echo "Summarizing ${pair_file}"
-  python tools/filter_inter_class_pairs.py \
-    --pair_info_file "${pair_file}" \
-    --mapping_file "${MAPPING_FILE}" \
-    --keywords "${KEYWORDS[@]}" \
-    --match_mode "${MATCH_MODE}" \
-    --topk "${TOPK}"
+  if [[ -n "${GROUP_FILE}" ]]; then
+    python tools/filter_inter_class_pairs.py \
+      --pair_info_file "${pair_file}" \
+      --mapping_file "${MAPPING_FILE}" \
+      --group_file "${GROUP_FILE}" \
+      --groups "${KEYWORDS[@]}" \
+      --match_mode "${MATCH_MODE}" \
+      --topk "${TOPK}"
+  else
+    python tools/filter_inter_class_pairs.py \
+      --pair_info_file "${pair_file}" \
+      --mapping_file "${MAPPING_FILE}" \
+      --keywords "${KEYWORDS[@]}" \
+      --match_mode "${MATCH_MODE}" \
+      --topk "${TOPK}"
+  fi
 done

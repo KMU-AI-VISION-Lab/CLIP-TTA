@@ -8,7 +8,9 @@ def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("--pair_info_file", required=True, type=str)
     parser.add_argument("--mapping_file", default="./imagenet-class-ids.txt", type=str)
-    parser.add_argument("--keywords", nargs="+", required=True, help="Examples: dog wolf frog")
+    parser.add_argument("--keywords", nargs="+", default=None, help="Examples: dog wolf frog")
+    parser.add_argument("--group_file", default=None, type=str, help="Optional JSON file mapping group names to explicit class id lists.")
+    parser.add_argument("--groups", nargs="+", default=None, help="Group names to use when --group_file is provided.")
     parser.add_argument("--match_mode", default="any", choices=["any", "both"])
     parser.add_argument("--topk", default=20, type=int)
     parser.add_argument("--output", default=None, type=str)
@@ -40,6 +42,15 @@ def normalize_text(text):
     return text.lower().strip()
 
 
+def load_group_file(path):
+    payload = load_json(path)
+    normalized = {}
+    for group_name, class_ids in payload.items():
+        normalized_group = normalize_text(group_name)
+        normalized[normalized_group] = sorted({int(class_id) for class_id in class_ids})
+    return normalized
+
+
 def build_keyword_to_class_ids(mapping, keywords):
     keyword_to_ids = defaultdict(list)
     normalized_mapping = {class_id: normalize_text(class_name) for class_id, class_name in mapping.items()}
@@ -49,6 +60,23 @@ def build_keyword_to_class_ids(mapping, keywords):
             if keyword_norm in class_name:
                 keyword_to_ids[keyword_norm].append(class_id)
     return dict(keyword_to_ids)
+
+
+def build_group_to_class_ids(mapping, args):
+    if args.group_file is not None:
+        group_to_ids = load_group_file(args.group_file)
+        requested_groups = [normalize_text(group) for group in (args.groups or args.keywords or sorted(group_to_ids.keys()))]
+        filtered = {}
+        for group_name in requested_groups:
+            if group_name not in group_to_ids:
+                raise KeyError(f"Requested group '{group_name}' not found in {args.group_file}")
+            filtered[group_name] = group_to_ids[group_name]
+        return filtered, requested_groups
+
+    keywords = [normalize_text(keyword) for keyword in (args.keywords or [])]
+    if not keywords:
+        raise ValueError("Provide --keywords or --group_file.")
+    return build_keyword_to_class_ids(mapping, keywords), keywords
 
 
 def pair_matches(entry, keyword_to_ids, match_mode):
@@ -173,8 +201,7 @@ def main():
     args = get_arguments()
     pair_info = load_json(args.pair_info_file)
     mapping = load_mapping(args.mapping_file)
-    keywords = [normalize_text(keyword) for keyword in args.keywords]
-    keyword_to_ids = build_keyword_to_class_ids(mapping, keywords)
+    keyword_to_ids, keywords = build_group_to_class_ids(mapping, args)
 
     filtered_pairs = []
     for entry in pair_info:
@@ -193,6 +220,7 @@ def main():
     summary = {
         "pair_info_file": args.pair_info_file,
         "mapping_file": args.mapping_file,
+        "group_file": args.group_file,
         "keywords": keywords,
         "match_mode": args.match_mode,
         "keyword_to_class_ids": keyword_to_ids,
