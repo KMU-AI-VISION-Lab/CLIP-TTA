@@ -1,0 +1,53 @@
+/home1/irteam/CLIP-TTA/tools/geometry_eval.py:1386: RuntimeWarning: pairwise distance correlation is not reliable for cross-dataset comparison without sample correspondence
+  warnings.warn(
+[timing] geometry device: cuda:0
+[timing] load feature files: 0.19s
+[timing] prepare_class_geometry_cache: 1.78s
+[timing] per-class metrics: 23.99s
+[timing] retrieval: 0.89s
+[timing] inter-class relational geometry: 0.22s
+[timing] save json: 0.02s
+Cross-dataset geometry evaluation
+pairwise distance correlation is not reliable for cross-dataset comparison without sample correspondence
+Source dataset: ImageNet_v1
+Target dataset: ImageNet_A
+Backbone: vit_b16
+Selected classes: 180
+centroid_cosine: same=0.875951 different=0.698419
+centroid_euclidean: same=0.420761 different=0.654091
+cov_frobenius: same=0.166065 different=0.171890
+pca_subspace: same=0.243805 different=0.181061
+pairwise_spearman: same=0.035116 different=0.002176
+pairwise_pearson: same=0.035475 different=0.001776
+retrieval_acc_centroid_cosine: 0.705556
+retrieval_acc_centroid_euclidean: 0.716667
+retrieval_acc_pca_subspace: 0.305556
+Correspondence-free topology metrics
+kNN distance Wasserstein (k=10): nan
+kNN distance Wasserstein (k=5): 0.161249
+kNN mean distance diff (k=10): nan
+kNN mean distance diff (k=5): 0.158570
+distance histogram JS: 0.327676
+distance histogram Wasserstein: 0.158475
+neighbor graph mean kNN distance diff (k=10): nan
+neighbor graph mean kNN distance diff (k=5): 0.158570
+Inter-class relational geometry
+- matrix Pearson corr: 0.852053
+- matrix Spearman corr: 0.848357
+- mean abs diff: 0.109775
+- sign consistency rate: 0.872210
+- near-zero pairs: 655/16110
+- radius corr: 0.487803
+- radius mean abs diff: 0.103307
+- source matrix: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_A_nc180_sc10_knn5_10_seed1_inter_class_source.npy
+- target matrix: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_A_nc180_sc10_knn5_10_seed1_inter_class_target.npy
+- per-pair signs: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_A_nc180_sc10_knn5_10_seed1_inter_class_per_pair_sign_info.json
+- per-class radii: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_A_nc180_sc10_knn5_10_seed1_inter_class_per_class_radius.json
+- most similar pair in source: grasshopper / leafhopper (0.831521)
+- most similar pair in target: stingray / pufferfish (0.846310)
+- largest similarity increase: crayfish / small white butterfly (delta=0.543320)
+- largest similarity decrease: harvestman / spider web (delta=-0.530493)
+small values -> class geometry preserved
+large values -> geometry differs across datasets
+Saved JSON to: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_A_nc180_sc10_knn5_10_seed1.json
+[timing] total: 27.11s

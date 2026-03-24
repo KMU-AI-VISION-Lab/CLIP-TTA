@@ -1,0 +1,53 @@
+/home1/irteam/CLIP-TTA/tools/geometry_eval.py:1386: RuntimeWarning: pairwise distance correlation is not reliable for cross-dataset comparison without sample correspondence
+  warnings.warn(
+[timing] geometry device: cuda:0
+[timing] load feature files: 0.33s
+[timing] prepare_class_geometry_cache: 1.75s
+[timing] per-class metrics: 27.30s
+[timing] retrieval: 1.07s
+[timing] inter-class relational geometry: 0.25s
+[timing] save json: 0.02s
+Cross-dataset geometry evaluation
+pairwise distance correlation is not reliable for cross-dataset comparison without sample correspondence
+Source dataset: ImageNet_v1
+Target dataset: ImageNet_Sketch
+Backbone: vit_b16
+Selected classes: 200
+centroid_cosine: same=0.833787 different=0.657860
+centroid_euclidean: same=0.502307 different=0.722167
+cov_frobenius: same=0.144625 different=0.147652
+pca_subspace: same=0.213736 different=0.163731
+pairwise_spearman: same=0.009300 different=-0.002740
+pairwise_pearson: same=0.014416 different=-0.002626
+retrieval_acc_centroid_cosine: 0.765000
+retrieval_acc_centroid_euclidean: 0.705000
+retrieval_acc_pca_subspace: 0.365000
+Correspondence-free topology metrics
+kNN distance Wasserstein (k=10): nan
+kNN distance Wasserstein (k=5): 0.122764
+kNN mean distance diff (k=10): nan
+kNN mean distance diff (k=5): 0.112833
+distance histogram JS: 0.253370
+distance histogram Wasserstein: 0.120590
+neighbor graph mean kNN distance diff (k=10): nan
+neighbor graph mean kNN distance diff (k=5): 0.112833
+Inter-class relational geometry
+- matrix Pearson corr: 0.796136
+- matrix Spearman corr: 0.759821
+- mean abs diff: 0.097658
+- sign consistency rate: 0.821217
+- near-zero pairs: 1151/19900
+- radius corr: 0.321458
+- radius mean abs diff: 0.071257
+- source matrix: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_Sketch_nc200_sc10_knn5_10_seed1_inter_class_source.npy
+- target matrix: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_Sketch_nc200_sc10_knn5_10_seed1_inter_class_target.npy
+- per-pair signs: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_Sketch_nc200_sc10_knn5_10_seed1_inter_class_per_pair_sign_info.json
+- per-class radii: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_Sketch_nc200_sc10_knn5_10_seed1_inter_class_per_class_radius.json
+- most similar pair in source: Rottweiler / Dobermann (0.901539)
+- most similar pair in target: monarch butterfly / sulphur butterfly (0.910433)
+- largest similarity increase: mousetrap / turnstile (delta=0.674253)
+- largest similarity decrease: Miniature Pinscher / bath towel (delta=-0.687151)
+small values -> class geometry preserved
+large values -> geometry differs across datasets
+Saved JSON to: ./outputs/geometry_vit_b16/ImageNet_v1_vs_ImageNet_Sketch_nc200_sc10_knn5_10_seed1.json
+[timing] total: 30.74s

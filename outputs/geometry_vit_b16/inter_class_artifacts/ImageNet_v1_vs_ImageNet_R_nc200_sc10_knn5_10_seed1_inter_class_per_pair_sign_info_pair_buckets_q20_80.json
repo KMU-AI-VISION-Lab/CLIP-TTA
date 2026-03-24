@@ -1,0 +1,1065 @@
+{
+  "pair_info_file": "./outputs/geometry_vit_b16/inter_class_artifacts/ImageNet_v1_vs_ImageNet_R_nc200_sc10_knn5_10_seed1_inter_class_per_pair_sign_info.json",
+  "bucket_definition": "source-similarity-quantiles",
+  "quantiles": {
+    "low_quantile": 0.2,
+    "high_quantile": 0.8
+  },
+  "bucket_thresholds": {
+    "far_upper": -0.16289016306400297,
+    "mid_lower": -0.16289016306400297,
+    "mid_upper": 0.12772958874702464,
+    "near_lower": 0.12772958874702464
+  },
+  "num_pairs_total": 19900,
+  "buckets": {
+    "far": {
+      "bucket": "far",
+      "num_pairs": 3980,
+      "mean_source_similarity": -0.2113758790320787,
+      "std_source_similarity": 0.0358920095394645,
+      "mean_target_similarity": -0.13894323869850023,
+      "std_target_similarity": 0.09233566645515241,
+      "mean_delta_similarity": 0.0724326403335785,
+      "std_delta_similarity": 0.09021118734779833,
+      "mean_abs_diff": 0.0927626568058103,
+      "std_abs_diff": 0.0691349058777154,
+      "representative_pairs": [
+        {
+          "class_a_id": 338,
+          "class_b_id": 447,
+          "class_a_name": "guinea pig",
+          "class_b_name": "binoculars",
+          "source_similarity": -0.3619246184825897,
+          "target_similarity": -0.1392069011926651,
+          "delta_similarity": 0.22271771728992462,
+          "abs_diff": 0.22271771728992462,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 113,
+          "class_b_id": 250,
+          "class_a_name": "snail",
+          "class_b_name": "Siberian Husky",
+          "source_similarity": -0.35899510979652405,
+          "target_similarity": -0.3134296238422394,
+          "delta_similarity": 0.04556548595428467,
+          "abs_diff": 0.04556548595428467,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 199,
+          "class_b_id": 310,
+          "class_a_name": "Scottish Terrier",
+          "class_b_name": "ant",
+          "source_similarity": -0.34993284940719604,
+          "target_similarity": -0.12245336174964905,
+          "delta_similarity": 0.227479487657547,
+          "abs_diff": 0.227479487657547,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 23,
+          "class_b_id": 435,
+          "class_a_name": "vulture",
+          "class_b_name": "bathtub",
+          "source_similarity": -0.34509164094924927,
+          "target_similarity": 0.002685953862965107,
+          "delta_similarity": 0.3477775948122144,
+          "abs_diff": 0.3477775948122144,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 203,
+          "class_b_id": 310,
+          "class_a_name": "West Highland White Terrier",
+          "class_b_name": "ant",
+          "source_similarity": -0.3442569971084595,
+          "target_similarity": -0.29446935653686523,
+          "delta_similarity": 0.04978764057159424,
+          "abs_diff": 0.04978764057159424,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 22,
+          "class_b_id": 629,
+          "class_a_name": "bald eagle",
+          "class_b_name": "lipstick",
+          "source_similarity": -0.34199705719947815,
+          "target_similarity": -0.0623805895447731,
+          "delta_similarity": 0.27961646765470505,
+          "abs_diff": 0.27961646765470505,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 334,
+          "class_b_id": 457,
+          "class_a_name": "porcupine",
+          "class_b_name": "bow tie",
+          "source_similarity": -0.3394772410392761,
+          "target_similarity": -0.12415909022092819,
+          "delta_similarity": 0.21531815081834793,
+          "abs_diff": 0.21531815081834793,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 276,
+          "class_b_id": 457,
+          "class_a_name": "hyena",
+          "class_b_name": "bow tie",
+          "source_similarity": -0.33722731471061707,
+          "target_similarity": -0.32536476850509644,
+          "delta_similarity": 0.01186254620552063,
+          "abs_diff": 0.01186254620552063,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 22,
+          "class_b_id": 435,
+          "class_a_name": "bald eagle",
+          "class_b_name": "bathtub",
+          "source_similarity": -0.33673107624053955,
+          "target_similarity": -0.20970186591148376,
+          "delta_similarity": 0.1270292103290558,
+          "abs_diff": 0.1270292103290558,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 132,
+          "class_b_id": 195,
+          "class_a_name": "great egret",
+          "class_b_name": "Boston Terrier",
+          "source_similarity": -0.33548596501350403,
+          "target_similarity": -0.15612396597862244,
+          "delta_similarity": 0.1793619990348816,
+          "abs_diff": 0.1793619990348816,
+          "bucket": "far"
+        }
+      ],
+      "largest_similarity_increase_pairs": [
+        {
+          "class_a_id": 397,
+          "class_b_id": 852,
+          "class_a_name": "pufferfish",
+          "class_b_name": "tennis ball",
+          "source_similarity": -0.18063503503799438,
+          "target_similarity": 0.26210492849349976,
+          "delta_similarity": 0.44273996353149414,
+          "abs_diff": 0.44273996353149414,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 330,
+          "class_b_id": 883,
+          "class_a_name": "cottontail rabbit",
+          "class_b_name": "vase",
+          "source_similarity": -0.18455132842063904,
+          "target_similarity": 0.19449551403522491,
+          "delta_similarity": 0.37904684245586395,
+          "abs_diff": 0.37904684245586395,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 63,
+          "class_b_id": 558,
+          "class_a_name": "Indian cobra",
+          "class_b_name": "flute",
+          "source_similarity": -0.23556780815124512,
+          "target_similarity": 0.14257992804050446,
+          "delta_similarity": 0.3781477361917496,
+          "abs_diff": 0.3781477361917496,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 309,
+          "class_b_id": 457,
+          "class_a_name": "bee",
+          "class_b_name": "bow tie",
+          "source_similarity": -0.20830854773521423,
+          "target_similarity": 0.1673743724822998,
+          "delta_similarity": 0.37568292021751404,
+          "abs_diff": 0.37568292021751404,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 97,
+          "class_b_id": 928,
+          "class_a_name": "duck",
+          "class_b_name": "ice cream",
+          "source_similarity": -0.20034383237361908,
+          "target_similarity": 0.17235730588436127,
+          "delta_similarity": 0.37270113825798035,
+          "abs_diff": 0.37270113825798035,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 187,
+          "class_b_id": 293,
+          "class_a_name": "Yorkshire Terrier",
+          "class_b_name": "cheetah",
+          "source_similarity": -0.18501369655132294,
+          "target_similarity": 0.18604423105716705,
+          "delta_similarity": 0.37105792760849,
+          "abs_diff": 0.37105792760849,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 366,
+          "class_b_id": 947,
+          "class_a_name": "gorilla",
+          "class_b_name": "mushroom",
+          "source_similarity": -0.17750495672225952,
+          "target_similarity": 0.1877550482749939,
+          "delta_similarity": 0.3652600049972534,
+          "abs_diff": 0.3652600049972534,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 372,
+          "class_b_id": 558,
+          "class_a_name": "baboon",
+          "class_b_name": "flute",
+          "source_similarity": -0.24484315514564514,
+          "target_similarity": 0.1117420345544815,
+          "delta_similarity": 0.35658518970012665,
+          "abs_diff": 0.35658518970012665,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 308,
+          "class_b_id": 457,
+          "class_a_name": "fly",
+          "class_b_name": "bow tie",
+          "source_similarity": -0.22616709768772125,
+          "target_similarity": 0.12189214676618576,
+          "delta_similarity": 0.348059244453907,
+          "abs_diff": 0.348059244453907,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 23,
+          "class_b_id": 435,
+          "class_a_name": "vulture",
+          "class_b_name": "bathtub",
+          "source_similarity": -0.34509164094924927,
+          "target_similarity": 0.002685953862965107,
+          "delta_similarity": 0.3477775948122144,
+          "abs_diff": 0.3477775948122144,
+          "bucket": "far"
+        }
+      ],
+      "largest_similarity_decrease_pairs": [
+        {
+          "class_a_id": 187,
+          "class_b_id": 587,
+          "class_a_name": "Yorkshire Terrier",
+          "class_b_name": "hammer",
+          "source_similarity": -0.16485311090946198,
+          "target_similarity": -0.38153526186943054,
+          "delta_similarity": -0.21668215095996857,
+          "abs_diff": 0.21668215095996857,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 267,
+          "class_b_id": 587,
+          "class_a_name": "Standard Poodle",
+          "class_b_name": "hammer",
+          "source_similarity": -0.21359111368656158,
+          "target_similarity": -0.426920086145401,
+          "delta_similarity": -0.21332897245883942,
+          "abs_diff": 0.21332897245883942,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 231,
+          "class_b_id": 587,
+          "class_a_name": "collie",
+          "class_b_name": "hammer",
+          "source_similarity": -0.21395976841449738,
+          "target_similarity": -0.41004472970962524,
+          "delta_similarity": -0.19608496129512787,
+          "abs_diff": 0.19608496129512787,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 187,
+          "class_b_id": 463,
+          "class_a_name": "Yorkshire Terrier",
+          "class_b_name": "bucket",
+          "source_similarity": -0.17789418995380402,
+          "target_similarity": -0.3663026988506317,
+          "delta_similarity": -0.1884085088968277,
+          "abs_diff": 0.1884085088968277,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 232,
+          "class_b_id": 587,
+          "class_a_name": "Border Collie",
+          "class_b_name": "hammer",
+          "source_similarity": -0.1823723018169403,
+          "target_similarity": -0.36237868666648865,
+          "delta_similarity": -0.18000638484954834,
+          "abs_diff": 0.18000638484954834,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 260,
+          "class_b_id": 657,
+          "class_a_name": "Chow Chow",
+          "class_b_name": "missile",
+          "source_similarity": -0.207865908741951,
+          "target_similarity": -0.38537874817848206,
+          "delta_similarity": -0.17751283943653107,
+          "abs_diff": 0.17751283943653107,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 203,
+          "class_b_id": 587,
+          "class_a_name": "West Highland White Terrier",
+          "class_b_name": "hammer",
+          "source_similarity": -0.16322091221809387,
+          "target_similarity": -0.3395433723926544,
+          "delta_similarity": -0.17632246017456055,
+          "abs_diff": 0.17632246017456055,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 267,
+          "class_b_id": 657,
+          "class_a_name": "Standard Poodle",
+          "class_b_name": "missile",
+          "source_similarity": -0.24299481511116028,
+          "target_similarity": -0.4158485531806946,
+          "delta_similarity": -0.1728537380695343,
+          "abs_diff": 0.1728537380695343,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 260,
+          "class_b_id": 583,
+          "class_a_name": "Chow Chow",
+          "class_b_name": "guillotine",
+          "source_similarity": -0.21804217994213104,
+          "target_similarity": -0.3886220455169678,
+          "delta_similarity": -0.17057986557483673,
+          "abs_diff": 0.17057986557483673,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 6,
+          "class_b_id": 207,
+          "class_a_name": "stingray",
+          "class_b_name": "Golden Retriever",
+          "source_similarity": -0.2100144624710083,
+          "target_similarity": -0.37648192048072815,
+          "delta_similarity": -0.16646745800971985,
+          "abs_diff": 0.16646745800971985,
+          "bucket": "far"
+        }
+      ]
+    },
+    "mid": {
+      "bucket": "mid",
+      "num_pairs": 11940,
+      "mean_source_similarity": -0.0389100671435983,
+      "std_source_similarity": 0.08053512038155336,
+      "mean_target_similarity": -0.03297777320718155,
+      "std_target_similarity": 0.10898103743148452,
+      "mean_delta_similarity": 0.005932293936416747,
+      "std_delta_similarity": 0.10037213202202613,
+      "mean_abs_diff": 0.07953391346882753,
+      "std_abs_diff": 0.061515149405070496,
+      "representative_pairs": [
+        {
+          "class_a_id": 63,
+          "class_b_id": 145,
+          "class_a_name": "Indian cobra",
+          "class_b_name": "king penguin",
+          "source_similarity": -0.04771820455789566,
+          "target_similarity": -0.08376093953847885,
+          "delta_similarity": -0.03604273498058319,
+          "abs_diff": 0.03604273498058319,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 334,
+          "class_b_id": 936,
+          "class_a_name": "porcupine",
+          "class_b_name": "cabbage",
+          "source_similarity": -0.04774193465709686,
+          "target_similarity": 0.00919776689261198,
+          "delta_similarity": 0.05693970154970884,
+          "abs_diff": 0.05693970154970884,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 327,
+          "class_b_id": 657,
+          "class_a_name": "starfish",
+          "class_b_name": "missile",
+          "source_similarity": -0.04767138138413429,
+          "target_similarity": -0.1511930227279663,
+          "delta_similarity": -0.10352164134383202,
+          "abs_diff": 0.10352164134383202,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 347,
+          "class_b_id": 724,
+          "class_a_name": "bison",
+          "class_b_name": "pirate ship",
+          "source_similarity": -0.0477905236184597,
+          "target_similarity": 0.022718461230397224,
+          "delta_similarity": 0.07050898484885693,
+          "abs_diff": 0.07050898484885693,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 207,
+          "class_b_id": 341,
+          "class_a_name": "Golden Retriever",
+          "class_b_name": "pig",
+          "source_similarity": -0.0476614311337471,
+          "target_similarity": -0.06727026402950287,
+          "delta_similarity": -0.019608832895755768,
+          "abs_diff": 0.019608832895755768,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 276,
+          "class_b_id": 483,
+          "class_a_name": "hyena",
+          "class_b_name": "castle",
+          "source_similarity": -0.04781278967857361,
+          "target_similarity": -0.012710561975836754,
+          "delta_similarity": 0.035102227702736855,
+          "abs_diff": 0.035102227702736855,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 132,
+          "class_b_id": 883,
+          "class_a_name": "great egret",
+          "class_b_name": "vase",
+          "source_similarity": -0.047636181116104126,
+          "target_similarity": 0.16693218052387238,
+          "delta_similarity": 0.2145683616399765,
+          "abs_diff": 0.2145683616399765,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 100,
+          "class_b_id": 967,
+          "class_a_name": "black swan",
+          "class_b_name": "espresso",
+          "source_similarity": -0.047632984817028046,
+          "target_similarity": 0.035670291632413864,
+          "delta_similarity": 0.08330327644944191,
+          "abs_diff": 0.08330327644944191,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 267,
+          "class_b_id": 932,
+          "class_a_name": "Standard Poodle",
+          "class_b_name": "pretzel",
+          "source_similarity": -0.04762153699994087,
+          "target_similarity": -0.08016429841518402,
+          "delta_similarity": -0.03254276141524315,
+          "abs_diff": 0.03254276141524315,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 609,
+          "class_b_id": 988,
+          "class_a_name": "jeep",
+          "class_b_name": "acorn",
+          "source_similarity": -0.04784256964921951,
+          "target_similarity": 0.006417583674192429,
+          "delta_similarity": 0.05426015332341194,
+          "abs_diff": 0.05426015332341194,
+          "bucket": "mid"
+        }
+      ],
+      "largest_similarity_increase_pairs": [
+        {
+          "class_a_id": 23,
+          "class_b_id": 107,
+          "class_a_name": "vulture",
+          "class_b_name": "jellyfish",
+          "source_similarity": -0.11299636214971542,
+          "target_similarity": 0.4413425922393799,
+          "delta_similarity": 0.5543389543890953,
+          "abs_diff": 0.5543389543890953,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 425,
+          "class_b_id": 472,
+          "class_a_name": "barn",
+          "class_b_name": "canoe",
+          "source_similarity": 0.012345950119197369,
+          "target_similarity": 0.43607404828071594,
+          "delta_similarity": 0.4237280981615186,
+          "abs_diff": 0.4237280981615186,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 250,
+          "class_b_id": 276,
+          "class_a_name": "Siberian Husky",
+          "class_b_name": "hyena",
+          "source_similarity": 0.03544941544532776,
+          "target_similarity": 0.43722784519195557,
+          "delta_similarity": 0.4017784297466278,
+          "abs_diff": 0.4017784297466278,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 160,
+          "class_b_id": 293,
+          "class_a_name": "Afghan Hound",
+          "class_b_name": "cheetah",
+          "source_similarity": -0.13142089545726776,
+          "target_similarity": 0.26487576961517334,
+          "delta_similarity": 0.3962966650724411,
+          "abs_diff": 0.3962966650724411,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 151,
+          "class_b_id": 293,
+          "class_a_name": "Chihuahua",
+          "class_b_name": "cheetah",
+          "source_similarity": -0.1446821242570877,
+          "target_similarity": 0.24858397245407104,
+          "delta_similarity": 0.39326609671115875,
+          "abs_diff": 0.39326609671115875,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 11,
+          "class_b_id": 883,
+          "class_a_name": "goldfinch",
+          "class_b_name": "vase",
+          "source_similarity": -0.03894178196787834,
+          "target_similarity": 0.3296297788619995,
+          "delta_similarity": 0.36857156082987785,
+          "abs_diff": 0.36857156082987785,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 397,
+          "class_b_id": 937,
+          "class_a_name": "pufferfish",
+          "class_b_name": "broccoli",
+          "source_similarity": -0.0721774473786354,
+          "target_similarity": 0.29539796710014343,
+          "delta_similarity": 0.36757541447877884,
+          "abs_diff": 0.36757541447877884,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 107,
+          "class_b_id": 254,
+          "class_a_name": "jellyfish",
+          "class_b_name": "pug",
+          "source_similarity": -0.16110840439796448,
+          "target_similarity": 0.20533634722232819,
+          "delta_similarity": 0.36644475162029266,
+          "abs_diff": 0.36644475162029266,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 47,
+          "class_b_id": 107,
+          "class_a_name": "chameleon",
+          "class_b_name": "jellyfish",
+          "source_similarity": 0.0403066985309124,
+          "target_similarity": 0.4031254053115845,
+          "delta_similarity": 0.3628187067806721,
+          "abs_diff": 0.3628187067806721,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 23,
+          "class_b_id": 763,
+          "class_a_name": "vulture",
+          "class_b_name": "revolver",
+          "source_similarity": -0.03466837853193283,
+          "target_similarity": 0.3280229866504669,
+          "delta_similarity": 0.36269136518239975,
+          "abs_diff": 0.36269136518239975,
+          "bucket": "mid"
+        }
+      ],
+      "largest_similarity_decrease_pairs": [
+        {
+          "class_a_id": 232,
+          "class_b_id": 852,
+          "class_a_name": "Border Collie",
+          "class_b_name": "tennis ball",
+          "source_similarity": 0.08370194584131241,
+          "target_similarity": -0.24725055694580078,
+          "delta_similarity": -0.3309525027871132,
+          "abs_diff": 0.3309525027871132,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 172,
+          "class_b_id": 852,
+          "class_a_name": "Whippet",
+          "class_b_name": "tennis ball",
+          "source_similarity": 0.10169018805027008,
+          "target_similarity": -0.21798080205917358,
+          "delta_similarity": -0.31967099010944366,
+          "abs_diff": 0.31967099010944366,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 11,
+          "class_b_id": 943,
+          "class_a_name": "goldfinch",
+          "class_b_name": "cucumber",
+          "source_similarity": 0.07445240020751953,
+          "target_similarity": -0.23429468274116516,
+          "delta_similarity": -0.3087470829486847,
+          "abs_diff": 0.3087470829486847,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 235,
+          "class_b_id": 658,
+          "class_a_name": "German Shepherd Dog",
+          "class_b_name": "mitten",
+          "source_similarity": -0.05323028191924095,
+          "target_similarity": -0.3497616648674011,
+          "delta_similarity": -0.29653138294816017,
+          "abs_diff": 0.29653138294816017,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 151,
+          "class_b_id": 658,
+          "class_a_name": "Chihuahua",
+          "class_b_name": "mitten",
+          "source_similarity": 0.015330652706325054,
+          "target_similarity": -0.2806108295917511,
+          "delta_similarity": -0.29594148229807615,
+          "abs_diff": 0.29594148229807615,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 208,
+          "class_b_id": 435,
+          "class_a_name": "Labrador Retriever",
+          "class_b_name": "bathtub",
+          "source_similarity": 0.08879959583282471,
+          "target_similarity": -0.20642006397247314,
+          "delta_similarity": -0.29521965980529785,
+          "abs_diff": 0.29521965980529785,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 160,
+          "class_b_id": 981,
+          "class_a_name": "Afghan Hound",
+          "class_b_name": "baseball player",
+          "source_similarity": 0.023058883845806122,
+          "target_similarity": -0.2715502381324768,
+          "delta_similarity": -0.29460912197828293,
+          "abs_diff": 0.29460912197828293,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 171,
+          "class_b_id": 435,
+          "class_a_name": "Italian Greyhound",
+          "class_b_name": "bathtub",
+          "source_similarity": 0.11685921996831894,
+          "target_similarity": -0.17708741128444672,
+          "delta_similarity": -0.29394663125276566,
+          "abs_diff": 0.29394663125276566,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 425,
+          "class_b_id": 943,
+          "class_a_name": "barn",
+          "class_b_name": "cucumber",
+          "source_similarity": 0.11434809118509293,
+          "target_similarity": -0.1794145405292511,
+          "delta_similarity": -0.293762631714344,
+          "abs_diff": 0.293762631714344,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 235,
+          "class_b_id": 852,
+          "class_a_name": "German Shepherd Dog",
+          "class_b_name": "tennis ball",
+          "source_similarity": -0.011710071004927158,
+          "target_similarity": -0.3050498366355896,
+          "delta_similarity": -0.29333976563066244,
+          "abs_diff": 0.29333976563066244,
+          "bucket": "mid"
+        }
+      ]
+    },
+    "near": {
+      "bucket": "near",
+      "num_pairs": 3980,
+      "mean_source_similarity": 0.30455774135850183,
+      "std_source_similarity": 0.16316089467270017,
+      "mean_target_similarity": 0.2144446344108588,
+      "std_target_similarity": 0.1856476844836355,
+      "mean_delta_similarity": -0.09011310694764305,
+      "std_delta_similarity": 0.11693174488234082,
+      "mean_abs_diff": 0.11989446789435103,
+      "std_abs_diff": 0.08613200086678946,
+      "representative_pairs": [
+        {
+          "class_a_id": 195,
+          "class_b_id": 245,
+          "class_a_name": "Boston Terrier",
+          "class_b_name": "French Bulldog",
+          "source_similarity": 0.8963158130645752,
+          "target_similarity": 0.7701435089111328,
+          "delta_similarity": -0.12617230415344238,
+          "abs_diff": 0.12617230415344238,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 161,
+          "class_b_id": 162,
+          "class_a_name": "Basset Hound",
+          "class_b_name": "Beagle",
+          "source_similarity": 0.8868806958198547,
+          "target_similarity": 0.8155278563499451,
+          "delta_similarity": -0.07135283946990967,
+          "abs_diff": 0.07135283946990967,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 311,
+          "class_b_id": 315,
+          "class_a_name": "grasshopper",
+          "class_b_name": "praying mantis",
+          "source_similarity": 0.8551250100135803,
+          "target_similarity": 0.7017223834991455,
+          "delta_similarity": -0.15340262651443481,
+          "abs_diff": 0.15340262651443481,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 366,
+          "class_b_id": 367,
+          "class_a_name": "gorilla",
+          "class_b_name": "chimpanzee",
+          "source_similarity": 0.8508418798446655,
+          "target_similarity": 0.5725192427635193,
+          "delta_similarity": -0.27832263708114624,
+          "abs_diff": 0.27832263708114624,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 199,
+          "class_b_id": 203,
+          "class_a_name": "Scottish Terrier",
+          "class_b_name": "West Highland White Terrier",
+          "source_similarity": 0.8360890746116638,
+          "target_similarity": 0.5899748206138611,
+          "delta_similarity": -0.24611425399780273,
+          "abs_diff": 0.24611425399780273,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 724,
+          "class_b_id": 780,
+          "class_a_name": "pirate ship",
+          "class_b_name": "schooner",
+          "source_similarity": 0.8288397789001465,
+          "target_similarity": 0.6767633557319641,
+          "delta_similarity": -0.15207642316818237,
+          "abs_diff": 0.15207642316818237,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 231,
+          "class_b_id": 232,
+          "class_a_name": "collie",
+          "class_b_name": "Border Collie",
+          "source_similarity": 0.817604124546051,
+          "target_similarity": 0.7423384189605713,
+          "delta_similarity": -0.07526570558547974,
+          "abs_diff": 0.07526570558547974,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 155,
+          "class_b_id": 187,
+          "class_a_name": "Shih Tzu",
+          "class_b_name": "Yorkshire Terrier",
+          "source_similarity": 0.8172580003738403,
+          "target_similarity": 0.789574146270752,
+          "delta_similarity": -0.02768385410308838,
+          "abs_diff": 0.02768385410308838,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 155,
+          "class_b_id": 265,
+          "class_a_name": "Shih Tzu",
+          "class_b_name": "Toy Poodle",
+          "source_similarity": 0.8114209175109863,
+          "target_similarity": 0.6272009015083313,
+          "delta_similarity": -0.18422001600265503,
+          "abs_diff": 0.18422001600265503,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 161,
+          "class_b_id": 163,
+          "class_a_name": "Basset Hound",
+          "class_b_name": "Bloodhound",
+          "source_similarity": 0.8106136322021484,
+          "target_similarity": 0.7139222025871277,
+          "delta_similarity": -0.09669142961502075,
+          "abs_diff": 0.09669142961502075,
+          "bucket": "near"
+        }
+      ],
+      "largest_similarity_increase_pairs": [
+        {
+          "class_a_id": 250,
+          "class_b_id": 269,
+          "class_a_name": "Siberian Husky",
+          "class_b_name": "grey wolf",
+          "source_similarity": 0.40632036328315735,
+          "target_similarity": 0.7278131246566772,
+          "delta_similarity": 0.3214927613735199,
+          "abs_diff": 0.3214927613735199,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 883,
+          "class_b_id": 951,
+          "class_a_name": "vase",
+          "class_b_name": "lemon",
+          "source_similarity": 0.2164415717124939,
+          "target_similarity": 0.5174063444137573,
+          "delta_similarity": 0.3009647727012634,
+          "abs_diff": 0.3009647727012634,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 657,
+          "class_b_id": 701,
+          "class_a_name": "missile",
+          "class_b_name": "parachute",
+          "source_similarity": 0.2913297116756439,
+          "target_similarity": 0.5907824039459229,
+          "delta_similarity": 0.29945269227027893,
+          "abs_diff": 0.29945269227027893,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 26,
+          "class_b_id": 39,
+          "class_a_name": "smooth newt",
+          "class_b_name": "green iguana",
+          "source_similarity": 0.37380704283714294,
+          "target_similarity": 0.6721053719520569,
+          "delta_similarity": 0.29829832911491394,
+          "abs_diff": 0.29829832911491394,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 231,
+          "class_b_id": 269,
+          "class_a_name": "collie",
+          "class_b_name": "grey wolf",
+          "source_similarity": 0.2523718774318695,
+          "target_similarity": 0.5339268445968628,
+          "delta_similarity": 0.2815549671649933,
+          "abs_diff": 0.2815549671649933,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 84,
+          "class_b_id": 94,
+          "class_a_name": "peafowl",
+          "class_b_name": "hummingbird",
+          "source_similarity": 0.3174196481704712,
+          "target_similarity": 0.5867798924446106,
+          "delta_similarity": 0.2693602442741394,
+          "abs_diff": 0.2693602442741394,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 107,
+          "class_b_id": 130,
+          "class_a_name": "jellyfish",
+          "class_b_name": "flamingo",
+          "source_similarity": 0.15033936500549316,
+          "target_similarity": 0.41723671555519104,
+          "delta_similarity": 0.2668973505496979,
+          "abs_diff": 0.2668973505496979,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 71,
+          "class_b_id": 107,
+          "class_a_name": "scorpion",
+          "class_b_name": "jellyfish",
+          "source_similarity": 0.21546299755573273,
+          "target_similarity": 0.47981444001197815,
+          "delta_similarity": 0.2643514424562454,
+          "abs_diff": 0.2643514424562454,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 812,
+          "class_b_id": 980,
+          "class_a_name": "space shuttle",
+          "class_b_name": "volcano",
+          "source_similarity": 0.1329309344291687,
+          "target_similarity": 0.3965112268924713,
+          "delta_similarity": 0.2635802924633026,
+          "abs_diff": 0.2635802924633026,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 281,
+          "class_b_id": 293,
+          "class_a_name": "tabby cat",
+          "class_b_name": "cheetah",
+          "source_similarity": 0.13275282084941864,
+          "target_similarity": 0.39418646693229675,
+          "delta_similarity": 0.2614336460828781,
+          "abs_diff": 0.2614336460828781,
+          "bucket": "near"
+        }
+      ],
+      "largest_similarity_decrease_pairs": [
+        {
+          "class_a_id": 658,
+          "class_b_id": 824,
+          "class_a_name": "mitten",
+          "class_b_name": "scarf",
+          "source_similarity": 0.7459415793418884,
+          "target_similarity": 0.1833617240190506,
+          "delta_similarity": -0.5625798553228378,
+          "abs_diff": 0.5625798553228378,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 943,
+          "class_b_id": 945,
+          "class_a_name": "cucumber",
+          "class_b_name": "bell pepper",
+          "source_similarity": 0.7820519208908081,
+          "target_similarity": 0.2506215572357178,
+          "delta_similarity": -0.5314303636550903,
+          "abs_diff": 0.5314303636550903,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 824,
+          "class_b_id": 883,
+          "class_a_name": "scarf",
+          "class_b_name": "vase",
+          "source_similarity": 0.5192679762840271,
+          "target_similarity": -0.006043450906872749,
+          "delta_similarity": -0.5253114271908998,
+          "abs_diff": 0.5253114271908998,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 587,
+          "class_b_id": 883,
+          "class_a_name": "hammer",
+          "class_b_name": "vase",
+          "source_similarity": 0.37162044644355774,
+          "target_similarity": -0.13713020086288452,
+          "delta_similarity": -0.5087506473064423,
+          "abs_diff": 0.5087506473064423,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 447,
+          "class_b_id": 883,
+          "class_a_name": "binoculars",
+          "class_b_name": "vase",
+          "source_similarity": 0.2867446839809418,
+          "target_similarity": -0.19798626005649567,
+          "delta_similarity": -0.48473094403743744,
+          "abs_diff": 0.48473094403743744,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 558,
+          "class_b_id": 875,
+          "class_a_name": "flute",
+          "class_b_name": "trombone",
+          "source_similarity": 0.7495633959770203,
+          "target_similarity": 0.28641802072525024,
+          "delta_similarity": -0.46314537525177,
+          "abs_diff": 0.46314537525177,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 63,
+          "class_b_id": 330,
+          "class_a_name": "Indian cobra",
+          "class_b_name": "cottontail rabbit",
+          "source_similarity": 0.22141824662685394,
+          "target_similarity": -0.237325981259346,
+          "delta_similarity": -0.45874422788619995,
+          "abs_diff": 0.45874422788619995,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 943,
+          "class_b_id": 957,
+          "class_a_name": "cucumber",
+          "class_b_name": "pomegranate",
+          "source_similarity": 0.5526354908943176,
+          "target_similarity": 0.09690863639116287,
+          "delta_similarity": -0.45572685450315475,
+          "abs_diff": 0.45572685450315475,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 6,
+          "class_b_id": 397,
+          "class_a_name": "stingray",
+          "class_b_name": "pufferfish",
+          "source_similarity": 0.6441746354103088,
+          "target_similarity": 0.19483229517936707,
+          "delta_similarity": -0.4493423402309418,
+          "abs_diff": 0.4493423402309418,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 291,
+          "class_b_id": 293,
+          "class_a_name": "lion",
+          "class_b_name": "cheetah",
+          "source_similarity": 0.6809460520744324,
+          "target_similarity": 0.24504618346691132,
+          "delta_similarity": -0.43589986860752106,
+          "abs_diff": 0.43589986860752106,
+          "bucket": "near"
+        }
+      ]
+    }
+  },
+  "plot_files": {
+    "source_histogram": "./outputs/geometry_vit_b16/inter_class_artifacts/ImageNet_v1_vs_ImageNet_R_nc200_sc10_knn5_10_seed1_inter_class_per_pair_sign_info_pair_buckets_q20_80_source_hist.png",
+    "bucket_stats": "./outputs/geometry_vit_b16/inter_class_artifacts/ImageNet_v1_vs_ImageNet_R_nc200_sc10_knn5_10_seed1_inter_class_per_pair_sign_info_pair_buckets_q20_80_bucket_stats.png"
+  }
+}

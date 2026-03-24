@@ -1,0 +1,53 @@
+/home1/irteam/CLIP-TTA/tools/geometry_eval.py:1386: RuntimeWarning: pairwise distance correlation is not reliable for cross-dataset comparison without sample correspondence
+  warnings.warn(
+[timing] geometry device: cuda:0
+[timing] load feature file: 0.04s
+[timing] prepare_class_geometry_cache: 1.00s
+[timing] per-class metrics: 28.38s
+[timing] retrieval: 0.95s
+[timing] inter-class relational geometry: 0.25s
+[timing] prepare_class_geometry_cache: 0.35s
+[timing] per-class metrics: 27.95s
+[timing] retrieval: 0.95s
+[timing] inter-class relational geometry: 0.24s
+[timing] prepare_class_geometry_cache: 0.32s
+[timing] per-class metrics: 28.39s
+[timing] retrieval: 0.93s
+[timing] inter-class relational geometry: 0.24s
+[timing] save json: 0.07s
+Same-dataset upper bound / split-half reliability estimate
+pairwise distance correlation is not reliable for cross-dataset comparison without sample correspondence
+Source dataset: ImageNet_v2_split_A
+Target dataset: ImageNet_v2_split_B
+Backbone: vit_b16
+Selected classes: 200
+centroid_cosine: same=0.915287+/-0.001090 different=0.655292+/-0.000428
+centroid_euclidean: same=0.344202+/-0.002181 different=0.716616+/-0.000656
+cov_frobenius: same=0.226679+/-0.000358 different=0.239285+/-0.000384
+pca_subspace: same=0.237867+/-0.000761 different=0.132647+/-0.000335
+pairwise_spearman: same=-0.010283+/-0.007968 different=-0.000081+/-0.000257
+pairwise_pearson: same=-0.018062+/-0.019486 different=0.000124+/-0.000297
+retrieval_acc_centroid_cosine: 0.891667+/-0.010274
+retrieval_acc_centroid_euclidean: 0.891667+/-0.009428
+retrieval_acc_pca_subspace: 0.466667+/-0.023921
+Correspondence-free topology metrics
+kNN distance Wasserstein (k=10): nan
+kNN distance Wasserstein (k=5): nan
+kNN mean distance diff (k=10): nan
+kNN mean distance diff (k=5): nan
+distance histogram JS: 0.455144
+distance histogram Wasserstein: 0.086612
+neighbor graph mean kNN distance diff (k=10): nan
+neighbor graph mean kNN distance diff (k=5): nan
+Inter-class relational geometry
+- matrix Pearson corr: 0.893063+/-0.002114
+- matrix Spearman corr: 0.870813+/-0.003473
+- mean abs diff: 0.063952+/-0.000622
+- sign consistency rate: 0.893073+/-0.003700
+- near-zero pairs: 1847.67+/-15.33
+- radius corr: 0.687106+/-0.017758
+- radius mean abs diff: 0.037376+/-0.000907
+small values -> class geometry preserved
+large values -> geometry differs across datasets
+Saved JSON to: ./outputs/geometry_vit_b16/ImageNet_v2_split_half_upper_bound_nc200_sc5_rep3_knn5_10_seed1.json
+[timing] total: 90.08s

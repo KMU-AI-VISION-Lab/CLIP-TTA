@@ -1,0 +1,1065 @@
+{
+  "pair_info_file": "./outputs/geometry_vit_b16/inter_class_artifacts/ImageNet_v1_vs_ImageNet_A_nc180_sc10_knn5_10_seed1_inter_class_per_pair_sign_info.json",
+  "bucket_definition": "source-similarity-quantiles",
+  "quantiles": {
+    "low_quantile": 0.1,
+    "high_quantile": 0.9
+  },
+  "bucket_thresholds": {
+    "far_upper": -0.22036780714988707,
+    "mid_lower": -0.22036780714988707,
+    "mid_upper": 0.2554243355989457,
+    "near_lower": 0.2554243355989457
+  },
+  "num_pairs_total": 16110,
+  "buckets": {
+    "far": {
+      "bucket": "far",
+      "num_pairs": 1611,
+      "mean_source_similarity": -0.258522037215517,
+      "std_source_similarity": 0.029507408823802546,
+      "mean_target_similarity": -0.28375256103502494,
+      "std_target_similarity": 0.09372676833591298,
+      "mean_delta_similarity": -0.02523052381950793,
+      "std_delta_similarity": 0.09236370644183862,
+      "mean_abs_diff": 0.07556998141103874,
+      "std_abs_diff": 0.05879465544942123,
+      "representative_pairs": [
+        {
+          "class_a_id": 42,
+          "class_b_id": 765,
+          "class_a_name": "agama",
+          "class_b_name": "rocking chair",
+          "source_similarity": -0.37230750918388367,
+          "target_similarity": -0.278545618057251,
+          "delta_similarity": 0.09376189112663269,
+          "abs_diff": 0.09376189112663269,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 298,
+          "class_b_id": 786,
+          "class_a_name": "mongoose",
+          "class_b_name": "sewing machine",
+          "source_similarity": -0.3697661757469177,
+          "target_similarity": -0.4243343472480774,
+          "delta_similarity": -0.05456817150115967,
+          "abs_diff": 0.05456817150115967,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 47,
+          "class_b_id": 792,
+          "class_a_name": "chameleon",
+          "class_b_name": "shovel",
+          "source_similarity": -0.3617793917655945,
+          "target_similarity": -0.25875771045684814,
+          "delta_similarity": 0.10302168130874634,
+          "abs_diff": 0.10302168130874634,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 23,
+          "class_b_id": 411,
+          "class_a_name": "vulture",
+          "class_b_name": "apron",
+          "source_similarity": -0.3616783618927002,
+          "target_similarity": -0.3328839838504791,
+          "delta_similarity": 0.02879437804222107,
+          "abs_diff": 0.02879437804222107,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 319,
+          "class_b_id": 589,
+          "class_a_name": "dragonfly",
+          "class_b_name": "hair dryer",
+          "source_similarity": -0.36158591508865356,
+          "target_similarity": -0.2886617183685303,
+          "delta_similarity": 0.07292419672012329,
+          "abs_diff": 0.07292419672012329,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 125,
+          "class_b_id": 765,
+          "class_a_name": "hermit crab",
+          "class_b_name": "rocking chair",
+          "source_similarity": -0.3551136255264282,
+          "target_similarity": -0.3433244228363037,
+          "delta_similarity": 0.011789202690124512,
+          "abs_diff": 0.011789202690124512,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 57,
+          "class_b_id": 589,
+          "class_a_name": "garter snake",
+          "class_b_name": "hair dryer",
+          "source_similarity": -0.35347267985343933,
+          "target_similarity": -0.2282809615135193,
+          "delta_similarity": 0.12519171833992004,
+          "abs_diff": 0.12519171833992004,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 57,
+          "class_b_id": 411,
+          "class_a_name": "garter snake",
+          "class_b_name": "apron",
+          "source_similarity": -0.3529527485370636,
+          "target_similarity": -0.32241544127464294,
+          "delta_similarity": 0.030537307262420654,
+          "abs_diff": 0.030537307262420654,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 309,
+          "class_b_id": 736,
+          "class_a_name": "bee",
+          "class_b_name": "pool table",
+          "source_similarity": -0.3525129556655884,
+          "target_similarity": -0.19759893417358398,
+          "delta_similarity": 0.1549140214920044,
+          "abs_diff": 0.1549140214920044,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 23,
+          "class_b_id": 549,
+          "class_a_name": "vulture",
+          "class_b_name": "envelope",
+          "source_similarity": -0.35198837518692017,
+          "target_similarity": -0.4081170856952667,
+          "delta_similarity": -0.05612871050834656,
+          "abs_diff": 0.05612871050834656,
+          "bucket": "far"
+        }
+      ],
+      "largest_similarity_increase_pairs": [
+        {
+          "class_a_id": 850,
+          "class_b_id": 988,
+          "class_a_name": "teddy bear",
+          "class_b_name": "acorn",
+          "source_similarity": -0.2279503345489502,
+          "target_similarity": 0.17535442113876343,
+          "delta_similarity": 0.4033047556877136,
+          "abs_diff": 0.4033047556877136,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 642,
+          "class_b_id": 815,
+          "class_a_name": "marimba",
+          "class_b_name": "spider web",
+          "source_similarity": -0.24981345236301422,
+          "target_similarity": 0.15260696411132812,
+          "delta_similarity": 0.40242041647434235,
+          "abs_diff": 0.40242041647434235,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 589,
+          "class_b_id": 947,
+          "class_a_name": "hair dryer",
+          "class_b_name": "mushroom",
+          "source_similarity": -0.3000330328941345,
+          "target_similarity": 0.09109283238649368,
+          "delta_similarity": 0.3911258652806282,
+          "abs_diff": 0.3911258652806282,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 416,
+          "class_b_id": 988,
+          "class_a_name": "balance beam",
+          "class_b_name": "acorn",
+          "source_similarity": -0.3139239251613617,
+          "target_similarity": 0.06973996758460999,
+          "delta_similarity": 0.3836638927459717,
+          "abs_diff": 0.3836638927459717,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 309,
+          "class_b_id": 589,
+          "class_a_name": "bee",
+          "class_b_name": "hair dryer",
+          "source_similarity": -0.3311389088630676,
+          "target_similarity": 0.043521638959646225,
+          "delta_similarity": 0.37466054782271385,
+          "abs_diff": 0.37466054782271385,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 589,
+          "class_b_id": 988,
+          "class_a_name": "hair dryer",
+          "class_b_name": "acorn",
+          "source_similarity": -0.2422112226486206,
+          "target_similarity": 0.1293952465057373,
+          "delta_similarity": 0.3716064691543579,
+          "abs_diff": 0.3716064691543579,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 313,
+          "class_b_id": 803,
+          "class_a_name": "stick insect",
+          "class_b_name": "snowplow",
+          "source_similarity": -0.23319144546985626,
+          "target_similarity": 0.11398012936115265,
+          "delta_similarity": 0.3471715748310089,
+          "abs_diff": 0.3471715748310089,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 643,
+          "class_b_id": 988,
+          "class_a_name": "mask",
+          "class_b_name": "acorn",
+          "source_similarity": -0.26415255665779114,
+          "target_similarity": 0.07160203903913498,
+          "delta_similarity": 0.3357545956969261,
+          "abs_diff": 0.3357545956969261,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 317,
+          "class_b_id": 589,
+          "class_a_name": "leafhopper",
+          "class_b_name": "hair dryer",
+          "source_similarity": -0.3117735981941223,
+          "target_similarity": 0.0031769992783665657,
+          "delta_similarity": 0.3149505974724889,
+          "abs_diff": 0.3149505974724889,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 301,
+          "class_b_id": 589,
+          "class_a_name": "ladybug",
+          "class_b_name": "hair dryer",
+          "source_similarity": -0.3169693350791931,
+          "target_similarity": -0.004817661829292774,
+          "delta_similarity": 0.31215167324990034,
+          "abs_diff": 0.31215167324990034,
+          "bucket": "far"
+        }
+      ],
+      "largest_similarity_decrease_pairs": [
+        {
+          "class_a_id": 319,
+          "class_b_id": 457,
+          "class_a_name": "dragonfly",
+          "class_b_name": "bow tie",
+          "source_similarity": -0.27396196126937866,
+          "target_similarity": -0.5529499650001526,
+          "delta_similarity": -0.2789880037307739,
+          "abs_diff": 0.2789880037307739,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 319,
+          "class_b_id": 626,
+          "class_a_name": "dragonfly",
+          "class_b_name": "lighter",
+          "source_similarity": -0.25124770402908325,
+          "target_similarity": -0.5226240158081055,
+          "delta_similarity": -0.2713763117790222,
+          "abs_diff": 0.2713763117790222,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 319,
+          "class_b_id": 934,
+          "class_a_name": "dragonfly",
+          "class_b_name": "hot dog",
+          "source_similarity": -0.27290359139442444,
+          "target_similarity": -0.5340243577957153,
+          "delta_similarity": -0.2611207664012909,
+          "abs_diff": 0.2611207664012909,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 50,
+          "class_b_id": 786,
+          "class_a_name": "American alligator",
+          "class_b_name": "sewing machine",
+          "source_similarity": -0.2915308475494385,
+          "target_similarity": -0.5208576321601868,
+          "delta_similarity": -0.2293267846107483,
+          "abs_diff": 0.2293267846107483,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 37,
+          "class_b_id": 643,
+          "class_a_name": "box turtle",
+          "class_b_name": "mask",
+          "source_similarity": -0.22252114117145538,
+          "target_similarity": -0.4493773281574249,
+          "delta_similarity": -0.22685618698596954,
+          "abs_diff": 0.22685618698596954,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 319,
+          "class_b_id": 549,
+          "class_a_name": "dragonfly",
+          "class_b_name": "envelope",
+          "source_similarity": -0.24609780311584473,
+          "target_similarity": -0.47216689586639404,
+          "delta_similarity": -0.22606909275054932,
+          "abs_diff": 0.22606909275054932,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 298,
+          "class_b_id": 859,
+          "class_a_name": "mongoose",
+          "class_b_name": "toaster",
+          "source_similarity": -0.24840649962425232,
+          "target_similarity": -0.46768513321876526,
+          "delta_similarity": -0.21927863359451294,
+          "abs_diff": 0.21927863359451294,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 311,
+          "class_b_id": 420,
+          "class_a_name": "grasshopper",
+          "class_b_name": "banjo",
+          "source_similarity": -0.22934459149837494,
+          "target_similarity": -0.44345784187316895,
+          "delta_similarity": -0.214113250374794,
+          "abs_diff": 0.214113250374794,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 319,
+          "class_b_id": 643,
+          "class_a_name": "dragonfly",
+          "class_b_name": "mask",
+          "source_similarity": -0.24305446445941925,
+          "target_similarity": -0.45637473464012146,
+          "delta_similarity": -0.2133202701807022,
+          "abs_diff": 0.2133202701807022,
+          "bucket": "far"
+        },
+        {
+          "class_a_id": 50,
+          "class_b_id": 773,
+          "class_a_name": "American alligator",
+          "class_b_name": "salt shaker",
+          "source_similarity": -0.2625109553337097,
+          "target_similarity": -0.47370728850364685,
+          "delta_similarity": -0.21119633316993713,
+          "abs_diff": 0.21119633316993713,
+          "bucket": "far"
+        }
+      ]
+    },
+    "mid": {
+      "bucket": "mid",
+      "num_pairs": 12888,
+      "mean_source_similarity": -0.021860819321207377,
+      "std_source_similarity": 0.12893474994649237,
+      "mean_target_similarity": -0.021659083062383712,
+      "std_target_similarity": 0.21375828120957976,
+      "mean_delta_similarity": 0.00020173625882366388,
+      "std_delta_similarity": 0.13933709077223685,
+      "mean_abs_diff": 0.11307021075252556,
+      "std_abs_diff": 0.08142476897583531,
+      "representative_pairs": [
+        {
+          "class_a_id": 23,
+          "class_b_id": 701,
+          "class_a_name": "vulture",
+          "class_b_name": "parachute",
+          "source_similarity": -0.0368918776512146,
+          "target_similarity": -0.11531344801187515,
+          "delta_similarity": -0.07842157036066055,
+          "abs_diff": 0.07842157036066055,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 125,
+          "class_b_id": 937,
+          "class_a_name": "hermit crab",
+          "class_b_name": "broccoli",
+          "source_similarity": -0.03685211390256882,
+          "target_similarity": -0.21063517034053802,
+          "delta_similarity": -0.1737830564379692,
+          "abs_diff": 0.1737830564379692,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 786,
+          "class_b_id": 815,
+          "class_a_name": "sewing machine",
+          "class_b_name": "spider web",
+          "source_similarity": -0.0368458516895771,
+          "target_similarity": 0.24306979775428772,
+          "delta_similarity": 0.2799156494438648,
+          "abs_diff": 0.2799156494438648,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 492,
+          "class_b_id": 880,
+          "class_a_name": "storage chest",
+          "class_b_name": "unicycle",
+          "source_similarity": -0.03680051863193512,
+          "target_similarity": 0.11916793882846832,
+          "delta_similarity": 0.15596845746040344,
+          "abs_diff": 0.15596845746040344,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 207,
+          "class_b_id": 862,
+          "class_a_name": "Golden Retriever",
+          "class_b_name": "torch",
+          "source_similarity": -0.03678719699382782,
+          "target_similarity": 0.028284952044487,
+          "delta_similarity": 0.06507214903831482,
+          "abs_diff": 0.06507214903831482,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 514,
+          "class_b_id": 888,
+          "class_a_name": "cowboy boot",
+          "class_b_name": "viaduct",
+          "source_similarity": -0.03696097061038017,
+          "target_similarity": -0.03226815536618233,
+          "delta_similarity": 0.0046928152441978455,
+          "abs_diff": 0.0046928152441978455,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 561,
+          "class_b_id": 937,
+          "class_a_name": "forklift",
+          "class_b_name": "broccoli",
+          "source_similarity": -0.03676922619342804,
+          "target_similarity": -0.11853555589914322,
+          "delta_similarity": -0.08176632970571518,
+          "abs_diff": 0.08176632970571518,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 15,
+          "class_b_id": 802,
+          "class_a_name": "American robin",
+          "class_b_name": "snowmobile",
+          "source_similarity": -0.03698858618736267,
+          "target_similarity": -0.2148636430501938,
+          "delta_similarity": -0.17787505686283112,
+          "abs_diff": 0.17787505686283112,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 933,
+          "class_b_id": 947,
+          "class_a_name": "cheeseburger",
+          "class_b_name": "mushroom",
+          "source_similarity": -0.03699329495429993,
+          "target_similarity": -0.16883711516857147,
+          "delta_similarity": -0.13184382021427155,
+          "abs_diff": 0.13184382021427155,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 472,
+          "class_b_id": 687,
+          "class_a_name": "canoe",
+          "class_b_name": "pipe organ",
+          "source_similarity": -0.03700123727321625,
+          "target_similarity": -0.04871361330151558,
+          "delta_similarity": -0.011712376028299332,
+          "abs_diff": 0.011712376028299332,
+          "bucket": "mid"
+        }
+      ],
+      "largest_similarity_increase_pairs": [
+        {
+          "class_a_id": 124,
+          "class_b_id": 324,
+          "class_a_name": "crayfish",
+          "class_b_name": "small white butterfly",
+          "source_similarity": 0.02155527099967003,
+          "target_similarity": 0.5648753046989441,
+          "delta_similarity": 0.5433200336992741,
+          "abs_diff": 0.5433200336992741,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 815,
+          "class_b_id": 879,
+          "class_a_name": "spider web",
+          "class_b_name": "umbrella",
+          "source_similarity": -0.02305537648499012,
+          "target_similarity": 0.5182193517684937,
+          "delta_similarity": 0.5412747282534838,
+          "abs_diff": 0.5412747282534838,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 124,
+          "class_b_id": 326,
+          "class_a_name": "crayfish",
+          "class_b_name": "gossamer-winged butterfly",
+          "source_similarity": 0.029185468330979347,
+          "target_similarity": 0.5651701092720032,
+          "delta_similarity": 0.5359846409410238,
+          "abs_diff": 0.5359846409410238,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 15,
+          "class_b_id": 39,
+          "class_a_name": "American robin",
+          "class_b_name": "green iguana",
+          "source_similarity": -0.06802500784397125,
+          "target_similarity": 0.4519720673561096,
+          "delta_similarity": 0.5199970752000809,
+          "abs_diff": 0.5199970752000809,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 752,
+          "class_b_id": 934,
+          "class_a_name": "racket",
+          "class_b_name": "hot dog",
+          "source_similarity": -0.007512421812862158,
+          "target_similarity": 0.47651535272598267,
+          "delta_similarity": 0.4840277745388448,
+          "abs_diff": 0.4840277745388448,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 420,
+          "class_b_id": 934,
+          "class_a_name": "banjo",
+          "class_b_name": "hot dog",
+          "source_similarity": 0.007478822022676468,
+          "target_similarity": 0.48583853244781494,
+          "delta_similarity": 0.4783597104251385,
+          "abs_diff": 0.4783597104251385,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 420,
+          "class_b_id": 626,
+          "class_a_name": "banjo",
+          "class_b_name": "lighter",
+          "source_similarity": 0.1174098327755928,
+          "target_similarity": 0.5905722975730896,
+          "delta_similarity": 0.4731624647974968,
+          "abs_diff": 0.4731624647974968,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 71,
+          "class_b_id": 323,
+          "class_a_name": "scorpion",
+          "class_b_name": "monarch butterfly",
+          "source_similarity": -0.05894232541322708,
+          "target_similarity": 0.4096921980381012,
+          "delta_similarity": 0.4686345234513283,
+          "abs_diff": 0.4686345234513283,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 687,
+          "class_b_id": 815,
+          "class_a_name": "pipe organ",
+          "class_b_name": "spider web",
+          "source_similarity": -0.11370804160833359,
+          "target_similarity": 0.34771332144737244,
+          "delta_similarity": 0.461421363055706,
+          "abs_diff": 0.461421363055706,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 831,
+          "class_b_id": 981,
+          "class_a_name": "couch",
+          "class_b_name": "baseball player",
+          "source_similarity": -0.053508028388023376,
+          "target_similarity": 0.4066525399684906,
+          "delta_similarity": 0.460160568356514,
+          "abs_diff": 0.460160568356514,
+          "bucket": "mid"
+        }
+      ],
+      "largest_similarity_decrease_pairs": [
+        {
+          "class_a_id": 309,
+          "class_b_id": 984,
+          "class_a_name": "bee",
+          "class_b_name": "rapeseed",
+          "source_similarity": 0.23777467012405396,
+          "target_similarity": -0.23193280398845673,
+          "delta_similarity": -0.4697074741125107,
+          "abs_diff": 0.4697074741125107,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 417,
+          "class_b_id": 780,
+          "class_a_name": "balloon",
+          "class_b_name": "schooner",
+          "source_similarity": 0.2519688904285431,
+          "target_similarity": -0.19291788339614868,
+          "delta_similarity": -0.4448867738246918,
+          "abs_diff": 0.4448867738246918,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 124,
+          "class_b_id": 934,
+          "class_a_name": "crayfish",
+          "class_b_name": "hot dog",
+          "source_similarity": -0.006489679217338562,
+          "target_similarity": -0.4132770001888275,
+          "delta_similarity": -0.40678732097148895,
+          "abs_diff": 0.40678732097148895,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 23,
+          "class_b_id": 815,
+          "class_a_name": "vulture",
+          "class_b_name": "spider web",
+          "source_similarity": 0.08888230472803116,
+          "target_similarity": -0.30794456601142883,
+          "delta_similarity": -0.39682687073946,
+          "abs_diff": 0.39682687073946,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 324,
+          "class_b_id": 437,
+          "class_a_name": "small white butterfly",
+          "class_b_name": "lighthouse",
+          "source_similarity": 0.0239933542907238,
+          "target_similarity": -0.3530846834182739,
+          "delta_similarity": -0.3770780377089977,
+          "abs_diff": 0.3770780377089977,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 361,
+          "class_b_id": 988,
+          "class_a_name": "skunk",
+          "class_b_name": "acorn",
+          "source_similarity": 0.13353188335895538,
+          "target_similarity": -0.24309715628623962,
+          "delta_similarity": -0.376629039645195,
+          "abs_diff": 0.376629039645195,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 50,
+          "class_b_id": 954,
+          "class_a_name": "American alligator",
+          "class_b_name": "banana",
+          "source_similarity": -0.03275594860315323,
+          "target_similarity": -0.4050539433956146,
+          "delta_similarity": -0.3722979947924614,
+          "abs_diff": 0.3722979947924614,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 334,
+          "class_b_id": 954,
+          "class_a_name": "porcupine",
+          "class_b_name": "banana",
+          "source_similarity": -0.026386860758066177,
+          "target_similarity": -0.3917199373245239,
+          "delta_similarity": -0.36533307656645775,
+          "abs_diff": 0.36533307656645775,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 13,
+          "class_b_id": 420,
+          "class_a_name": "junco",
+          "class_b_name": "banjo",
+          "source_similarity": -0.013558213599026203,
+          "target_similarity": -0.37747517228126526,
+          "delta_similarity": -0.36391695868223906,
+          "abs_diff": 0.36391695868223906,
+          "bucket": "mid"
+        },
+        {
+          "class_a_id": 105,
+          "class_b_id": 954,
+          "class_a_name": "koala",
+          "class_b_name": "banana",
+          "source_similarity": 0.012111090123653412,
+          "target_similarity": -0.3468961715698242,
+          "delta_similarity": -0.35900726169347763,
+          "abs_diff": 0.35900726169347763,
+          "bucket": "mid"
+        }
+      ]
+    },
+    "near": {
+      "bucket": "near",
+      "num_pairs": 1611,
+      "mean_source_similarity": 0.38016570731766247,
+      "std_source_similarity": 0.11131769573701297,
+      "mean_target_similarity": 0.40800140520891903,
+      "std_target_similarity": 0.16473071336389125,
+      "mean_delta_similarity": 0.02783569789125655,
+      "std_delta_similarity": 0.14474596824200806,
+      "mean_abs_diff": 0.11761936201921518,
+      "std_abs_diff": 0.0888364062623118,
+      "representative_pairs": [
+        {
+          "class_a_id": 311,
+          "class_b_id": 317,
+          "class_a_name": "grasshopper",
+          "class_b_name": "leafhopper",
+          "source_similarity": 0.8315205574035645,
+          "target_similarity": 0.5267932415008545,
+          "delta_similarity": -0.30472731590270996,
+          "abs_diff": 0.30472731590270996,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 234,
+          "class_b_id": 235,
+          "class_a_name": "Rottweiler",
+          "class_b_name": "German Shepherd Dog",
+          "source_similarity": 0.8217644095420837,
+          "target_similarity": 0.43581169843673706,
+          "delta_similarity": -0.3859527111053467,
+          "abs_diff": 0.3859527111053467,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 124,
+          "class_b_id": 125,
+          "class_a_name": "crayfish",
+          "class_b_name": "hermit crab",
+          "source_similarity": 0.8199460506439209,
+          "target_similarity": 0.6830065250396729,
+          "delta_similarity": -0.13693952560424805,
+          "abs_diff": 0.13693952560424805,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 324,
+          "class_b_id": 326,
+          "class_a_name": "small white butterfly",
+          "class_b_name": "gossamer-winged butterfly",
+          "source_similarity": 0.8183714151382446,
+          "target_similarity": 0.5995116233825684,
+          "delta_similarity": -0.21885979175567627,
+          "abs_diff": 0.21885979175567627,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 313,
+          "class_b_id": 315,
+          "class_a_name": "stick insect",
+          "class_b_name": "praying mantis",
+          "source_similarity": 0.8147578239440918,
+          "target_similarity": 0.6482609510421753,
+          "delta_similarity": -0.1664968729019165,
+          "abs_diff": 0.1664968729019165,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 108,
+          "class_b_id": 110,
+          "class_a_name": "sea anemone",
+          "class_b_name": "flatworm",
+          "source_similarity": 0.8070980310440063,
+          "target_similarity": 0.4686262607574463,
+          "delta_similarity": -0.33847177028656006,
+          "abs_diff": 0.33847177028656006,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 311,
+          "class_b_id": 315,
+          "class_a_name": "grasshopper",
+          "class_b_name": "praying mantis",
+          "source_similarity": 0.7810354828834534,
+          "target_similarity": 0.7491449117660522,
+          "delta_similarity": -0.03189057111740112,
+          "abs_diff": 0.03189057111740112,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 334,
+          "class_b_id": 336,
+          "class_a_name": "porcupine",
+          "class_b_name": "marmot",
+          "source_similarity": 0.7802165150642395,
+          "target_similarity": 0.7317276000976562,
+          "delta_similarity": -0.04848891496658325,
+          "abs_diff": 0.04848891496658325,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 943,
+          "class_b_id": 945,
+          "class_a_name": "cucumber",
+          "class_b_name": "bell pepper",
+          "source_similarity": 0.7730066776275635,
+          "target_similarity": 0.7504357099533081,
+          "delta_similarity": -0.02257096767425537,
+          "abs_diff": 0.02257096767425537,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 108,
+          "class_b_id": 327,
+          "class_a_name": "sea anemone",
+          "class_b_name": "starfish",
+          "source_similarity": 0.7547988295555115,
+          "target_similarity": 0.7425147294998169,
+          "delta_similarity": -0.01228410005569458,
+          "abs_diff": 0.01228410005569458,
+          "bucket": "near"
+        }
+      ],
+      "largest_similarity_increase_pairs": [
+        {
+          "class_a_id": 291,
+          "class_b_id": 378,
+          "class_a_name": "lion",
+          "class_b_name": "white-headed capuchin",
+          "source_similarity": 0.30810779333114624,
+          "target_similarity": 0.7273399233818054,
+          "delta_similarity": 0.4192321300506592,
+          "abs_diff": 0.4192321300506592,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 79,
+          "class_b_id": 309,
+          "class_a_name": "centipede",
+          "class_b_name": "bee",
+          "source_similarity": 0.2956736981868744,
+          "target_similarity": 0.7032075524330139,
+          "delta_similarity": 0.4075338542461395,
+          "abs_diff": 0.4075338542461395,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 110,
+          "class_b_id": 124,
+          "class_a_name": "flatworm",
+          "class_b_name": "crayfish",
+          "source_similarity": 0.33521950244903564,
+          "target_similarity": 0.7304491400718689,
+          "delta_similarity": 0.39522963762283325,
+          "abs_diff": 0.39522963762283325,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 57,
+          "class_b_id": 110,
+          "class_a_name": "garter snake",
+          "class_b_name": "flatworm",
+          "source_similarity": 0.31264278292655945,
+          "target_similarity": 0.7068776488304138,
+          "delta_similarity": 0.39423486590385437,
+          "abs_diff": 0.39423486590385437,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 70,
+          "class_b_id": 113,
+          "class_a_name": "harvestman",
+          "class_b_name": "snail",
+          "source_similarity": 0.28373968601226807,
+          "target_similarity": 0.6766164898872375,
+          "delta_similarity": 0.3928768038749695,
+          "abs_diff": 0.3928768038749695,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 932,
+          "class_b_id": 937,
+          "class_a_name": "pretzel",
+          "class_b_name": "broccoli",
+          "source_similarity": 0.27957311272621155,
+          "target_similarity": 0.6668026447296143,
+          "delta_similarity": 0.3872295320034027,
+          "abs_diff": 0.3872295320034027,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 47,
+          "class_b_id": 110,
+          "class_a_name": "chameleon",
+          "class_b_name": "flatworm",
+          "source_similarity": 0.29353445768356323,
+          "target_similarity": 0.6801969408988953,
+          "delta_similarity": 0.38666248321533203,
+          "abs_diff": 0.38666248321533203,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 113,
+          "class_b_id": 124,
+          "class_a_name": "snail",
+          "class_b_name": "crayfish",
+          "source_similarity": 0.2943929433822632,
+          "target_similarity": 0.6784712672233582,
+          "delta_similarity": 0.38407832384109497,
+          "abs_diff": 0.38407832384109497,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 287,
+          "class_b_id": 334,
+          "class_a_name": "lynx",
+          "class_b_name": "porcupine",
+          "source_similarity": 0.3324393033981323,
+          "target_similarity": 0.7131651043891907,
+          "delta_similarity": 0.38072580099105835,
+          "abs_diff": 0.38072580099105835,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 27,
+          "class_b_id": 124,
+          "class_a_name": "newt",
+          "class_b_name": "crayfish",
+          "source_similarity": 0.37194135785102844,
+          "target_similarity": 0.7520269751548767,
+          "delta_similarity": 0.38008561730384827,
+          "abs_diff": 0.38008561730384827,
+          "bucket": "near"
+        }
+      ],
+      "largest_similarity_decrease_pairs": [
+        {
+          "class_a_id": 70,
+          "class_b_id": 815,
+          "class_a_name": "harvestman",
+          "class_b_name": "spider web",
+          "source_similarity": 0.6417261362075806,
+          "target_similarity": 0.11123348772525787,
+          "delta_similarity": -0.5304926484823227,
+          "abs_diff": 0.5304926484823227,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 363,
+          "class_b_id": 988,
+          "class_a_name": "armadillo",
+          "class_b_name": "acorn",
+          "source_similarity": 0.28461146354675293,
+          "target_similarity": -0.14684133231639862,
+          "delta_similarity": -0.43145279586315155,
+          "abs_diff": 0.43145279586315155,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 76,
+          "class_b_id": 815,
+          "class_a_name": "tarantula",
+          "class_b_name": "spider web",
+          "source_similarity": 0.6017229557037354,
+          "target_similarity": 0.19811934232711792,
+          "delta_similarity": -0.40360361337661743,
+          "abs_diff": 0.40360361337661743,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 234,
+          "class_b_id": 235,
+          "class_a_name": "Rottweiler",
+          "class_b_name": "German Shepherd Dog",
+          "source_similarity": 0.8217644095420837,
+          "target_similarity": 0.43581169843673706,
+          "delta_similarity": -0.3859527111053467,
+          "abs_diff": 0.3859527111053467,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 319,
+          "class_b_id": 815,
+          "class_a_name": "dragonfly",
+          "class_b_name": "spider web",
+          "source_similarity": 0.45342549681663513,
+          "target_similarity": 0.0724983960390091,
+          "delta_similarity": -0.38092710077762604,
+          "abs_diff": 0.38092710077762604,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 57,
+          "class_b_id": 815,
+          "class_a_name": "garter snake",
+          "class_b_name": "spider web",
+          "source_similarity": 0.26591014862060547,
+          "target_similarity": -0.0980115681886673,
+          "delta_similarity": -0.36392171680927277,
+          "abs_diff": 0.36392171680927277,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 311,
+          "class_b_id": 815,
+          "class_a_name": "grasshopper",
+          "class_b_name": "spider web",
+          "source_similarity": 0.3645298182964325,
+          "target_similarity": 0.005541358143091202,
+          "delta_similarity": -0.3589884601533413,
+          "abs_diff": 0.3589884601533413,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 539,
+          "class_b_id": 792,
+          "class_a_name": "doormat",
+          "class_b_name": "shovel",
+          "source_similarity": 0.26040664315223694,
+          "target_similarity": -0.09000103175640106,
+          "delta_similarity": -0.350407674908638,
+          "abs_diff": 0.350407674908638,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 71,
+          "class_b_id": 815,
+          "class_a_name": "scorpion",
+          "class_b_name": "spider web",
+          "source_similarity": 0.31778594851493835,
+          "target_similarity": -0.028144510462880135,
+          "delta_similarity": -0.3459304589778185,
+          "abs_diff": 0.3459304589778185,
+          "bucket": "near"
+        },
+        {
+          "class_a_id": 309,
+          "class_b_id": 815,
+          "class_a_name": "bee",
+          "class_b_name": "spider web",
+          "source_similarity": 0.3376403748989105,
+          "target_similarity": -0.007389809936285019,
+          "delta_similarity": -0.34503018483519554,
+          "abs_diff": 0.34503018483519554,
+          "bucket": "near"
+        }
+      ]
+    }
+  },
+  "plot_files": {
+    "source_histogram": "./outputs/geometry_vit_b16/inter_class_artifacts/ImageNet_v1_vs_ImageNet_A_nc180_sc10_knn5_10_seed1_inter_class_per_pair_sign_info_pair_buckets_q10_90_source_hist.png",
+    "bucket_stats": "./outputs/geometry_vit_b16/inter_class_artifacts/ImageNet_v1_vs_ImageNet_A_nc180_sc10_knn5_10_seed1_inter_class_per_pair_sign_info_pair_buckets_q10_90_bucket_stats.png"
+  }
+}

@@ -1,0 +1,1402 @@
+[
+  {
+    "class_id": 5,
+    "class_name": "electric ray",
+    "source_radius": 0.3984677493572235,
+    "target_radius": 0.4558633863925934,
+    "abs_diff": 0.05739563703536987
+  },
+  {
+    "class_id": 6,
+    "class_name": "stingray",
+    "source_radius": 0.34205836057662964,
+    "target_radius": 0.39452362060546875,
+    "abs_diff": 0.05246526002883911
+  },
+  {
+    "class_id": 16,
+    "class_name": "bulbul",
+    "source_radius": 0.37429165840148926,
+    "target_radius": 0.4622519314289093,
+    "abs_diff": 0.08796027302742004
+  },
+  {
+    "class_id": 22,
+    "class_name": "bald eagle",
+    "source_radius": 0.4373084306716919,
+    "target_radius": 0.4922453761100769,
+    "abs_diff": 0.05493694543838501
+  },
+  {
+    "class_id": 23,
+    "class_name": "vulture",
+    "source_radius": 0.4212747812271118,
+    "target_radius": 0.4219115078449249,
+    "abs_diff": 0.0006367266178131104
+  },
+  {
+    "class_id": 24,
+    "class_name": "great grey owl",
+    "source_radius": 0.42573466897010803,
+    "target_radius": 0.4531276524066925,
+    "abs_diff": 0.027392983436584473
+  },
+  {
+    "class_id": 28,
+    "class_name": "spotted salamander",
+    "source_radius": 0.43473389744758606,
+    "target_radius": 0.4717951714992523,
+    "abs_diff": 0.03706127405166626
+  },
+  {
+    "class_id": 30,
+    "class_name": "American bullfrog",
+    "source_radius": 0.4347771406173706,
+    "target_radius": 0.5008054971694946,
+    "abs_diff": 0.06602835655212402
+  },
+  {
+    "class_id": 34,
+    "class_name": "leatherback sea turtle",
+    "source_radius": 0.5052147507667542,
+    "target_radius": 0.48235759139060974,
+    "abs_diff": 0.02285715937614441
+  },
+  {
+    "class_id": 39,
+    "class_name": "green iguana",
+    "source_radius": 0.4534980356693268,
+    "target_radius": 0.43079620599746704,
+    "abs_diff": 0.02270182967185974
+  },
+  {
+    "class_id": 48,
+    "class_name": "Komodo dragon",
+    "source_radius": 0.4801397919654846,
+    "target_radius": 0.4272940754890442,
+    "abs_diff": 0.05284571647644043
+  },
+  {
+    "class_id": 52,
+    "class_name": "worm snake",
+    "source_radius": 0.43682941794395447,
+    "target_radius": 0.4245144724845886,
+    "abs_diff": 0.012314945459365845
+  },
+  {
+    "class_id": 54,
+    "class_name": "eastern hog-nosed snake",
+    "source_radius": 0.3962361216545105,
+    "target_radius": 0.4038253724575043,
+    "abs_diff": 0.007589250802993774
+  },
+  {
+    "class_id": 60,
+    "class_name": "night snake",
+    "source_radius": 0.4516809284687042,
+    "target_radius": 0.4192751944065094,
+    "abs_diff": 0.032405734062194824
+  },
+  {
+    "class_id": 62,
+    "class_name": "African rock python",
+    "source_radius": 0.37762412428855896,
+    "target_radius": 0.3878019154071808,
+    "abs_diff": 0.010177791118621826
+  },
+  {
+    "class_id": 70,
+    "class_name": "harvestman",
+    "source_radius": 0.43146100640296936,
+    "target_radius": 0.37436550855636597,
+    "abs_diff": 0.057095497846603394
+  },
+  {
+    "class_id": 74,
+    "class_name": "European garden spider",
+    "source_radius": 0.436555415391922,
+    "target_radius": 0.41975080966949463,
+    "abs_diff": 0.016804605722427368
+  },
+  {
+    "class_id": 78,
+    "class_name": "tick",
+    "source_radius": 0.49386507272720337,
+    "target_radius": 0.4664275348186493,
+    "abs_diff": 0.027437537908554077
+  },
+  {
+    "class_id": 99,
+    "class_name": "goose",
+    "source_radius": 0.4542391896247864,
+    "target_radius": 0.4507504999637604,
+    "abs_diff": 0.003488689661026001
+  },
+  {
+    "class_id": 100,
+    "class_name": "black swan",
+    "source_radius": 0.4850795567035675,
+    "target_radius": 0.3898766338825226,
+    "abs_diff": 0.09520292282104492
+  },
+  {
+    "class_id": 102,
+    "class_name": "echidna",
+    "source_radius": 0.40079808235168457,
+    "target_radius": 0.4374273717403412,
+    "abs_diff": 0.036629289388656616
+  },
+  {
+    "class_id": 103,
+    "class_name": "platypus",
+    "source_radius": 0.3396376073360443,
+    "target_radius": 0.3919734060764313,
+    "abs_diff": 0.05233579874038696
+  },
+  {
+    "class_id": 105,
+    "class_name": "koala",
+    "source_radius": 0.48669517040252686,
+    "target_radius": 0.42339450120925903,
+    "abs_diff": 0.06330066919326782
+  },
+  {
+    "class_id": 111,
+    "class_name": "nematode",
+    "source_radius": 0.4895932078361511,
+    "target_radius": 0.4996224343776703,
+    "abs_diff": 0.010029226541519165
+  },
+  {
+    "class_id": 116,
+    "class_name": "chiton",
+    "source_radius": 0.4888838529586792,
+    "target_radius": 0.43076422810554504,
+    "abs_diff": 0.058119624853134155
+  },
+  {
+    "class_id": 132,
+    "class_name": "great egret",
+    "source_radius": 0.45123085379600525,
+    "target_radius": 0.4451136589050293,
+    "abs_diff": 0.006117194890975952
+  },
+  {
+    "class_id": 137,
+    "class_name": "American coot",
+    "source_radius": 0.3839917480945587,
+    "target_radius": 0.40669044852256775,
+    "abs_diff": 0.022698700428009033
+  },
+  {
+    "class_id": 141,
+    "class_name": "common redshank",
+    "source_radius": 0.49252280592918396,
+    "target_radius": 0.45100030303001404,
+    "abs_diff": 0.04152250289916992
+  },
+  {
+    "class_id": 142,
+    "class_name": "dowitcher",
+    "source_radius": 0.43514513969421387,
+    "target_radius": 0.4795437753200531,
+    "abs_diff": 0.04439863562583923
+  },
+  {
+    "class_id": 160,
+    "class_name": "Afghan Hound",
+    "source_radius": 0.44911113381385803,
+    "target_radius": 0.4872947931289673,
+    "abs_diff": 0.03818365931510925
+  },
+  {
+    "class_id": 170,
+    "class_name": "Irish Wolfhound",
+    "source_radius": 0.43547847867012024,
+    "target_radius": 0.47974783182144165,
+    "abs_diff": 0.04426935315132141
+  },
+  {
+    "class_id": 173,
+    "class_name": "Ibizan Hound",
+    "source_radius": 0.4157521724700928,
+    "target_radius": 0.4083935618400574,
+    "abs_diff": 0.0073586106300354
+  },
+  {
+    "class_id": 174,
+    "class_name": "Norwegian Elkhound",
+    "source_radius": 0.4795890748500824,
+    "target_radius": 0.46950775384902954,
+    "abs_diff": 0.010081321001052856
+  },
+  {
+    "class_id": 175,
+    "class_name": "Otterhound",
+    "source_radius": 0.46312597393989563,
+    "target_radius": 0.5095148682594299,
+    "abs_diff": 0.0463888943195343
+  },
+  {
+    "class_id": 190,
+    "class_name": "Sealyham Terrier",
+    "source_radius": 0.4006163775920868,
+    "target_radius": 0.4096387028694153,
+    "abs_diff": 0.009022325277328491
+  },
+  {
+    "class_id": 200,
+    "class_name": "Tibetan Terrier",
+    "source_radius": 0.4198807179927826,
+    "target_radius": 0.4450262486934662,
+    "abs_diff": 0.025145530700683594
+  },
+  {
+    "class_id": 201,
+    "class_name": "Australian Silky Terrier",
+    "source_radius": 0.5338606834411621,
+    "target_radius": 0.498961478471756,
+    "abs_diff": 0.03489920496940613
+  },
+  {
+    "class_id": 204,
+    "class_name": "Lhasa Apso",
+    "source_radius": 0.44372138381004333,
+    "target_radius": 0.47649946808815,
+    "abs_diff": 0.03277808427810669
+  },
+  {
+    "class_id": 209,
+    "class_name": "Chesapeake Bay Retriever",
+    "source_radius": 0.4059732258319855,
+    "target_radius": 0.4533262252807617,
+    "abs_diff": 0.047352999448776245
+  },
+  {
+    "class_id": 220,
+    "class_name": "Sussex Spaniel",
+    "source_radius": 0.4068017303943634,
+    "target_radius": 0.40235698223114014,
+    "abs_diff": 0.004444748163223267
+  },
+  {
+    "class_id": 222,
+    "class_name": "Kuvasz",
+    "source_radius": 0.4752945303916931,
+    "target_radius": 0.42756399512290955,
+    "abs_diff": 0.04773053526878357
+  },
+  {
+    "class_id": 230,
+    "class_name": "Shetland Sheepdog",
+    "source_radius": 0.4494594931602478,
+    "target_radius": 0.45508190989494324,
+    "abs_diff": 0.005622416734695435
+  },
+  {
+    "class_id": 234,
+    "class_name": "Rottweiler",
+    "source_radius": 0.48532381653785706,
+    "target_radius": 0.4477413296699524,
+    "abs_diff": 0.03758248686790466
+  },
+  {
+    "class_id": 236,
+    "class_name": "Dobermann",
+    "source_radius": 0.4551617205142975,
+    "target_radius": 0.4683004915714264,
+    "abs_diff": 0.013138771057128906
+  },
+  {
+    "class_id": 237,
+    "class_name": "Miniature Pinscher",
+    "source_radius": 0.4665721356868744,
+    "target_radius": 0.46503114700317383,
+    "abs_diff": 0.0015409886837005615
+  },
+  {
+    "class_id": 250,
+    "class_name": "Siberian Husky",
+    "source_radius": 0.4936160445213318,
+    "target_radius": 0.5081680417060852,
+    "abs_diff": 0.014551997184753418
+  },
+  {
+    "class_id": 251,
+    "class_name": "Dalmatian",
+    "source_radius": 0.46998167037963867,
+    "target_radius": 0.42274999618530273,
+    "abs_diff": 0.04723167419433594
+  },
+  {
+    "class_id": 252,
+    "class_name": "Affenpinscher",
+    "source_radius": 0.44213786721229553,
+    "target_radius": 0.482646107673645,
+    "abs_diff": 0.04050824046134949
+  },
+  {
+    "class_id": 258,
+    "class_name": "Samoyed",
+    "source_radius": 0.45123445987701416,
+    "target_radius": 0.4144979417324066,
+    "abs_diff": 0.036736518144607544
+  },
+  {
+    "class_id": 259,
+    "class_name": "Pomeranian",
+    "source_radius": 0.4578596353530884,
+    "target_radius": 0.457845002412796,
+    "abs_diff": 1.4632940292358398e-05
+  },
+  {
+    "class_id": 262,
+    "class_name": "brussels griffon",
+    "source_radius": 0.39350762963294983,
+    "target_radius": 0.500929057598114,
+    "abs_diff": 0.10742142796516418
+  },
+  {
+    "class_id": 272,
+    "class_name": "coyote",
+    "source_radius": 0.4410459101200104,
+    "target_radius": 0.4360995590686798,
+    "abs_diff": 0.004946351051330566
+  },
+  {
+    "class_id": 277,
+    "class_name": "red fox",
+    "source_radius": 0.48453885316848755,
+    "target_radius": 0.45425131916999817,
+    "abs_diff": 0.03028753399848938
+  },
+  {
+    "class_id": 285,
+    "class_name": "Egyptian Mau",
+    "source_radius": 0.3763977587223053,
+    "target_radius": 0.4350343644618988,
+    "abs_diff": 0.058636605739593506
+  },
+  {
+    "class_id": 305,
+    "class_name": "dung beetle",
+    "source_radius": 0.4613044559955597,
+    "target_radius": 0.4431634247303009,
+    "abs_diff": 0.01814103126525879
+  },
+  {
+    "class_id": 306,
+    "class_name": "rhinoceros beetle",
+    "source_radius": 0.4179413318634033,
+    "target_radius": 0.44774800539016724,
+    "abs_diff": 0.029806673526763916
+  },
+  {
+    "class_id": 310,
+    "class_name": "ant",
+    "source_radius": 0.4175436198711395,
+    "target_radius": 0.47342991828918457,
+    "abs_diff": 0.055886298418045044
+  },
+  {
+    "class_id": 315,
+    "class_name": "praying mantis",
+    "source_radius": 0.41564100980758667,
+    "target_radius": 0.4385252296924591,
+    "abs_diff": 0.022884219884872437
+  },
+  {
+    "class_id": 320,
+    "class_name": "damselfly",
+    "source_radius": 0.3695906400680542,
+    "target_radius": 0.4240871071815491,
+    "abs_diff": 0.05449646711349487
+  },
+  {
+    "class_id": 323,
+    "class_name": "monarch butterfly",
+    "source_radius": 0.45991483330726624,
+    "target_radius": 0.4822767674922943,
+    "abs_diff": 0.022361934185028076
+  },
+  {
+    "class_id": 325,
+    "class_name": "sulphur butterfly",
+    "source_radius": 0.4354812204837799,
+    "target_radius": 0.4470863938331604,
+    "abs_diff": 0.011605173349380493
+  },
+  {
+    "class_id": 326,
+    "class_name": "gossamer-winged butterfly",
+    "source_radius": 0.44218477606773376,
+    "target_radius": 0.42835021018981934,
+    "abs_diff": 0.013834565877914429
+  },
+  {
+    "class_id": 333,
+    "class_name": "hamster",
+    "source_radius": 0.4699576795101166,
+    "target_radius": 0.44363293051719666,
+    "abs_diff": 0.026324748992919922
+  },
+  {
+    "class_id": 337,
+    "class_name": "beaver",
+    "source_radius": 0.44177716970443726,
+    "target_radius": 0.46424075961112976,
+    "abs_diff": 0.022463589906692505
+  },
+  {
+    "class_id": 343,
+    "class_name": "warthog",
+    "source_radius": 0.4175720512866974,
+    "target_radius": 0.4060208201408386,
+    "abs_diff": 0.011551231145858765
+  },
+  {
+    "class_id": 362,
+    "class_name": "badger",
+    "source_radius": 0.4413852393627167,
+    "target_radius": 0.5142202377319336,
+    "abs_diff": 0.07283499836921692
+  },
+  {
+    "class_id": 366,
+    "class_name": "gorilla",
+    "source_radius": 0.4405190944671631,
+    "target_radius": 0.46457675099372864,
+    "abs_diff": 0.024057656526565552
+  },
+  {
+    "class_id": 367,
+    "class_name": "chimpanzee",
+    "source_radius": 0.43239864706993103,
+    "target_radius": 0.4660520553588867,
+    "abs_diff": 0.03365340828895569
+  },
+  {
+    "class_id": 373,
+    "class_name": "macaque",
+    "source_radius": 0.4539355933666229,
+    "target_radius": 0.4613119661808014,
+    "abs_diff": 0.007376372814178467
+  },
+  {
+    "class_id": 374,
+    "class_name": "langur",
+    "source_radius": 0.3808782398700714,
+    "target_radius": 0.38674405217170715,
+    "abs_diff": 0.005865812301635742
+  },
+  {
+    "class_id": 377,
+    "class_name": "marmoset",
+    "source_radius": 0.4141206443309784,
+    "target_radius": 0.4536992311477661,
+    "abs_diff": 0.03957858681678772
+  },
+  {
+    "class_id": 379,
+    "class_name": "howler monkey",
+    "source_radius": 0.44582173228263855,
+    "target_radius": 0.38183102011680603,
+    "abs_diff": 0.06399071216583252
+  },
+  {
+    "class_id": 383,
+    "class_name": "ring-tailed lemur",
+    "source_radius": 0.39242345094680786,
+    "target_radius": 0.4592096507549286,
+    "abs_diff": 0.06678619980812073
+  },
+  {
+    "class_id": 390,
+    "class_name": "eel",
+    "source_radius": 0.3696235716342926,
+    "target_radius": 0.418538898229599,
+    "abs_diff": 0.048915326595306396
+  },
+  {
+    "class_id": 395,
+    "class_name": "gar fish",
+    "source_radius": 0.4112915098667145,
+    "target_radius": 0.41827884316444397,
+    "abs_diff": 0.006987333297729492
+  },
+  {
+    "class_id": 400,
+    "class_name": "academic gown",
+    "source_radius": 0.501776933670044,
+    "target_radius": 0.5011718273162842,
+    "abs_diff": 0.0006051063537597656
+  },
+  {
+    "class_id": 402,
+    "class_name": "acoustic guitar",
+    "source_radius": 0.4484843611717224,
+    "target_radius": 0.4824717044830322,
+    "abs_diff": 0.033987343311309814
+  },
+  {
+    "class_id": 403,
+    "class_name": "aircraft carrier",
+    "source_radius": 0.6351169943809509,
+    "target_radius": 0.4741770625114441,
+    "abs_diff": 0.16093993186950684
+  },
+  {
+    "class_id": 410,
+    "class_name": "apiary",
+    "source_radius": 0.4261426627635956,
+    "target_radius": 0.39711806178092957,
+    "abs_diff": 0.029024600982666016
+  },
+  {
+    "class_id": 417,
+    "class_name": "balloon",
+    "source_radius": 0.3727596700191498,
+    "target_radius": 0.355881929397583,
+    "abs_diff": 0.016877740621566772
+  },
+  {
+    "class_id": 421,
+    "class_name": "baluster / handrail",
+    "source_radius": 0.4197222888469696,
+    "target_radius": 0.4270523488521576,
+    "abs_diff": 0.007330060005187988
+  },
+  {
+    "class_id": 432,
+    "class_name": "bassoon",
+    "source_radius": 0.4732978343963623,
+    "target_radius": 0.38927507400512695,
+    "abs_diff": 0.08402276039123535
+  },
+  {
+    "class_id": 434,
+    "class_name": "bath towel",
+    "source_radius": 0.275197833776474,
+    "target_radius": 0.35827869176864624,
+    "abs_diff": 0.08308085799217224
+  },
+  {
+    "class_id": 436,
+    "class_name": "station wagon",
+    "source_radius": 0.4779282510280609,
+    "target_radius": 0.3963810205459595,
+    "abs_diff": 0.08154723048210144
+  },
+  {
+    "class_id": 438,
+    "class_name": "beaker",
+    "source_radius": 0.4566684365272522,
+    "target_radius": 0.4380163550376892,
+    "abs_diff": 0.01865208148956299
+  },
+  {
+    "class_id": 443,
+    "class_name": "baby bib",
+    "source_radius": 0.4181370735168457,
+    "target_radius": 0.34965676069259644,
+    "abs_diff": 0.06848031282424927
+  },
+  {
+    "class_id": 444,
+    "class_name": "tandem bicycle",
+    "source_radius": 0.5651425719261169,
+    "target_radius": 0.4447499215602875,
+    "abs_diff": 0.12039265036582947
+  },
+  {
+    "class_id": 445,
+    "class_name": "bikini",
+    "source_radius": 0.46995458006858826,
+    "target_radius": 0.4380704462528229,
+    "abs_diff": 0.03188413381576538
+  },
+  {
+    "class_id": 449,
+    "class_name": "boathouse",
+    "source_radius": 0.4363429546356201,
+    "target_radius": 0.4608837068080902,
+    "abs_diff": 0.024540752172470093
+  },
+  {
+    "class_id": 454,
+    "class_name": "bookstore",
+    "source_radius": 0.43383336067199707,
+    "target_radius": 0.4137537181377411,
+    "abs_diff": 0.02007964253425598
+  },
+  {
+    "class_id": 455,
+    "class_name": "bottle cap",
+    "source_radius": 0.29491522908210754,
+    "target_radius": 0.34293004870414734,
+    "abs_diff": 0.048014819622039795
+  },
+  {
+    "class_id": 456,
+    "class_name": "hunting bow",
+    "source_radius": 0.35525834560394287,
+    "target_radius": 0.3712652921676636,
+    "abs_diff": 0.016006946563720703
+  },
+  {
+    "class_id": 462,
+    "class_name": "broom",
+    "source_radius": 0.44849997758865356,
+    "target_radius": 0.43141987919807434,
+    "abs_diff": 0.017080098390579224
+  },
+  {
+    "class_id": 463,
+    "class_name": "bucket",
+    "source_radius": 0.3264712989330292,
+    "target_radius": 0.3559117615222931,
+    "abs_diff": 0.029440462589263916
+  },
+  {
+    "class_id": 466,
+    "class_name": "high-speed train",
+    "source_radius": 0.44467613101005554,
+    "target_radius": 0.5073756575584412,
+    "abs_diff": 0.06269952654838562
+  },
+  {
+    "class_id": 490,
+    "class_name": "chain mail",
+    "source_radius": 0.354753315448761,
+    "target_radius": 0.4620800316333771,
+    "abs_diff": 0.10732671618461609
+  },
+  {
+    "class_id": 494,
+    "class_name": "bell or wind chime",
+    "source_radius": 0.34837672114372253,
+    "target_radius": 0.3330620527267456,
+    "abs_diff": 0.015314668416976929
+  },
+  {
+    "class_id": 503,
+    "class_name": "cocktail shaker",
+    "source_radius": 0.4127001166343689,
+    "target_radius": 0.39577651023864746,
+    "abs_diff": 0.016923606395721436
+  },
+  {
+    "class_id": 518,
+    "class_name": "crash helmet",
+    "source_radius": 0.409268319606781,
+    "target_radius": 0.3651488423347473,
+    "abs_diff": 0.04411947727203369
+  },
+  {
+    "class_id": 525,
+    "class_name": "dam",
+    "source_radius": 0.4633159041404724,
+    "target_radius": 0.5077442526817322,
+    "abs_diff": 0.044428348541259766
+  },
+  {
+    "class_id": 526,
+    "class_name": "desk",
+    "source_radius": 0.4214874804019928,
+    "target_radius": 0.4168585240840912,
+    "abs_diff": 0.004628956317901611
+  },
+  {
+    "class_id": 533,
+    "class_name": "dishcloth",
+    "source_radius": 0.44315117597579956,
+    "target_radius": 0.3753832280635834,
+    "abs_diff": 0.06776794791221619
+  },
+  {
+    "class_id": 539,
+    "class_name": "doormat",
+    "source_radius": 0.3797256350517273,
+    "target_radius": 0.3441426753997803,
+    "abs_diff": 0.03558295965194702
+  },
+  {
+    "class_id": 546,
+    "class_name": "electric guitar",
+    "source_radius": 0.4777555763721466,
+    "target_radius": 0.48451676964759827,
+    "abs_diff": 0.00676119327545166
+  },
+  {
+    "class_id": 549,
+    "class_name": "envelope",
+    "source_radius": 0.4538291394710541,
+    "target_radius": 0.49990344047546387,
+    "abs_diff": 0.04607430100440979
+  },
+  {
+    "class_id": 552,
+    "class_name": "feather boa",
+    "source_radius": 0.4356662631034851,
+    "target_radius": 0.43482717871665955,
+    "abs_diff": 0.0008390843868255615
+  },
+  {
+    "class_id": 560,
+    "class_name": "football helmet",
+    "source_radius": 0.5861247777938843,
+    "target_radius": 0.589939534664154,
+    "abs_diff": 0.0038147568702697754
+  },
+  {
+    "class_id": 565,
+    "class_name": "freight car",
+    "source_radius": 0.4407177269458771,
+    "target_radius": 0.45756468176841736,
+    "abs_diff": 0.016846954822540283
+  },
+  {
+    "class_id": 568,
+    "class_name": "fur coat",
+    "source_radius": 0.41385284066200256,
+    "target_radius": 0.4173816740512848,
+    "abs_diff": 0.0035288333892822266
+  },
+  {
+    "class_id": 597,
+    "class_name": "holster",
+    "source_radius": 0.3391365706920624,
+    "target_radius": 0.3681004047393799,
+    "abs_diff": 0.028963834047317505
+  },
+  {
+    "class_id": 598,
+    "class_name": "home theater",
+    "source_radius": 0.4059705138206482,
+    "target_radius": 0.3764759302139282,
+    "abs_diff": 0.02949458360671997
+  },
+  {
+    "class_id": 601,
+    "class_name": "hoop skirt",
+    "source_radius": 0.49742475152015686,
+    "target_radius": 0.46330296993255615,
+    "abs_diff": 0.03412178158760071
+  },
+  {
+    "class_id": 605,
+    "class_name": "iPod",
+    "source_radius": 0.42062249779701233,
+    "target_radius": 0.4239506125450134,
+    "abs_diff": 0.0033281147480010986
+  },
+  {
+    "class_id": 606,
+    "class_name": "clothes iron",
+    "source_radius": 0.3753889799118042,
+    "target_radius": 0.3860724866390228,
+    "abs_diff": 0.010683506727218628
+  },
+  {
+    "class_id": 610,
+    "class_name": "T-shirt",
+    "source_radius": 0.40169721841812134,
+    "target_radius": 0.39305511116981506,
+    "abs_diff": 0.008642107248306274
+  },
+  {
+    "class_id": 616,
+    "class_name": "knot",
+    "source_radius": 0.42634761333465576,
+    "target_radius": 0.4135037362575531,
+    "abs_diff": 0.012843877077102661
+  },
+  {
+    "class_id": 617,
+    "class_name": "lab coat",
+    "source_radius": 0.4604230225086212,
+    "target_radius": 0.49885478615760803,
+    "abs_diff": 0.038431763648986816
+  },
+  {
+    "class_id": 619,
+    "class_name": "lampshade",
+    "source_radius": 0.3542521893978119,
+    "target_radius": 0.3651684820652008,
+    "abs_diff": 0.010916292667388916
+  },
+  {
+    "class_id": 622,
+    "class_name": "lens cap",
+    "source_radius": 0.45557862520217896,
+    "target_radius": 0.47419825196266174,
+    "abs_diff": 0.018619626760482788
+  },
+  {
+    "class_id": 627,
+    "class_name": "limousine",
+    "source_radius": 0.4739992320537567,
+    "target_radius": 0.48134270310401917,
+    "abs_diff": 0.007343471050262451
+  },
+  {
+    "class_id": 628,
+    "class_name": "ocean liner",
+    "source_radius": 0.45319753885269165,
+    "target_radius": 0.534948468208313,
+    "abs_diff": 0.08175092935562134
+  },
+  {
+    "class_id": 630,
+    "class_name": "slip-on shoe",
+    "source_radius": 0.4097355604171753,
+    "target_radius": 0.39523065090179443,
+    "abs_diff": 0.01450490951538086
+  },
+  {
+    "class_id": 631,
+    "class_name": "lotion",
+    "source_radius": 0.4274929463863373,
+    "target_radius": 0.38421621918678284,
+    "abs_diff": 0.04327672719955444
+  },
+  {
+    "class_id": 635,
+    "class_name": "magnetic compass",
+    "source_radius": 0.39083483815193176,
+    "target_radius": 0.41170167922973633,
+    "abs_diff": 0.020866841077804565
+  },
+  {
+    "class_id": 642,
+    "class_name": "marimba",
+    "source_radius": 0.4127962291240692,
+    "target_radius": 0.33028924465179443,
+    "abs_diff": 0.08250698447227478
+  },
+  {
+    "class_id": 647,
+    "class_name": "measuring cup",
+    "source_radius": 0.4252384901046753,
+    "target_radius": 0.41814953088760376,
+    "abs_diff": 0.007088959217071533
+  },
+  {
+    "class_id": 652,
+    "class_name": "military uniform",
+    "source_radius": 0.42992573976516724,
+    "target_radius": 0.47142747044563293,
+    "abs_diff": 0.0415017306804657
+  },
+  {
+    "class_id": 655,
+    "class_name": "miniskirt",
+    "source_radius": 0.40907877683639526,
+    "target_radius": 0.4823116362094879,
+    "abs_diff": 0.07323285937309265
+  },
+  {
+    "class_id": 664,
+    "class_name": "monitor",
+    "source_radius": 0.3905640244483948,
+    "target_radius": 0.43415144085884094,
+    "abs_diff": 0.04358741641044617
+  },
+  {
+    "class_id": 668,
+    "class_name": "mosque",
+    "source_radius": 0.5565172433853149,
+    "target_radius": 0.5378938317298889,
+    "abs_diff": 0.018623411655426025
+  },
+  {
+    "class_id": 673,
+    "class_name": "computer mouse",
+    "source_radius": 0.3358575105667114,
+    "target_radius": 0.3647913336753845,
+    "abs_diff": 0.028933823108673096
+  },
+  {
+    "class_id": 674,
+    "class_name": "mousetrap",
+    "source_radius": 0.3801688253879547,
+    "target_radius": 0.3642248511314392,
+    "abs_diff": 0.015943974256515503
+  },
+  {
+    "class_id": 678,
+    "class_name": "neck brace",
+    "source_radius": 0.32359549403190613,
+    "target_radius": 0.37699615955352783,
+    "abs_diff": 0.053400665521621704
+  },
+  {
+    "class_id": 679,
+    "class_name": "necklace",
+    "source_radius": 0.4790482819080353,
+    "target_radius": 0.4563891291618347,
+    "abs_diff": 0.02265915274620056
+  },
+  {
+    "class_id": 685,
+    "class_name": "odometer",
+    "source_radius": 0.39267104864120483,
+    "target_radius": 0.39176255464553833,
+    "abs_diff": 0.0009084939956665039
+  },
+  {
+    "class_id": 689,
+    "class_name": "overskirt",
+    "source_radius": 0.41870835423469543,
+    "target_radius": 0.41542407870292664,
+    "abs_diff": 0.003284275531768799
+  },
+  {
+    "class_id": 704,
+    "class_name": "parking meter",
+    "source_radius": 0.400995135307312,
+    "target_radius": 0.33619651198387146,
+    "abs_diff": 0.06479862332344055
+  },
+  {
+    "class_id": 710,
+    "class_name": "pencil sharpener",
+    "source_radius": 0.37555792927742004,
+    "target_radius": 0.34319210052490234,
+    "abs_diff": 0.0323658287525177
+  },
+  {
+    "class_id": 711,
+    "class_name": "perfume",
+    "source_radius": 0.4383913278579712,
+    "target_radius": 0.4217718243598938,
+    "abs_diff": 0.016619503498077393
+  },
+  {
+    "class_id": 713,
+    "class_name": "photocopier",
+    "source_radius": 0.4064003825187683,
+    "target_radius": 0.43579742312431335,
+    "abs_diff": 0.029397040605545044
+  },
+  {
+    "class_id": 725,
+    "class_name": "drink pitcher",
+    "source_radius": 0.35246485471725464,
+    "target_radius": 0.38439708948135376,
+    "abs_diff": 0.03193223476409912
+  },
+  {
+    "class_id": 728,
+    "class_name": "plastic bag",
+    "source_radius": 0.4353383779525757,
+    "target_radius": 0.31430375576019287,
+    "abs_diff": 0.12103462219238281
+  },
+  {
+    "class_id": 731,
+    "class_name": "plunger",
+    "source_radius": 0.37697216868400574,
+    "target_radius": 0.4076427221298218,
+    "abs_diff": 0.03067055344581604
+  },
+  {
+    "class_id": 737,
+    "class_name": "soda bottle",
+    "source_radius": 0.339146226644516,
+    "target_radius": 0.4030153155326843,
+    "abs_diff": 0.06386908888816833
+  },
+  {
+    "class_id": 741,
+    "class_name": "prayer rug",
+    "source_radius": 0.44550061225891113,
+    "target_radius": 0.4578860402107239,
+    "abs_diff": 0.012385427951812744
+  },
+  {
+    "class_id": 742,
+    "class_name": "printer",
+    "source_radius": 0.3615010976791382,
+    "target_radius": 0.37467679381370544,
+    "abs_diff": 0.01317569613456726
+  },
+  {
+    "class_id": 747,
+    "class_name": "punching bag",
+    "source_radius": 0.42125436663627625,
+    "target_radius": 0.3367428481578827,
+    "abs_diff": 0.08451151847839355
+  },
+  {
+    "class_id": 751,
+    "class_name": "race car",
+    "source_radius": 0.5295141935348511,
+    "target_radius": 0.5013105273246765,
+    "abs_diff": 0.02820366621017456
+  },
+  {
+    "class_id": 753,
+    "class_name": "radiator",
+    "source_radius": 0.4802660048007965,
+    "target_radius": 0.41571861505508423,
+    "abs_diff": 0.06454738974571228
+  },
+  {
+    "class_id": 754,
+    "class_name": "radio",
+    "source_radius": 0.47397172451019287,
+    "target_radius": 0.4272185266017914,
+    "abs_diff": 0.04675319790840149
+  },
+  {
+    "class_id": 755,
+    "class_name": "radio telescope",
+    "source_radius": 0.44629964232444763,
+    "target_radius": 0.45564180612564087,
+    "abs_diff": 0.009342163801193237
+  },
+  {
+    "class_id": 756,
+    "class_name": "rain barrel",
+    "source_radius": 0.38078194856643677,
+    "target_radius": 0.4087904989719391,
+    "abs_diff": 0.02800855040550232
+  },
+  {
+    "class_id": 764,
+    "class_name": "rifle",
+    "source_radius": 0.5178373456001282,
+    "target_radius": 0.4768173396587372,
+    "abs_diff": 0.04102000594139099
+  },
+  {
+    "class_id": 765,
+    "class_name": "rocking chair",
+    "source_radius": 0.4273209273815155,
+    "target_radius": 0.41862839460372925,
+    "abs_diff": 0.008692532777786255
+  },
+  {
+    "class_id": 766,
+    "class_name": "rotisserie",
+    "source_radius": 0.4456873834133148,
+    "target_radius": 0.4047345817089081,
+    "abs_diff": 0.04095280170440674
+  },
+  {
+    "class_id": 770,
+    "class_name": "sneaker",
+    "source_radius": 0.4380883574485779,
+    "target_radius": 0.42190849781036377,
+    "abs_diff": 0.01617985963821411
+  },
+  {
+    "class_id": 775,
+    "class_name": "sarong",
+    "source_radius": 0.4176398813724518,
+    "target_radius": 0.3725655674934387,
+    "abs_diff": 0.04507431387901306
+  },
+  {
+    "class_id": 777,
+    "class_name": "scabbard",
+    "source_radius": 0.41246601939201355,
+    "target_radius": 0.3773094117641449,
+    "abs_diff": 0.03515660762786865
+  },
+  {
+    "class_id": 781,
+    "class_name": "scoreboard",
+    "source_radius": 0.34070801734924316,
+    "target_radius": 0.4633888602256775,
+    "abs_diff": 0.12268084287643433
+  },
+  {
+    "class_id": 788,
+    "class_name": "shoe store",
+    "source_radius": 0.40536099672317505,
+    "target_radius": 0.43903177976608276,
+    "abs_diff": 0.033670783042907715
+  },
+  {
+    "class_id": 790,
+    "class_name": "shopping basket",
+    "source_radius": 0.40342482924461365,
+    "target_radius": 0.4221842288970947,
+    "abs_diff": 0.01875939965248108
+  },
+  {
+    "class_id": 791,
+    "class_name": "shopping cart",
+    "source_radius": 0.44410011172294617,
+    "target_radius": 0.47816747426986694,
+    "abs_diff": 0.034067362546920776
+  },
+  {
+    "class_id": 792,
+    "class_name": "shovel",
+    "source_radius": 0.3679870367050171,
+    "target_radius": 0.4270040690898895,
+    "abs_diff": 0.059017032384872437
+  },
+  {
+    "class_id": 799,
+    "class_name": "sliding door",
+    "source_radius": 0.48801687359809875,
+    "target_radius": 0.45242974162101746,
+    "abs_diff": 0.0355871319770813
+  },
+  {
+    "class_id": 804,
+    "class_name": "soap dispenser",
+    "source_radius": 0.3910682201385498,
+    "target_radius": 0.384050190448761,
+    "abs_diff": 0.007018029689788818
+  },
+  {
+    "class_id": 806,
+    "class_name": "sock",
+    "source_radius": 0.4203096032142639,
+    "target_radius": 0.41341632604599,
+    "abs_diff": 0.006893277168273926
+  },
+  {
+    "class_id": 813,
+    "class_name": "spatula",
+    "source_radius": 0.4487178921699524,
+    "target_radius": 0.4064685106277466,
+    "abs_diff": 0.04224938154220581
+  },
+  {
+    "class_id": 817,
+    "class_name": "sports car",
+    "source_radius": 0.5398823618888855,
+    "target_radius": 0.4880290925502777,
+    "abs_diff": 0.05185326933860779
+  },
+  {
+    "class_id": 831,
+    "class_name": "couch",
+    "source_radius": 0.47516316175460815,
+    "target_radius": 0.434430330991745,
+    "abs_diff": 0.04073283076286316
+  },
+  {
+    "class_id": 834,
+    "class_name": "suit",
+    "source_radius": 0.444294273853302,
+    "target_radius": 0.43450573086738586,
+    "abs_diff": 0.009788542985916138
+  },
+  {
+    "class_id": 842,
+    "class_name": "swim trunks / shorts",
+    "source_radius": 0.47339320182800293,
+    "target_radius": 0.46488648653030396,
+    "abs_diff": 0.008506715297698975
+  },
+  {
+    "class_id": 844,
+    "class_name": "electrical switch",
+    "source_radius": 0.4135951101779938,
+    "target_radius": 0.42348048090934753,
+    "abs_diff": 0.00988537073135376
+  },
+  {
+    "class_id": 845,
+    "class_name": "syringe",
+    "source_radius": 0.4347691535949707,
+    "target_radius": 0.5384109020233154,
+    "abs_diff": 0.10364174842834473
+  },
+  {
+    "class_id": 846,
+    "class_name": "table lamp",
+    "source_radius": 0.41269734501838684,
+    "target_radius": 0.37784120440483093,
+    "abs_diff": 0.03485614061355591
+  },
+  {
+    "class_id": 847,
+    "class_name": "tank",
+    "source_radius": 0.5508795380592346,
+    "target_radius": 0.5609397292137146,
+    "abs_diff": 0.01006019115447998
+  },
+  {
+    "class_id": 848,
+    "class_name": "tape player",
+    "source_radius": 0.45769003033638,
+    "target_radius": 0.5062416195869446,
+    "abs_diff": 0.048551589250564575
+  },
+  {
+    "class_id": 850,
+    "class_name": "teddy bear",
+    "source_radius": 0.47645851969718933,
+    "target_radius": 0.462338924407959,
+    "abs_diff": 0.014119595289230347
+  },
+  {
+    "class_id": 859,
+    "class_name": "toaster",
+    "source_radius": 0.3945620059967041,
+    "target_radius": 0.39793887734413147,
+    "abs_diff": 0.003376871347427368
+  },
+  {
+    "class_id": 862,
+    "class_name": "torch",
+    "source_radius": 0.44723114371299744,
+    "target_radius": 0.39930689334869385,
+    "abs_diff": 0.04792425036430359
+  },
+  {
+    "class_id": 867,
+    "class_name": "semi-trailer truck",
+    "source_radius": 0.5080631971359253,
+    "target_radius": 0.5130070447921753,
+    "abs_diff": 0.00494384765625
+  },
+  {
+    "class_id": 870,
+    "class_name": "tricycle",
+    "source_radius": 0.43926066160202026,
+    "target_radius": 0.4102223515510559,
+    "abs_diff": 0.029038310050964355
+  },
+  {
+    "class_id": 876,
+    "class_name": "hot tub",
+    "source_radius": 0.35943588614463806,
+    "target_radius": 0.3137359619140625,
+    "abs_diff": 0.04569992423057556
+  },
+  {
+    "class_id": 877,
+    "class_name": "turnstile",
+    "source_radius": 0.4294699728488922,
+    "target_radius": 0.3984978497028351,
+    "abs_diff": 0.03097212314605713
+  },
+  {
+    "class_id": 878,
+    "class_name": "typewriter keyboard",
+    "source_radius": 0.465059757232666,
+    "target_radius": 0.4326067864894867,
+    "abs_diff": 0.03245297074317932
+  },
+  {
+    "class_id": 895,
+    "class_name": "military aircraft",
+    "source_radius": 0.38278135657310486,
+    "target_radius": 0.4603608548641205,
+    "abs_diff": 0.07757949829101562
+  },
+  {
+    "class_id": 904,
+    "class_name": "window screen",
+    "source_radius": 0.5053586959838867,
+    "target_radius": 0.48702457547187805,
+    "abs_diff": 0.018334120512008667
+  },
+  {
+    "class_id": 905,
+    "class_name": "window shade",
+    "source_radius": 0.5114994049072266,
+    "target_radius": 0.3828867971897125,
+    "abs_diff": 0.12861260771751404
+  },
+  {
+    "class_id": 909,
+    "class_name": "wok",
+    "source_radius": 0.3121586740016937,
+    "target_radius": 0.3302260637283325,
+    "abs_diff": 0.018067389726638794
+  },
+  {
+    "class_id": 917,
+    "class_name": "comic book",
+    "source_radius": 0.5118863582611084,
+    "target_radius": 0.4675584137439728,
+    "abs_diff": 0.04432794451713562
+  },
+  {
+    "class_id": 921,
+    "class_name": "dust jacket",
+    "source_radius": 0.42787691950798035,
+    "target_radius": 0.3842282295227051,
+    "abs_diff": 0.04364868998527527
+  },
+  {
+    "class_id": 929,
+    "class_name": "popsicle",
+    "source_radius": 0.369769811630249,
+    "target_radius": 0.40247976779937744,
+    "abs_diff": 0.03270995616912842
+  },
+  {
+    "class_id": 933,
+    "class_name": "cheeseburger",
+    "source_radius": 0.4935343861579895,
+    "target_radius": 0.4399169385433197,
+    "abs_diff": 0.0536174476146698
+  },
+  {
+    "class_id": 960,
+    "class_name": "chocolate syrup",
+    "source_radius": 0.31527677178382874,
+    "target_radius": 0.3439129889011383,
+    "abs_diff": 0.02863621711730957
+  },
+  {
+    "class_id": 961,
+    "class_name": "dough",
+    "source_radius": 0.33604860305786133,
+    "target_radius": 0.36252084374427795,
+    "abs_diff": 0.026472240686416626
+  },
+  {
+    "class_id": 963,
+    "class_name": "pizza",
+    "source_radius": 0.4499396085739136,
+    "target_radius": 0.4583136737346649,
+    "abs_diff": 0.008374065160751343
+  },
+  {
+    "class_id": 968,
+    "class_name": "tea cup",
+    "source_radius": 0.47670018672943115,
+    "target_radius": 0.4479220509529114,
+    "abs_diff": 0.028778135776519775
+  },
+  {
+    "class_id": 973,
+    "class_name": "coral reef",
+    "source_radius": 0.3475910723209381,
+    "target_radius": 0.3543890416622162,
+    "abs_diff": 0.006797969341278076
+  },
+  {
+    "class_id": 974,
+    "class_name": "geyser",
+    "source_radius": 0.3738432228565216,
+    "target_radius": 0.4141972064971924,
+    "abs_diff": 0.040353983640670776
+  },
+  {
+    "class_id": 994,
+    "class_name": "stinkhorn mushroom",
+    "source_radius": 0.40285804867744446,
+    "target_radius": 0.4259963631629944,
+    "abs_diff": 0.023138314485549927
+  },
+  {
+    "class_id": 997,
+    "class_name": "bolete",
+    "source_radius": 0.47877541184425354,
+    "target_radius": 0.48523011803627014,
+    "abs_diff": 0.0064547061920166016
+  }
+]
