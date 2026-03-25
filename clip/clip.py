@@ -1,5 +1,6 @@
 import hashlib
 import os
+import fcntl
 import urllib
 import warnings
 from typing import Any, Union, List
@@ -43,28 +44,39 @@ def _download(url: str, root: str):
 
     expected_sha256 = url.split("/")[-2]
     download_target = os.path.join(root, filename)
+    lock_path = download_target + ".lock"
+    tmp_target = download_target + ".tmp"
 
     if os.path.exists(download_target) and not os.path.isfile(download_target):
         raise RuntimeError(f"{download_target} exists and is not a regular file")
 
-    if os.path.isfile(download_target):
-        if hashlib.sha256(open(download_target, "rb").read()).hexdigest() == expected_sha256:
-            return download_target
-        else:
+    with open(lock_path, "w") as lock_file:
+        fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
+
+        if os.path.isfile(download_target):
+            if hashlib.sha256(open(download_target, "rb").read()).hexdigest() == expected_sha256:
+                return download_target
             warnings.warn(f"{download_target} exists, but the SHA256 checksum does not match; re-downloading the file")
+            os.remove(download_target)
 
-    with urllib.request.urlopen(url) as source, open(download_target, "wb") as output:
-        with tqdm(total=int(source.info().get("Content-Length")), ncols=80, unit='iB', unit_scale=True, unit_divisor=1024) as loop:
-            while True:
-                buffer = source.read(8192)
-                if not buffer:
-                    break
+        if os.path.exists(tmp_target):
+            os.remove(tmp_target)
 
-                output.write(buffer)
-                loop.update(len(buffer))
+        with urllib.request.urlopen(url) as source, open(tmp_target, "wb") as output:
+            with tqdm(total=int(source.info().get("Content-Length")), ncols=80, unit='iB', unit_scale=True, unit_divisor=1024) as loop:
+                while True:
+                    buffer = source.read(8192)
+                    if not buffer:
+                        break
 
-    if hashlib.sha256(open(download_target, "rb").read()).hexdigest() != expected_sha256:
-        raise RuntimeError(f"Model has been downloaded but the SHA256 checksum does not not match")
+                    output.write(buffer)
+                    loop.update(len(buffer))
+
+        if hashlib.sha256(open(tmp_target, "rb").read()).hexdigest() != expected_sha256:
+            os.remove(tmp_target)
+            raise RuntimeError(f"Model has been downloaded but the SHA256 checksum does not not match")
+
+        os.replace(tmp_target, download_target)
 
     return download_target
 
