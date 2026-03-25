@@ -1,0 +1,4001 @@
+{
+  "root_path": "/data",
+  "results_root": "outputs/stata_runs",
+  "setting": "online",
+  "datasets": [
+    "imagenet",
+    "sun397",
+    "fgvc",
+    "eurosat",
+    "stanford_cars",
+    "food101",
+    "oxford_pets",
+    "oxford_flowers",
+    "caltech101",
+    "dtd",
+    "ucf101"
+  ],
+  "backbones": [
+    "rn50",
+    "vit_b16",
+    "vit_b32",
+    "vit_l14"
+  ],
+  "methods": [
+    "TPT",
+    "TDA",
+    "DOTA",
+    "TransCLIP",
+    "StatA"
+  ],
+  "shared_config": {
+    "n_tasks": 100,
+    "batch_size": 128,
+    "online": true,
+    "gamma": 0.1,
+    "num_class_eff_min": null,
+    "num_class_eff_max": null
+  },
+  "experiments": [
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "sun397",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "fgvc",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "eurosat",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "stanford_cars",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "food101",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_pets",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "oxford_flowers",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "caltech101",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "dtd",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    }
+  ]
+}

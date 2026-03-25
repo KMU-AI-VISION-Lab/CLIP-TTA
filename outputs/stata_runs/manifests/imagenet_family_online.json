@@ -1,0 +1,1835 @@
+{
+  "root_path": "/data/tta/ImageNet_Family",
+  "results_root": "outputs/stata_runs",
+  "setting": "online",
+  "datasets": [
+    "imagenet",
+    "imagenet_a",
+    "imagenet_r",
+    "imagenet_sketch",
+    "imagenet_v2"
+  ],
+  "backbones": [
+    "rn50",
+    "vit_b16",
+    "vit_b32",
+    "vit_l14"
+  ],
+  "methods": [
+    "TPT",
+    "TDA",
+    "DOTA",
+    "TransCLIP",
+    "StatA"
+  ],
+  "shared_config": {
+    "n_tasks": 100,
+    "batch_size": 128,
+    "online": true,
+    "gamma": 0.1,
+    "num_class_eff_min": null,
+    "num_class_eff_max": null
+  },
+  "experiments": [
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_a",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_r",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_sketch",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "rn50",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "rn50",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "rn50",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "rn50",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "rn50",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b16",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b16",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b16",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b16",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b16",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b32",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b32",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b32",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b32",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_b32",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_l14",
+      "method": "TPT",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'TPT' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_l14",
+      "method": "TDA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_l14",
+      "method": "DOTA",
+      "seed": 1,
+      "status": "missing",
+      "note": "Method 'DOTA' is not implemented in this repository.",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_l14",
+      "method": "TransCLIP",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    },
+    {
+      "dataset": "imagenet_v2",
+      "backbone": "vit_l14",
+      "method": "StatA",
+      "seed": 1,
+      "status": "pending",
+      "note": "",
+      "root_path": "/data/tta/ImageNet_Family",
+      "setting": "online",
+      "config": {
+        "n_tasks": 100,
+        "batch_size": 128,
+        "online": true,
+        "gamma": 0.1,
+        "num_class_eff_min": null,
+        "num_class_eff_max": null
+      }
+    }
+  ]
+}

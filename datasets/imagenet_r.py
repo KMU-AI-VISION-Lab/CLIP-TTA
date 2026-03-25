@@ -8,6 +8,7 @@ import torchvision
 import torchvision.transforms as transforms
 
 import torchvision.datasets as datasets
+from .imagenet_path_resolver import resolve_dataset_dir
 
 imagenet_classes = ["tench", "goldfish", "great white shark", "tiger shark", "hammerhead shark", "electric ray",
                     "stingray", "rooster", "hen", "ostrich", "brambling", "goldfinch", "house finch", "junco",
@@ -498,7 +499,11 @@ class ImageNetR():
     def __init__(self, root, num_shots, preprocess, train_preprocess=None, test_preprocess=None, load_cache=False,
                  load_pre_feat=False):
 
-        self.dataset_dir = os.path.join(root, self.dataset_dir)
+        self.dataset_dir = resolve_dataset_dir(
+            root,
+            self.dataset_dir,
+            aliases=['ImageNet_R', 'imagenet_r', 'imagenet-r'],
+        )
         self.image_dir = os.path.join(self.dataset_dir, 'images')
 
         if train_preprocess is None:

@@ -1,6 +1,7 @@
 import os
 import random
 import argparse
+import json
 import numpy as np
 import torch
 from datasets import get_all_dataloaders
@@ -19,6 +20,7 @@ def get_arguments():
     parser.add_argument('--backbone', default='vit_b16', type=str, choices=['rn50', 'rn101', 'vit_b32', 'vit_b16', 'vit_l14'], help="CLIP architecture")
     parser.add_argument('--cache_dir', type = str, default = None, help='where to store visual and textual features if not None')
     parser.add_argument('--load', action='store_true', default=False, help="Load features from cache_dir")
+    parser.add_argument('--results_json', type=str, default=None, help='optional path to save final metrics as JSON')
 
     # Experimental arguments
     parser.add_argument('--n_tasks', type=int, default=1, help="number of tasks to run")
@@ -75,6 +77,55 @@ def set_random_seed(seed):
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
+
+
+def get_available_results_path(path):
+    if not os.path.exists(path):
+        return path
+
+    stem, ext = os.path.splitext(path)
+    suffix = 1
+    while True:
+        candidate = f"{stem}__{suffix}{ext}"
+        if not os.path.exists(candidate):
+            return candidate
+        suffix += 1
+
+
+def save_results_json(args, acc_zs_tot, acc_tot):
+    if not args.results_json:
+        return None
+
+    results_path = get_available_results_path(args.results_json)
+    results_dir = os.path.dirname(results_path)
+    if results_dir:
+        os.makedirs(results_dir, exist_ok=True)
+
+    results = {
+        'dataset': args.dataset,
+        'method': args.method,
+        'backbone': args.backbone,
+        'seed': args.seed,
+        'n_tasks': args.n_tasks,
+        'batch_size': args.batch_size,
+        'online': args.online,
+        'selected_classes': {
+            'num_class_eff': args.num_class_eff,
+            'num_class_eff_min': args.num_class_eff_min,
+            'num_class_eff_max': args.num_class_eff_max,
+            'gamma': args.gamma if args.online else None,
+        },
+        'metrics': {
+            'zero_shot_accuracy': float(acc_zs_tot),
+            'final_accuracy': float(acc_tot),
+        },
+        'cache_dir': args.cache_dir,
+    }
+
+    with open(results_path, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2)
+
+    return results_path
 
 
 def main():
@@ -245,6 +296,10 @@ def main():
     print(f"ZERO-shot Accuracy: {acc_zs_tot:.4f}")
     print(f"FINAL Accuracy:     {acc_tot:.4f}")
     print("============================\n")
+
+    results_path = save_results_json(args, acc_zs_tot, acc_tot)
+    if results_path is not None:
+        print(f"Results JSON:      {results_path}")
 
 
 
