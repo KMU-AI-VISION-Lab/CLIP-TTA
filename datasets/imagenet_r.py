@@ -505,6 +505,8 @@ class ImageNetR():
             aliases=['ImageNet_R', 'imagenet_r', 'imagenet-r'],
         )
         self.image_dir = os.path.join(self.dataset_dir, 'images')
+        if not os.path.isdir(self.image_dir):
+            self.image_dir = self.dataset_dir
 
         if train_preprocess is None:
             train_preprocess = transforms.Compose([
@@ -521,7 +523,7 @@ class ImageNetR():
         self.train, self.val = None, None
 
         if not load_pre_feat:
-            self.test = datasets.ImageFolder(os.path.join(self.image_dir), transform=test_preprocess)
+            self.test = datasets.ImageFolder(self.image_dir, transform=test_preprocess)
 
         self.template = imagenet_templates
         self.custom_templates = custom_templates

@@ -200,6 +200,10 @@ class ImageNet():
             aliases=['ImageNet_v1', 'imagenet_v1', 'ImageNet-1K', 'imagenet1k'],
         )
         self.image_dir = os.path.join(self.dataset_dir, 'images')
+        train_dir = os.path.join(self.dataset_dir, 'train')
+        val_dir = os.path.join(self.dataset_dir, 'val')
+        image_train_dir = os.path.join(self.image_dir, 'train')
+        image_val_dir = os.path.join(self.image_dir, 'val')
         
         if train_preprocess is None:
             train_preprocess = transforms.Compose([
@@ -215,14 +219,31 @@ class ImageNet():
 
         self.train, self.val, self.test = None, None, None
 
+        if os.path.isdir(image_train_dir) and os.path.isdir(image_val_dir):
+            train_source_dir = image_train_dir
+            val_source_dir = image_train_dir
+            test_source_dir = image_val_dir
+        elif os.path.isdir(train_dir) and os.path.isdir(val_dir):
+            train_source_dir = train_dir
+            val_source_dir = train_dir
+            test_source_dir = val_dir
+        else:
+            train_source_dir = None
+            val_source_dir = None
+            test_source_dir = self.dataset_dir
+
         if not load_cache and num_shots > 0:
-            self.train = datasets.ImageFolder(os.path.join(os.path.join(self.dataset_dir, 'train')), transform=train_preprocess)
+            if train_source_dir is None:
+                raise RuntimeError(f"Training split not found under {self.dataset_dir}")
+            self.train = datasets.ImageFolder(train_source_dir, transform=train_preprocess)
 
         if not load_pre_feat and num_shots > 0:
-            self.val = datasets.ImageFolder(os.path.join(os.path.join(self.dataset_dir, 'train')), transform=preprocess)
+            if val_source_dir is None:
+                raise RuntimeError(f"Validation split not found under {self.dataset_dir}")
+            self.val = datasets.ImageFolder(val_source_dir, transform=preprocess)
 
         if not load_pre_feat:
-            self.test = datasets.ImageFolder(os.path.join(os.path.join(self.dataset_dir, 'val')), transform=test_preprocess)
+            self.test = datasets.ImageFolder(test_source_dir, transform=test_preprocess)
         
         num_shots_val = min(4, num_shots)
         

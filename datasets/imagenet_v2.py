@@ -505,6 +505,17 @@ class ImageNetV2():
             aliases=['ImageNet_v2', 'imagenet_v2', 'imagenet-v2'],
         )
         self.image_dir = os.path.join(self.dataset_dir, 'images')
+        if not os.path.isdir(self.image_dir):
+            fallback_dirs = [
+                'imagenetv2-matched-frequency-format-val',
+                'imagenetv2-threshold0.7-format-val',
+                'imagenetv2-top-images-format-val',
+            ]
+            for fallback_dir in fallback_dirs:
+                candidate = os.path.join(self.dataset_dir, fallback_dir)
+                if os.path.isdir(candidate):
+                    self.image_dir = candidate
+                    break
 
         if train_preprocess is None:
             train_preprocess = transforms.Compose([
