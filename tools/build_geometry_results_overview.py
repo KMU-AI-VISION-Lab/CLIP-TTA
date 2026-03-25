@@ -242,6 +242,8 @@ def build_metric_guide():
         "- `inter_class_geometry.pearson_corr`: centered class prototype similarity matrix가 얼마나 비슷한지. 높을수록 좋습니다.",
         "- `inter_class_geometry.mean_abs_diff`: inter-class similarity matrix 평균 차이. 낮을수록 좋습니다.",
         "- `inter_class_geometry.radius_corr`: 클래스별 centered prototype norm(반지름) 순서가 얼마나 유지되는지. 높을수록 좋습니다.",
+        "- `inter_class_geometry.global_prototype_shift_l2`: source 전체 중심 `m_0`와 target 전체 중심 `m'_0` 사이의 L2 거리입니다. 낮을수록 두 dataset의 전역 중심이 비슷합니다.",
+        "- `inter_class_geometry.global_prototype_shift_cosine`: source/target 전체 중심 벡터 방향이 얼마나 비슷한지 보는 cosine입니다. 높을수록 전역 방향이 비슷합니다.",
         "",
     ]
 
@@ -318,6 +320,8 @@ def build_averages_only_sections(result_files):
                     f"| inter_class | sign_consistency_rate | {fmt(safe_get(inter_class, 'sign_consistency_rate'))} |",
                     f"| inter_class | radius_corr | {fmt(safe_get(inter_class, 'radius_corr'))} |",
                     f"| inter_class | radius_mean_abs_diff | {fmt(safe_get(inter_class, 'radius_mean_abs_diff'))} |",
+                    f"| inter_class | global_prototype_shift_l2 | {fmt(safe_get(inter_class, 'global_prototype_shift_l2'))} |",
+                    f"| inter_class | global_prototype_shift_cosine | {fmt(safe_get(inter_class, 'global_prototype_shift_cosine'))} |",
                     "",
                 ]
             )

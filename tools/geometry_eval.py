@@ -626,6 +626,13 @@ def safe_stat_correlation(values_a, values_b, method, context):
     raise ValueError(f"Unsupported correlation method: {method}")
 
 
+def safe_vector_cosine(vector_a, vector_b):
+    denom = np.linalg.norm(vector_a) * np.linalg.norm(vector_b)
+    if denom == 0:
+        return float("nan")
+    return float(np.dot(vector_a, vector_b) / denom)
+
+
 def sign_label(value):
     # 부호를 JSON에 저장하기 쉽도록 -1 / 0 / +1로 바꿉니다.
     if value > 0:
@@ -810,6 +817,8 @@ def compute_inter_class_geometry_results(
     # 상관계수 계산을 위해 radius를 다시 숫자 벡터로 모읍니다.
     source_radius_values = np.asarray([record["source_radius"] for record in radius_records], dtype=np.float64)
     target_radius_values = np.asarray([record["target_radius"] for record in radius_records], dtype=np.float64)
+    source_global_prototype = np.asarray(source_structure["global_prototype"], dtype=np.float64)
+    target_global_prototype = np.asarray(target_structure["global_prototype"], dtype=np.float64)
 
     artifact_prefix = build_inter_class_artifact_prefix(output_prefix, artifact_suffix)
     os.makedirs(os.path.dirname(output_prefix) or ".", exist_ok=True)
@@ -866,6 +875,12 @@ def compute_inter_class_geometry_results(
         # 이 값이 비슷하면 전체 클래스 배치의 바깥/안쪽 구조가 유지된 것으로 볼 수 있습니다.
         "radius_corr": safe_stat_correlation(source_radius_values, target_radius_values, "pearson", "inter-class radius correlation"),
         "radius_mean_abs_diff": float(np.mean(np.abs(source_radius_values - target_radius_values))),
+        # source/target 전체 feature cloud의 평균 위치입니다.
+        # 이 둘의 차이를 보면 dataset-level global center drift를 볼 수 있습니다.
+        "source_global_prototype": [float(value) for value in source_global_prototype],
+        "target_global_prototype": [float(value) for value in target_global_prototype],
+        "global_prototype_shift_l2": float(np.linalg.norm(target_global_prototype - source_global_prototype)),
+        "global_prototype_shift_cosine": safe_vector_cosine(source_global_prototype, target_global_prototype),
         # centered prototype norm 자체도 저장해 두면 나중에 클래스별 해석이 쉬워집니다.
         "source_centered_prototype_norms": [float(value) for value in source_structure["radii"]],
         "target_centered_prototype_norms": [float(value) for value in target_structure["radii"]],
@@ -883,7 +898,16 @@ def compute_inter_class_geometry_results(
 def summarize_inter_class_geometry(inter_class_runs):
     # split-half upper bound에서는 랜덤하게 나눈 결과가 여러 번 생기므로
     # 반복 실험들의 평균과 표준편차를 함께 요약합니다.
-    keys = ["pearson_corr", "spearman_corr", "mean_abs_diff", "sign_consistency_rate", "radius_corr", "radius_mean_abs_diff"]
+    keys = [
+        "pearson_corr",
+        "spearman_corr",
+        "mean_abs_diff",
+        "sign_consistency_rate",
+        "radius_corr",
+        "radius_mean_abs_diff",
+        "global_prototype_shift_l2",
+        "global_prototype_shift_cosine",
+    ]
     summary = {}
     for key in keys:
         values = [run[key] for run in inter_class_runs if key in run and not math.isnan(run[key])]
@@ -1809,6 +1833,8 @@ def main():
             print(f"- near-zero pairs: {inter_class_summary['num_pairs_near_zero']['mean']:.2f}+/-{inter_class_summary['num_pairs_near_zero']['std']:.2f}")
             print(f"- radius corr: {inter_class_summary['radius_corr']['mean']:.6f}+/-{inter_class_summary['radius_corr']['std']:.6f}")
             print(f"- radius mean abs diff: {inter_class_summary['radius_mean_abs_diff']['mean']:.6f}+/-{inter_class_summary['radius_mean_abs_diff']['std']:.6f}")
+            print(f"- global prototype shift L2: {inter_class_summary['global_prototype_shift_l2']['mean']:.6f}+/-{inter_class_summary['global_prototype_shift_l2']['std']:.6f}")
+            print(f"- global prototype cosine: {inter_class_summary['global_prototype_shift_cosine']['mean']:.6f}+/-{inter_class_summary['global_prototype_shift_cosine']['std']:.6f}")
         else:
             inter_class = results["inter_class_geometry"]
             print(f"- matrix Pearson corr: {inter_class['pearson_corr']:.6f}")
@@ -1818,6 +1844,8 @@ def main():
             print(f"- near-zero pairs: {inter_class['num_pairs_near_zero']}/{inter_class['num_pairs_total']}")
             print(f"- radius corr: {inter_class['radius_corr']:.6f}")
             print(f"- radius mean abs diff: {inter_class['radius_mean_abs_diff']:.6f}")
+            print(f"- global prototype shift L2: {inter_class['global_prototype_shift_l2']:.6f}")
+            print(f"- global prototype cosine: {inter_class['global_prototype_shift_cosine']:.6f}")
             print(f"- source matrix: {inter_class['matrix_file_source']}")
             print(f"- target matrix: {inter_class['matrix_file_target']}")
             print(f"- per-pair signs: {inter_class['per_pair_sign_info_file']}")
